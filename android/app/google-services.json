@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "256213987810",
+    "project_id": "mandaaquela-5601c",
+    "storage_bucket": "mandaaquela-5601c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:256213987810:android:5f5b041ef0a009689409bb",
+        "android_client_info": {
+          "package_name": "com.example.manda_aquela"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "256213987810-todfiil4vb1alknrmni2mam29ape5a3d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA9nceRTv1zFLw7gBfFRL0_LbPf6wYSLrI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "256213987810-ei39ffpsmc68othlha1e15l6m5d22sfm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

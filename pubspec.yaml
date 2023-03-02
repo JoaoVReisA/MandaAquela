@@ -38,6 +38,7 @@ dependencies:
   mobx: ^2.1.4
   flutter_mobx: ^2.0.6+5
   flutter_modular: ^5.0.3
+  firebase_core: ^2.7.0
 
 dev_dependencies:
   flutter_test:
