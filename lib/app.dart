@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
+import 'material-theme/color_schemes.g.dart';
+
 class AppWidget extends StatelessWidget {
   const AppWidget({super.key});
 
@@ -9,7 +11,10 @@ class AppWidget extends StatelessWidget {
     return MaterialApp.router(
       title: 'Manda Aquela',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        colorScheme: lightColorScheme,
+      ),
+      darkTheme: ThemeData(
+        colorScheme: darkColorScheme,
       ),
       routeInformationParser: Modular.routeInformationParser,
       routerDelegate: Modular.routerDelegate,
