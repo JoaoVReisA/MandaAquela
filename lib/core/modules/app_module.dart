@@ -1,6 +1,7 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:manda_aquela/core/modules/home_module.dart';
 import 'package:manda_aquela/core/modules/network_module.dart';
+import 'package:manda_aquela/core/modules/start_module.dart';
 import 'package:manda_aquela/presenter/splash/splash_page.dart';
 
 class AppModule extends Module {
@@ -16,5 +17,6 @@ class AppModule extends Module {
   List<ModularRoute> get routes => [
         ChildRoute('/', child: (context, args) => const SplashPage()),
         ModuleRoute('/home/', module: HomeModule()),
+        ModuleRoute('/start/', module: StartModule()),
       ];
 }

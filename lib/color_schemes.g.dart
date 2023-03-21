@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 const lightColorScheme = ColorScheme(
@@ -25,7 +24,7 @@ const lightColorScheme = ColorScheme(
   onSurface: Color(0xFF001F25),
   surfaceVariant: Color(0xFFF5DDD8),
   onSurfaceVariant: Color(0xFF534340),
-  outline: Color(0xFF85736F),
+  outline: Color(0xFF727475),
   onInverseSurface: Color(0xFFD6F6FF),
   inverseSurface: Color(0xFF00363F),
   inversePrimary: Color(0xFFFFB4A3),
@@ -59,7 +58,7 @@ const darkColorScheme = ColorScheme(
   onSurface: Color(0xFFA6EEFF),
   surfaceVariant: Color(0xFF534340),
   onSurfaceVariant: Color(0xFFD8C2BD),
-  outline: Color(0xFFA08C88),
+  outline: Color(0xFF727475),
   onInverseSurface: Color(0xFF001F25),
   inverseSurface: Color(0xFFA6EEFF),
   inversePrimary: Color(0xFFB52700),

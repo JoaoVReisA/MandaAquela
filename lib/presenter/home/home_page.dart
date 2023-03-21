@@ -1,4 +1,3 @@
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
@@ -16,20 +15,9 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text("$network"),
-            ElevatedButton(
-              onPressed: () {
-                FirebaseCrashlytics.instance.crash();
-              },
-              child: const Text('Crash'),
-            )
-          ],
-        ),
+        child: Text('Home'),
       ),
     );
   }
