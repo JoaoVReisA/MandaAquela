@@ -41,6 +41,8 @@ dependencies:
   firebase_core: ^2.7.0
   firebase_crashlytics: ^3.0.15
   flutter_svg: ^2.0.2
+  dio: ^5.0.1
+  connectivity_plus: ^3.0.3
 
 dev_dependencies:
   flutter_test:
