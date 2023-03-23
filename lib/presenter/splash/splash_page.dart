@@ -21,7 +21,7 @@ class _SplashPageState extends State<SplashPage> {
           seconds: 3,
         ),
         () async {
-          Modular.to.navigate('/home/');
+          Modular.to.navigate('/login/');
         },
       );
     });

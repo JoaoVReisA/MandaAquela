@@ -12,6 +12,14 @@ class AppWidget extends StatelessWidget {
       title: 'Manda Aquela',
       theme: ThemeData(
         colorScheme: lightColorScheme,
+        fontFamily: 'Outfit',
+        inputDecorationTheme: const InputDecorationTheme(
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(8.0),
+            ),
+          ),
+        ),
       ),
       darkTheme: ThemeData(
         colorScheme: darkColorScheme,
