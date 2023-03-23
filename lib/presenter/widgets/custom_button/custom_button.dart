@@ -7,7 +7,6 @@ class CustomButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextButton(
-      style: const ButtonStyle(),
       onPressed: () {},
       child: Text(
         "Login",
