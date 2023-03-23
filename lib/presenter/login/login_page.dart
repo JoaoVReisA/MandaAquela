@@ -15,23 +15,25 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(children: [
-        SvgPicture.asset(Assets.musician),
-        Text("Login", style: TextStyles.outfit30px700w),
-        const SizedBox(height: 15),
-        TextFormField(
-          style: TextStyles.outfit15px400w,
-          decoration: const InputDecoration(hintText: "Email"),
-        ),
-        const SizedBox(
-          height: 10,
-        ),
-        TextFormField(
-          style: TextStyles.outfit15px400w,
-          decoration: const InputDecoration(hintText: "Senha"),
-        ),
-        const CustomButton()
-      ]),
+      body: SafeArea(
+        child: Column(children: [
+          SvgPicture.asset(Assets.musician),
+          Text("Login", style: TextStyles.outfit30px700w),
+          const SizedBox(height: 15),
+          TextFormField(
+            style: TextStyles.outfit15px400w,
+            decoration: const InputDecoration(hintText: "Email"),
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          TextFormField(
+            style: TextStyles.outfit15px400w,
+            decoration: const InputDecoration(hintText: "Senha"),
+          ),
+          const CustomButton()
+        ]),
+      ),
     );
   }
 }

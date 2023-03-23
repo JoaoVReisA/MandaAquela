@@ -7,8 +7,7 @@
         {
             "name": "manda_aquela",
             "request": "launch",
-            "type": "dart",
-            
+            "type": "dart",            
         },
     
     ]

@@ -13,16 +13,19 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            ElevatedButton(
-              onPressed: () {
-                FirebaseCrashlytics.instance.crash();
-              },
-              child: const Text('Crash'),
-            )
-          ],
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ElevatedButton(
+                onPressed: () {
+                  FirebaseCrashlytics.instance.crash();
+                },
+                child: const Text('Crash'),
+              )
+            ],
+          ),
         ),
       ),
     );
