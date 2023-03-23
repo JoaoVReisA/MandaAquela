@@ -1,4 +1,3 @@
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -11,22 +10,9 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              ElevatedButton(
-                onPressed: () {
-                  FirebaseCrashlytics.instance.crash();
-                },
-                child: const Text('Crash'),
-              )
-            ],
-          ),
-        ),
+        child: Text('Home'),
       ),
     );
   }
