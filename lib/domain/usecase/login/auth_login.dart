@@ -1,12 +1,12 @@
 import 'package:manda_aquela/domain/entities/user.dart';
 import 'package:manda_aquela/domain/repositories/AuthRepository/auth_login_repository.dart';
 
-abstract class AuthLogin {
+abstract class AuthLoginUsecase {
   Future<User> call();
 }
 
-class EmailAuthLogin extends AuthLogin {
-  EmailAuthLogin(this.repository);
+class EmailAuthLoginUsecase extends AuthLoginUsecase {
+  EmailAuthLoginUsecase(this.repository);
   final AuthLoginRepository repository;
 
   @override
@@ -16,8 +16,8 @@ class EmailAuthLogin extends AuthLogin {
   }
 }
 
-class GoogleAuthLogin extends AuthLogin {
-  GoogleAuthLogin(this.repository);
+class GoogleAuthLoginUsecase extends AuthLoginUsecase {
+  GoogleAuthLoginUsecase(this.repository);
   final AuthLoginRepository repository;
 
   @override
@@ -27,8 +27,8 @@ class GoogleAuthLogin extends AuthLogin {
   }
 }
 
-class FacebookAuthLogin extends AuthLogin {
-  FacebookAuthLogin(this.repository);
+class FacebookAuthLoginUsecase extends AuthLoginUsecase {
+  FacebookAuthLoginUsecase(this.repository);
   final AuthLoginRepository repository;
 
   @override

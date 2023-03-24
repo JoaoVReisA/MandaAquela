@@ -3,45 +3,40 @@ import 'dart:io';
 class CustomException implements Exception {
   final int code;
   final String message;
-  final List<String>? data;
 
-  const CustomException(this.code, this.message, this.data);
+  const CustomException(this.code, this.message);
 
-  const CustomException.simpleConstructor(this.code, this.message)
-      : data = null;
+  const CustomException.simpleConstructor(this.code, this.message);
 }
 
 class BadRequestException extends CustomException {
-  BadRequestException(String message, [List<String>? data])
-      : super(HttpStatus.badRequest, message, data);
+  BadRequestException(String message) : super(HttpStatus.badRequest, message);
 }
 
 class ConflictException extends CustomException {
-  ConflictException(String message, [List<String>? data])
-      : super(HttpStatus.conflict, message, data);
+  ConflictException(String message) : super(HttpStatus.conflict, message);
 }
 
 class UnauthorizedException extends CustomException {
-  UnauthorizedException(String message, [List<String>? data])
-      : super(HttpStatus.unauthorized, message, data);
+  UnauthorizedException(String message)
+      : super(HttpStatus.unauthorized, message);
 }
 
 class SessionExpiredException extends CustomException {
-  SessionExpiredException(String message, [List<String>? data])
-      : super(HttpStatus.unauthorized, message, data);
+  SessionExpiredException(String message)
+      : super(HttpStatus.unauthorized, message);
 }
 
 class NotFoundException extends CustomException {
-  NotFoundException(String message, [List<String>? data])
-      : super(HttpStatus.notFound, message, data);
+  NotFoundException(String message) : super(HttpStatus.notFound, message);
 }
 
 class ConnectionException extends CustomException {
-  ConnectionException(String message, [List<String>? data])
-      : super(HttpStatus.networkConnectTimeoutError, message, data);
+  ConnectionException(String message)
+      : super(HttpStatus.networkConnectTimeoutError, message);
 }
 
 class ConnectivityException extends CustomException {
-  ConnectivityException(String message, [List<String>? data])
-      : super(HttpStatus.networkConnectTimeoutError, message, data);
+  ConnectivityException(String message)
+      : super(HttpStatus.networkConnectTimeoutError, message);
 }
