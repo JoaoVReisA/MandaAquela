@@ -20,20 +20,19 @@ class DioHttpErrorHandler extends HttpErrorHandler {
     if (error?.response?.statusCode == HttpStatus.notFound) {
       return NotFoundException(
         error.response.statusCode.toString(),
-        [error.response.data.toString()],
       );
     }
 
     if (error?.response?.statusCode == HttpStatus.badRequest) {
-      return BadRequestException(error.response.statusCode.toString(),
-          [error.response.data.toString()]);
+      return BadRequestException(
+        error.response.statusCode.toString(),
+      );
     }
 
     if (error?.response?.statusCode == HttpStatus.conflict) {
       final Map<String, dynamic> map = jsonDecode(error?.response.data);
       return ConflictException(
         map['message'] ?? '',
-        [error.response.data.toString()],
       );
     }
 
