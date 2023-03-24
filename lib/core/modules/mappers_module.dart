@@ -6,7 +6,7 @@ import 'package:manda_aquela/data/models/model_response.dart';
 class MappersModule extends Module {
   @override
   List<Bind> get binds => [
-        Bind<ResponseMapper<ModelResponse>>((i) => i()),
-        Bind<ModelResponseMapper>((i) => ModelResponseMapper()),
+        Bind<ResponseMapper<ModelResponse>>((i) => i(), export: true),
+        Bind<ModelResponseMapper>((i) => ModelResponseMapper(), export: true),
       ];
 }
