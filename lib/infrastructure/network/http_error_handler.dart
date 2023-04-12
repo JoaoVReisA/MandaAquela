@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/dio.dart';
 
 import '../../core/custom_exceptions.dart';
@@ -13,9 +12,9 @@ abstract class HttpErrorHandler {
 class DioHttpErrorHandler extends HttpErrorHandler {
   @override
   Future<Exception> handleError(dynamic error) async {
-    if (await (Connectivity().checkConnectivity()) == ConnectivityResult.none) {
-      return ConnectivityException('');
-    }
+    // if (await (Connectivity().checkConnectivity()) == ConnectivityResult.none) {
+    //   return ConnectivityException('');
+    // }
 
     if (error?.response?.statusCode == HttpStatus.notFound) {
       return NotFoundException(
