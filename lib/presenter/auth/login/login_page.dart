@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:manda_aquela/presenter/assets.dart';
-import 'package:manda_aquela/presenter/text_styles.dart';
+import 'package:manda_aquela/presenter/auth/widgets/social_media_button.dart';
+import 'package:manda_aquela/presenter/common/assets.dart';
+
+import '../../common/text_styles.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -20,7 +23,7 @@ class _LoginPageState extends State<LoginPage> {
           padding: const EdgeInsets.all(16.0),
           child: Column(
             children: [
-              SvgPicture.asset(Assets.musician),
+              SvgPicture.asset(Assets.musician.path),
               Text("Login", style: TextStyles.outfit30px700w),
               const SizedBox(height: 16),
               TextFormField(
@@ -29,7 +32,7 @@ class _LoginPageState extends State<LoginPage> {
                     hintText: "Digite seu email", label: Text("Email")),
               ),
               const SizedBox(
-                height: 10,
+                height: 8,
               ),
               TextFormField(
                 style: TextStyles.outfit15px400w,
@@ -42,7 +45,9 @@ class _LoginPageState extends State<LoginPage> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Modular.to.pushNamed('/auth/forgot_password');
+                    },
                     child: Text(
                       "Esqueceu a senha ?",
                       style: TextStyles.outfit15px400w
@@ -58,10 +63,13 @@ class _LoginPageState extends State<LoginPage> {
                   height: screenSize.height * 0.05,
                   width: double.infinity,
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Modular.to.navigate('/start/');
+                    },
                     child: Text(
                       "Login",
-                      style: TextStyles.outfit18px700w,
+                      style: TextStyles.outfit18px700w
+                          .copyWith(color: Colors.white),
                     ),
                   )),
               const SizedBox(
@@ -95,10 +103,42 @@ class _LoginPageState extends State<LoginPage> {
                         thickness: 1.5,
                         color: Theme.of(context).colorScheme.tertiary,
                       ),
-                    )
+                    ),
                   ],
                 ),
               ),
+              const SizedBox(
+                height: 32,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: const [
+                  SocialMediaButton(assets: Assets.googleLogo),
+                  SocialMediaButton(assets: Assets.facebookLogo),
+                  SocialMediaButton(assets: Assets.appleLogo),
+                ],
+              ),
+              const SizedBox(
+                height: 32,
+              ),
+              InkWell(
+                onTap: () {
+                  Modular.to.pushNamed('/auth/sign_up');
+                },
+                child: RichText(
+                    text: TextSpan(
+                  text: 'Ainda não tem conta?',
+                  style: TextStyles.outfit15px400w.copyWith(
+                      color: Theme.of(context).colorScheme.surfaceVariant),
+                  children: [
+                    TextSpan(
+                        text: ' Criar conta',
+                        style: TextStyles.outfit15pxBold
+                            .copyWith(color: Colors.black)),
+                  ],
+                )),
+              )
             ],
           ),
         ),

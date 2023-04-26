@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:manda_aquela/presenter/assets.dart';
+import 'package:manda_aquela/presenter/common/assets.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -21,7 +21,7 @@ class _SplashPageState extends State<SplashPage> {
           seconds: 3,
         ),
         () async {
-          Modular.to.navigate('/login/');
+          Modular.to.navigate('/auth/');
         },
       );
     });
@@ -32,7 +32,7 @@ class _SplashPageState extends State<SplashPage> {
     return Scaffold(
       body: Container(
         color: Theme.of(context).colorScheme.primary,
-        child: Center(child: SvgPicture.asset(Assets.logo)),
+        child: Center(child: SvgPicture.asset(Assets.logo.path)),
       ),
     );
   }

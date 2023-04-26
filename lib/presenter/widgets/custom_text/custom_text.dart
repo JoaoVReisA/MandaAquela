@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../../text_styles.dart';
+import 'package:manda_aquela/presenter/common/text_styles.dart';
 
 class CustomText extends StatelessWidget {
   CustomText(this.data, {this.style, super.key});

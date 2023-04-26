@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:manda_aquela/presenter/assets.dart';
+import 'package:manda_aquela/presenter/common/assets.dart';
 
 class StartPage extends StatefulWidget {
   const StartPage({super.key});
@@ -41,7 +41,7 @@ class _StartPageState extends State<StartPage> {
               icon: Icon(Icons.person), label: 'Perfil'),
           BottomNavigationBarItem(
               icon: SvgPicture.asset(
-                Assets.logo,
+                Assets.logo.path,
                 colorFilter: ColorFilter.mode(
                     currentIndex == 1
                         ? Theme.of(context).colorScheme.primary
