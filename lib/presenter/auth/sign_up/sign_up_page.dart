@@ -22,54 +22,61 @@ class _SignUpPageState extends State<SignUpPage> {
         elevation: 0,
       ),
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Center(child: SvgPicture.asset(Assets.signUpStep.path)),
-              const SizedBox(
-                height: 8,
-              ),
-              Text(
-                'Criar Conta',
-                style: TextStyles.outfit30px700w,
-              ),
-              const SizedBox(height: 16),
-              TextFormField(
-                style: TextStyles.outfit15px400w,
-                decoration: const InputDecoration(
-                    hintText: "Nome", label: Text("Nome")),
-              ),
-              const SizedBox(
-                height: 8,
-              ),
-              TextFormField(
-                style: TextStyles.outfit15px400w,
-                decoration: const InputDecoration(
-                  hintText: "Email",
-                  label: Text("Email"),
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Center(child: SvgPicture.asset(Assets.signUpStep.path)),
+                const SizedBox(
+                  height: 15,
                 ),
-              ),
-              TextFormField(
-                style: TextStyles.outfit15px400w,
-                decoration: const InputDecoration(
-                    hintText: "Senha", label: Text("Senha")),
-              ),
-              const SizedBox(
-                height: 8,
-              ),
-              TextFormField(
-                style: TextStyles.outfit15px400w,
-                decoration: const InputDecoration(
-                  hintText: "Confirmar senha",
-                  label: Text("Confirmar senha"),
+                Text('Criar Conta', style: TextStyles.outfit30px700w),
+                const SizedBox(height: 16),
+                TextFormField(
+                  style: TextStyles.outfit15px400w,
+                  decoration: const InputDecoration(
+                    hintText: "Nome",
+                    label: Text("Nome"),
+                  ),
                 ),
-              ),
-              SizedBox(
+                const SizedBox(
+                  height: 18,
+                ),
+                TextFormField(
+                  style: TextStyles.outfit15px400w,
+                  decoration: const InputDecoration(
+                    hintText: "Email",
+                    label: Text("Email"),
+                  ),
+                ),
+                const SizedBox(
+                  height: 12,
+                ),
+                TextFormField(
+                  style: TextStyles.outfit15px400w,
+                  decoration: const InputDecoration(
+                      hintText: "Senha", label: Text("Senha")),
+                ),
+                const SizedBox(
+                  height: 12,
+                ),
+                TextFormField(
+                  style: TextStyles.outfit15px400w,
+                  decoration: const InputDecoration(
+                    hintText: "Confirmar senha",
+                    label: Text("Confirmar senha"),
+                  ),
+                ),
+                const SizedBox(
+                  height: 26,
+                ),
+                SizedBox(
                   height: screenSize.height * 0.05,
                   width: double.infinity,
                   child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(elevation: 0.0),
                     onPressed: () {
                       Modular.to.navigate('/start/');
                     },
@@ -78,8 +85,30 @@ class _SignUpPageState extends State<SignUpPage> {
                       style: TextStyles.outfit18px700w
                           .copyWith(color: Colors.white),
                     ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 30,
+                ),
+                InkWell(
+                  onTap: () {
+                    Modular.to.pushNamed('/auth/sign_up');
+                  },
+                  child: RichText(
+                      text: TextSpan(
+                    text: 'Já tem uma conta?',
+                    style: TextStyles.outfit15px400w.copyWith(
+                        color: Theme.of(context).colorScheme.surfaceVariant),
+                    children: [
+                      TextSpan(
+                          text: ' Fazer login',
+                          style: TextStyles.outfit15pxBold
+                              .copyWith(color: Colors.black)),
+                    ],
                   )),
-            ],
+                )
+              ],
+            ),
           ),
         ),
       ),
