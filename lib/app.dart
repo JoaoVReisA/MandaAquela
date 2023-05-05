@@ -14,6 +14,11 @@ class AppWidget extends StatelessWidget {
         colorScheme: lightColorScheme,
         fontFamily: 'Outfit',
         inputDecorationTheme: const InputDecorationTheme(
+          isDense: true,
+          contentPadding: EdgeInsets.symmetric(
+            vertical: 15.0,
+            horizontal: 17.0,
+          ),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.all(
               Radius.circular(8.0),

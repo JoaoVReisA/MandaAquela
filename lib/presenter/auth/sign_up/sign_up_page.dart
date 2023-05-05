@@ -3,6 +3,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:manda_aquela/presenter/common/assets.dart';
 import 'package:manda_aquela/presenter/common/text_styles.dart';
+import 'package:manda_aquela/presenter/widgets/custom_button/custom_button.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -72,27 +73,18 @@ class _SignUpPageState extends State<SignUpPage> {
                 const SizedBox(
                   height: 26,
                 ),
-                SizedBox(
-                  height: screenSize.height * 0.05,
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(elevation: 0.0),
-                    onPressed: () {
-                      Modular.to.navigate('/start/');
-                    },
-                    child: Text(
-                      "Cadastrar-se",
-                      style: TextStyles.outfit18px700w
-                          .copyWith(color: Colors.white),
-                    ),
-                  ),
+                CustomButton(
+                  onPressed: () {
+                    Modular.to.navigate('/start/');
+                  },
+                  label: "Cadastrar-se",
                 ),
                 const SizedBox(
                   height: 30,
                 ),
                 InkWell(
                   onTap: () {
-                    Modular.to.pushNamed('/auth/sign_up');
+                    Modular.to.pop();
                   },
                   child: RichText(
                       text: TextSpan(
