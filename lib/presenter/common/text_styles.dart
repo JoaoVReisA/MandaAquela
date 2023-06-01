@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:manda_aquela/presenter/common/font_family.dart';
 
 class TextStyles {
-  static final base = FontFamilys.outfit;
+  static const base = FontFamilies.outfit;
 
   static final outfit30px700w = base.copyWith(
     fontSize: 30,
@@ -12,7 +12,6 @@ class TextStyles {
   static final outfit15px400w = base.copyWith(
     fontSize: 15,
     fontWeight: FontWeight.w400,
-    height: 19,
   );
 
   static final outfit15pxBold = base.copyWith(

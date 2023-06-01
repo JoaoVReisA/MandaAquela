@@ -1,5 +1,5 @@
-import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter/material.dart';
 
-class FontFamilys {
-  static final outfit = GoogleFonts.outfit();
+class FontFamilies {
+  static const outfit = TextStyle(fontFamily: 'Outfit');
 }

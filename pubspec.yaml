@@ -22,6 +22,7 @@ dependencies:
   dio: ^5.0.1
   google_fonts: ^4.0.3
 
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -30,6 +31,21 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  fonts:
+    - family: Outfit
+      fonts:
+        - asset: assets/fonts/Outfit/Outfit-Regular.ttf
+        - asset: assets/fonts/Outfit/Outfit-Black.ttf
+        - asset: assets/fonts/Outfit/Outfit-Bold.ttf
+        - asset: assets/fonts/Outfit/Outfit-ExtraBold.ttf
+        - asset: assets/fonts/Outfit/Outfit-ExtraLight.ttf
+        - asset: assets/fonts/Outfit/Outfit-Light.ttf
+        - asset: assets/fonts/Outfit/Outfit-Medium.ttf
+        - asset: assets/fonts/Outfit/Outfit-SemiBold.ttf
+        - asset: assets/fonts/Outfit/Outfit-Thin.ttf
+        - asset: assets/fonts/Outfit/Outfit-VariableFont_wght.ttf
 
   assets:
     - assets/
+  
+    

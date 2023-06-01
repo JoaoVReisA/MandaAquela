@@ -13,6 +13,11 @@ class CustomButton extends StatelessWidget {
       height: 48,
       width: double.infinity,
       child: ElevatedButton(
+        style: ButtonStyle(
+            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                    side: const BorderSide(color: Colors.red)))),
         onPressed: onPressed,
         child: Text(
           label,
