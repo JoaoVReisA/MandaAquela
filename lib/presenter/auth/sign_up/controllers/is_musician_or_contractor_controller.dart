@@ -5,11 +5,11 @@ class IsMusicianOrContractorController extends GetxController {
 
   bool get isMusicianSelected => _isMusicianSelected.value;
 
-  void setIsMusicianSelectedSelected(bool value) {
+  void toggleIsMusicianSelectedSelected() {
     if (isContractorSelected) {
-      setIsContractorSelected(false);
+      toggleIsContractorSelected();
     }
-    _isMusicianSelected.value = value;
+    _isMusicianSelected.value = !isMusicianSelected;
   }
 
   final RxBool _isContractorSelected = false.obs;
@@ -18,10 +18,20 @@ class IsMusicianOrContractorController extends GetxController {
 
   bool get isContinueButtonReady => isContractorSelected || isMusicianSelected;
 
-  void setIsContractorSelected(bool value) {
+  void toggleIsContractorSelected() {
     if (isMusicianSelected) {
-      setIsMusicianSelectedSelected(false);
+      toggleIsMusicianSelectedSelected();
     }
-    _isContractorSelected.value = value;
+    _isContractorSelected.value = !isContractorSelected;
+  }
+
+  String get selectionText {
+    if (isMusicianSelected) {
+      return 'Músico';
+    }
+    if (isContractorSelected) {
+      return 'Contratante';
+    }
+    return 'Selecione um dos dois para continuar';
   }
 }

@@ -41,8 +41,7 @@ class _IsMusicianOrContractorPageState
             SelectUserTypeWidget(
               userType: UserType.musician,
               isSelected: _controller.isMusicianSelected,
-              onTap: () => _controller.setIsMusicianSelectedSelected(
-                  !_controller.isMusicianSelected),
+              onTap: _controller.toggleIsMusicianSelectedSelected,
             ),
             const SizedBox(
               height: 16,
@@ -50,22 +49,31 @@ class _IsMusicianOrContractorPageState
             SelectUserTypeWidget(
               userType: UserType.contractor,
               isSelected: _controller.isContractorSelected,
-              onTap: () => _controller
-                  .setIsContractorSelected(!_controller.isContractorSelected),
+              onTap: _controller.toggleIsContractorSelected,
             ),
             const SizedBox(
               height: 16,
             ),
-            Text(
-              'Eu sou:  ',
-              style: TextStyles.outfit15pxBold,
+            RichText(
+              text: TextSpan(
+                text: 'Eu sou: ',
+                style: TextStyles.outfit15pxBold.copyWith(color: Colors.black),
+                children: [
+                  TextSpan(
+                      text: _controller.selectionText,
+                      style: TextStyles.outfit15pxBold.copyWith(
+                          color: _controller.isContinueButtonReady
+                              ? AppColors.success
+                              : AppColors.tertiary)),
+                ],
+              ),
             ),
             const Spacer(),
           ],
         )),
         bottomNavigationBar: SafeArea(
           child: Padding(
-              padding: const EdgeInsets.all(16),
+              padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
               child: CustomButton(
                   onPressed: _controller.isContinueButtonReady ? () {} : null,
                   label: 'Continuar')),
