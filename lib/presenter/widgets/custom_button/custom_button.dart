@@ -17,7 +17,7 @@ class CustomButton extends StatelessWidget {
             shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                 RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
-                    side: const BorderSide(color: Colors.red)))),
+                    side: const BorderSide(color: Colors.transparent)))),
         onPressed: onPressed,
         child: Text(
           label,

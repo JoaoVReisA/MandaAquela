@@ -17,58 +17,59 @@ class IsMusicianOrContractorPage extends StatefulWidget {
 
 class _IsMusicianOrContractorPageState
     extends State<IsMusicianOrContractorPage> {
+  //TODO: ADD on Dependencie injection
+  final _controller = IsMusicianOrContractorController();
+
   @override
   Widget build(BuildContext context) {
-    //TODO: ADD on Dependencie injection
-    final controller = IsMusicianOrContractorController();
-    return Scaffold(
-      body: SafeArea(
-          child: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
-            child: Text(
-              'Antes de começarmos, precisamos saber o porque está aqui',
-              style: TextStyles.outfit15pxBold.copyWith(
-                color: AppColors.tertiary,
+    return Obx(
+      () => Scaffold(
+        body: SafeArea(
+            child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+              child: Text(
+                'Antes de começarmos, precisamos saber o porque está aqui',
+                style: TextStyles.outfit15pxBold.copyWith(
+                  color: AppColors.tertiary,
+                ),
+                textAlign: TextAlign.center,
               ),
-              textAlign: TextAlign.center,
             ),
-          ),
-          const Spacer(),
-          Obx(
-            () => SelectUserTypeWidget(
+            const Spacer(),
+            SelectUserTypeWidget(
               userType: UserType.musician,
-              isSelected: controller.isMusicianSelected,
-              onTap: () => controller.setIsMusicianSelectedSelected(
-                  !controller.isMusicianSelected),
+              isSelected: _controller.isMusicianSelected,
+              onTap: () => _controller.setIsMusicianSelectedSelected(
+                  !_controller.isMusicianSelected),
             ),
-          ),
-          const SizedBox(
-            height: 16,
-          ),
-          Obx(
-            () => SelectUserTypeWidget(
+            const SizedBox(
+              height: 16,
+            ),
+            SelectUserTypeWidget(
               userType: UserType.contractor,
-              isSelected: controller.isContractorSelected,
-              onTap: () => controller
-                  .setIsContractorSelected(!controller.isContractorSelected),
+              isSelected: _controller.isContractorSelected,
+              onTap: () => _controller
+                  .setIsContractorSelected(!_controller.isContractorSelected),
             ),
-          ),
-          const SizedBox(
-            height: 16,
-          ),
-          Text(
-            'Eu sou:  ',
-            style: TextStyles.outfit15pxBold,
-          ),
-          const Spacer(),
-        ],
-      )),
-      bottomNavigationBar: SafeArea(
-        child: Padding(
-            padding: const EdgeInsets.all(16),
-            child: CustomButton(onPressed: () {}, label: 'Continuar')),
+            const SizedBox(
+              height: 16,
+            ),
+            Text(
+              'Eu sou:  ',
+              style: TextStyles.outfit15pxBold,
+            ),
+            const Spacer(),
+          ],
+        )),
+        bottomNavigationBar: SafeArea(
+          child: Padding(
+              padding: const EdgeInsets.all(16),
+              child: CustomButton(
+                  onPressed: _controller.isContinueButtonReady ? () {} : null,
+                  label: 'Continuar')),
+        ),
       ),
     );
   }

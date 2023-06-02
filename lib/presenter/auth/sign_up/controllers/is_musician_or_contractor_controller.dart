@@ -16,6 +16,8 @@ class IsMusicianOrContractorController extends GetxController {
 
   bool get isContractorSelected => _isContractorSelected.value;
 
+  bool get isContinueButtonReady => isContractorSelected || isMusicianSelected;
+
   void setIsContractorSelected(bool value) {
     if (isMusicianSelected) {
       setIsMusicianSelectedSelected(false);
