@@ -16,7 +16,7 @@ class TextStyles {
 
   static final outfit15pxBold = base.copyWith(
     fontSize: 15,
-    fontWeight: FontWeight.w400,
+    fontWeight: FontWeight.bold,
   );
 
   static final outfit18px700w = base.copyWith(

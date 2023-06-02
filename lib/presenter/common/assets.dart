@@ -5,7 +5,10 @@ enum Assets {
   facebookLogo('$base/facebook_logo.svg'),
   appleLogo('$base/apple_logo.svg'),
   signUpStep('$base/sign_up_step.svg'),
-  forgotPassword('$base/forgot_password.svg');
+  forgotPassword('$base/forgot_password.svg'),
+  musicianDisplay('$base/musician_display.png'),
+  contractorDisplay('$base/contractor_display.png'),
+  check('$base/icon_check.svg');
 
   static const String base = 'assets';
 

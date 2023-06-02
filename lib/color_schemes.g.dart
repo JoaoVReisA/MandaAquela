@@ -67,3 +67,12 @@ const darkColorScheme = ColorScheme(
   outlineVariant: Color(0xFF534340),
   scrim: Color(0xFF000000),
 );
+
+class AppColors {
+  static const primary = Color(0xFFE84118);
+  static const secondary = Color(0xFF9C88FF);
+  static const tertiary = Color(0xFFD9D9D9);
+  static const white = Color(0xFFFFFFFF);
+  static const highlight = Color(0xFFFBC531);
+  static const success = Color(0xFF44BD32);
+}

@@ -64,7 +64,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
               CustomButton(
                 onPressed: () {
-                  Modular.to.navigate('/start/');
+                  Modular.to.navigate('/auth/is_musician_or_contractor');
                 },
                 label: "Login",
               ),
