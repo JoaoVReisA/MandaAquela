@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+// Modular.to.pushNamed('/auth/input_email_code');
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:manda_aquela/color_schemes.g.dart';
 import 'package:manda_aquela/presenter/auth/forgot_password/controllers/forgot_password_page_controller.dart';
 import 'package:manda_aquela/presenter/common/assets.dart';
 import 'package:manda_aquela/presenter/common/text_styles.dart';
+import 'package:manda_aquela/presenter/widgets/common_dialog/common_dialog.dart';
 import 'package:manda_aquela/presenter/widgets/custom_button/custom_button.dart';
 
 class SendEmailPage extends StatefulWidget {
@@ -52,22 +53,12 @@ class _SendEmailPageState extends State<SendEmailPage> {
                         TextStyles.outfit18px400w.copyWith(color: Colors.grey),
                     children: [
                       TextSpan(
-                        text: 'código ',
+                        text: 'email ',
                         style: TextStyles.outfit18px700w
                             .copyWith(color: Colors.black),
                       ),
                       TextSpan(
-                        text: 'por ',
-                        style: TextStyles.outfit18px400w
-                            .copyWith(color: Colors.grey),
-                      ),
-                      TextSpan(
-                        text: 'email ',
-                        style: TextStyles.outfit18px700w
-                            .copyWith(color: AppColors.primary),
-                      ),
-                      TextSpan(
-                        text: 'para prosseguir com a alteração da senha.',
+                        text: 'para prosseguir com a alteração da senha. ',
                         style: TextStyles.outfit18px400w
                             .copyWith(color: Colors.grey),
                       ),
@@ -99,9 +90,20 @@ class _SendEmailPageState extends State<SendEmailPage> {
             padding: const EdgeInsets.all(16),
             child: CustomButton(
               onPressed: _controller.email.isNotEmpty
-                  ? () async {
-                      await _controller.onTapSendEmailButton();
-                      Modular.to.pushNamed('/auth/input_email_code');
+                  ? () {
+                      _controller.onTapSendEmailButton();
+                      showDialog(
+                        context: context,
+                        builder: (context) => CommonDialog(
+                          title: 'Email enviado com sucesso',
+                          bodyText:
+                              'Verifique a sua caixa de entrada e prossiga com a alteração da senha seguindo os passos do email',
+                          buttonText: 'Ir para login',
+                          onTap: () {
+                            Modular.to.pushReplacementNamed('/auth/');
+                          },
+                        ),
+                      );
                     }
                   : null,
               label: "Enviar email",
