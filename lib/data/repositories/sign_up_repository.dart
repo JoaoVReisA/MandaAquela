@@ -8,7 +8,7 @@ class SignUpRepositoryImpl extends SignUpRepository {
   final HttpService httpService;
 
   @override
-  Future<UserCredential?> emailLogin(UserRequest userRequest) async {
+  Future<UserCredential?> emailSignUp(UserRequest userRequest) async {
     try {
       final credential =
           await FirebaseAuth.instance.createUserWithEmailAndPassword(
@@ -33,5 +33,36 @@ class SignUpRepositoryImpl extends SignUpRepository {
       rethrow;
     }
     return null;
+  }
+
+  @override
+  Future<void> sendResetPasswordEmailCode({required String email}) async {
+    try {
+      await FirebaseAuth.instance.setLanguageCode("pt-br");
+      await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<void> sendResetNewPassword(
+      {required String code, required String newPassword}) async {
+    try {
+      await FirebaseAuth.instance
+          .confirmPasswordReset(code: code, newPassword: newPassword);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<String> verifyEmailCode({required String code}) async {
+    try {
+      final email = await FirebaseAuth.instance.verifyPasswordResetCode(code);
+      return email;
+    } catch (e) {
+      rethrow;
+    }
   }
 }

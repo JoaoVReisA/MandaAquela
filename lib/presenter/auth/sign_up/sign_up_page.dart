@@ -6,6 +6,7 @@ import 'package:manda_aquela/presenter/auth/sign_up/controllers/sign_up_page_con
 import 'package:manda_aquela/presenter/common/assets.dart';
 import 'package:manda_aquela/presenter/common/text_styles.dart';
 import 'package:manda_aquela/presenter/widgets/custom_button/custom_button.dart';
+import 'package:manda_aquela/presenter/widgets/password_text_field/password_text_field.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -61,23 +62,17 @@ class _SignUpPageState extends State<SignUpPage> {
                   const SizedBox(
                     height: 12,
                   ),
-                  TextFormField(
-                    style: TextStyles.outfit15px400w,
-                    decoration: const InputDecoration(
-                      hintText: "Senha",
-                      label: Text("Senha"),
-                    ),
+                  PasswordTextField(
+                    hintText: "Senha",
+                    label: "Senha",
                     onChanged: _controller.setPassword,
                   ),
                   const SizedBox(
                     height: 12,
                   ),
-                  TextFormField(
-                    style: TextStyles.outfit15px400w,
-                    decoration: const InputDecoration(
-                      hintText: "Confirmar senha",
-                      label: Text("Confirmar senha"),
-                    ),
+                  PasswordTextField(
+                    hintText: "Confirmar senha",
+                    label: "Confirmar senha",
                     onChanged: _controller.setConfirmPassword,
                   ),
                   const SizedBox(

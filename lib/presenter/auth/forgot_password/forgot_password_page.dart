@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:manda_aquela/presenter/auth/forgot_password/controllers/forgot_password_page_controller.dart';
 import 'package:manda_aquela/presenter/common/assets.dart';
 import 'package:manda_aquela/presenter/common/text_styles.dart';
 import 'package:manda_aquela/presenter/widgets/custom_button/custom_button.dart';
+import 'package:manda_aquela/presenter/widgets/password_text_field/password_text_field.dart';
 
 class ForgotPasswordPage extends StatefulWidget {
   const ForgotPasswordPage({super.key});
@@ -13,6 +15,8 @@ class ForgotPasswordPage extends StatefulWidget {
 }
 
 class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
+  final _controller = Modular.get<ForgotPasswordPageController>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,22 +33,18 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
               SvgPicture.asset(Assets.forgotPassword.path),
               Text("Esqueci a senha", style: TextStyles.outfit30px700w),
               const Spacer(),
-              TextFormField(
-                style: TextStyles.outfit15px400w,
-                decoration: const InputDecoration(
-                  hintText: "Nova senha",
-                  label: Text("Nova senha"),
-                ),
+              PasswordTextField(
+                hintText: "Nova senha",
+                label: "Nova senha",
+                onChanged: _controller.setPassword,
               ),
               const SizedBox(
                 height: 16,
               ),
-              TextFormField(
-                style: TextStyles.outfit15px400w,
-                decoration: const InputDecoration(
-                  hintText: "Confirmar senha",
-                  label: Text("Confirmar senha"),
-                ),
+              PasswordTextField(
+                hintText: "Confirmar senha",
+                label: "Confirmar senha",
+                onChanged: _controller.setConfirmPassword,
               ),
               const Spacer()
             ],
@@ -55,9 +55,11 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
         child: Padding(
           padding: const EdgeInsets.all(16),
           child: CustomButton(
-            onPressed: () {
-              Modular.to.navigate('/start/');
-            },
+            onPressed: _controller.isSendPasswordButtonReady
+                ? () {
+                    Modular.to.navigate('/start/');
+                  }
+                : null,
             label: "Enviar",
           ),
         ),

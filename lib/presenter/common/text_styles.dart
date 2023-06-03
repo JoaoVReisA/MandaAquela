@@ -23,4 +23,9 @@ class TextStyles {
     fontSize: 18,
     fontWeight: FontWeight.w700,
   );
+
+  static final outfit18px400w = base.copyWith(
+    fontSize: 18,
+    fontWeight: FontWeight.w400,
+  );
 }

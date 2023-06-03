@@ -8,7 +8,9 @@ enum Assets {
   forgotPassword('$base/forgot_password.svg'),
   musicianDisplay('$base/musician_display.png'),
   contractorDisplay('$base/contractor_display.png'),
-  check('$base/icon_check.svg');
+  check('$base/icon_check.svg'),
+  sendEmail('$base/send_email.svg'),
+  sendCode('$base/send_code.svg');
 
   static const String base = 'assets';
 

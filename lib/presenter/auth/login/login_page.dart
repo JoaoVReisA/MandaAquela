@@ -6,6 +6,7 @@ import 'package:manda_aquela/presenter/auth/login/controllers/login_page_control
 import 'package:manda_aquela/presenter/auth/widgets/social_media_button.dart';
 import 'package:manda_aquela/presenter/common/assets.dart';
 import 'package:manda_aquela/presenter/widgets/custom_button/custom_button.dart';
+import 'package:manda_aquela/presenter/widgets/password_text_field/password_text_field.dart';
 
 import '../../common/text_styles.dart';
 
@@ -43,20 +44,17 @@ class _LoginPageState extends State<LoginPage> {
                 const SizedBox(
                   height: 12,
                 ),
-                TextFormField(
+                PasswordTextField(
+                  hintText: 'Digite a senha',
+                  label: 'Senha',
                   onChanged: _controller.setPassword,
-                  style: TextStyles.outfit15px400w,
-                  decoration: const InputDecoration(
-                    hintText: "Digite sua senha",
-                    label: Text("Senha"),
-                  ),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     TextButton(
                       onPressed: () {
-                        Modular.to.pushNamed('/auth/forgot_password');
+                        Modular.to.pushNamed('/auth/send_email');
                       },
                       child: Text(
                         "Esqueceu a senha ?",

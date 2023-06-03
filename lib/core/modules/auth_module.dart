@@ -3,11 +3,17 @@ import 'package:manda_aquela/data/repositories/auth_login_repository.dart';
 import 'package:manda_aquela/data/repositories/sign_up_repository.dart';
 import 'package:manda_aquela/domain/repositories/AuthRepository/auth_login_repository.dart';
 import 'package:manda_aquela/domain/repositories/AuthRepository/sign_up_repository.dart';
+import 'package:manda_aquela/domain/usecase/forgot_password/send_email_code_usecase.dart';
+import 'package:manda_aquela/domain/usecase/forgot_password/send_reset_new_password_usecase.dart';
+import 'package:manda_aquela/domain/usecase/forgot_password/verify_email_code_usecase.dart';
 import 'package:manda_aquela/domain/usecase/login/email_auth_login_usecase.dart';
 import 'package:manda_aquela/domain/usecase/login/facebook_auth_login.dart';
 import 'package:manda_aquela/domain/usecase/login/google_auth_login.dart';
 import 'package:manda_aquela/domain/usecase/login/sign_up_usecase.dart';
-import 'package:manda_aquela/presenter/auth/forgot_password_page.dart';
+import 'package:manda_aquela/presenter/auth/forgot_password/controllers/forgot_password_page_controller.dart';
+import 'package:manda_aquela/presenter/auth/forgot_password/forgot_password_page.dart';
+import 'package:manda_aquela/presenter/auth/forgot_password/input_email_code_page.dart';
+import 'package:manda_aquela/presenter/auth/forgot_password/send_email_page.dart';
 import 'package:manda_aquela/presenter/auth/login/controllers/login_page_controller.dart';
 import 'package:manda_aquela/presenter/auth/login/login_page.dart';
 import 'package:manda_aquela/presenter/auth/sign_up/controllers/sign_up_page_controller.dart';
@@ -49,6 +55,25 @@ class AuthModule extends Module {
           export: true,
           (i) => SignUpRepositoryImpl(httpService: i()),
         ),
+        Bind<ForgotPasswordPageController>(
+          (i) => ForgotPasswordPageController(
+              sendEmailCodeUsecase: i(),
+              sendResetNewPasswordUsecase: i(),
+              verifyEmailCodeUsecase: i()),
+          export: true,
+        ),
+        Bind<SendEmailCodeUsecase>(
+          (i) => RemoteSendEmailCodeUsecase(repository: i()),
+          export: true,
+        ),
+        Bind<VerifyEmailCodeUsecase>(
+          (i) => RemoteVerifyEmailCodeUsecase(repository: i()),
+          export: true,
+        ),
+        Bind<SendResetNewPasswordUsecase>(
+          (i) => RemoteSendResetNewPasswordUsecase(repository: i()),
+          export: true,
+        ),
       ];
 
   @override
@@ -60,6 +85,14 @@ class AuthModule extends Module {
         ChildRoute(
           '/is_musician_or_contractor',
           child: (_, __) => const IsMusicianOrContractorPage(),
+        ),
+        ChildRoute(
+          '/send_email',
+          child: (_, __) => const SendEmailPage(),
+        ),
+        ChildRoute(
+          '/input_email_code',
+          child: (_, __) => const InputEmailCodePage(),
         ),
       ];
 }
