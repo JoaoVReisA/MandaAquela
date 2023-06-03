@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:manda_aquela/core/extensions/string_extensions.dart';
 import 'package:manda_aquela/domain/entities/user_request.dart';
 import 'package:manda_aquela/domain/usecase/login/sign_up_usecase.dart';
 
@@ -37,7 +38,10 @@ class SignUpPageController extends GetxController {
     _stateModel.confirmPassword.value = value;
   }
 
-  bool get isSignUpButtonReady => _stateModel.isFullFilled;
+  bool get isSignUpButtonReady =>
+      _stateModel.isFullFilled &&
+      _stateModel.email.value.isValidEmail &&
+      _stateModel.password.value == _stateModel.confirmPassword.value;
 
   Future<bool> onTapReadyButton() async {
     final userRequest = UserRequest(

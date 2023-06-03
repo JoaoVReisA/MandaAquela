@@ -4,18 +4,19 @@ import 'package:manda_aquela/data/repositories/sign_up_repository.dart';
 import 'package:manda_aquela/domain/repositories/AuthRepository/auth_login_repository.dart';
 import 'package:manda_aquela/domain/repositories/AuthRepository/sign_up_repository.dart';
 import 'package:manda_aquela/domain/usecase/forgot_password/send_email_code_usecase.dart';
-import 'package:manda_aquela/domain/usecase/forgot_password/send_reset_new_password_usecase.dart';
-import 'package:manda_aquela/domain/usecase/forgot_password/verify_email_code_usecase.dart';
 import 'package:manda_aquela/domain/usecase/login/email_auth_login_usecase.dart';
 import 'package:manda_aquela/domain/usecase/login/facebook_auth_login.dart';
 import 'package:manda_aquela/domain/usecase/login/google_auth_login.dart';
 import 'package:manda_aquela/domain/usecase/login/sign_up_usecase.dart';
 import 'package:manda_aquela/presenter/auth/forgot_password/controllers/forgot_password_page_controller.dart';
-import 'package:manda_aquela/presenter/auth/forgot_password/forgot_password_page.dart';
-import 'package:manda_aquela/presenter/auth/forgot_password/input_email_code_page.dart';
 import 'package:manda_aquela/presenter/auth/forgot_password/send_email_page.dart';
 import 'package:manda_aquela/presenter/auth/login/controllers/login_page_controller.dart';
 import 'package:manda_aquela/presenter/auth/login/login_page.dart';
+import 'package:manda_aquela/presenter/auth/sign_up/add_image_page.dart';
+import 'package:manda_aquela/presenter/auth/sign_up/address_page.dart';
+import 'package:manda_aquela/presenter/auth/sign_up/controllers/add_image_page_controller.dart';
+import 'package:manda_aquela/presenter/auth/sign_up/controllers/address_page_controller.dart';
+import 'package:manda_aquela/presenter/auth/sign_up/controllers/is_musician_or_contractor_controller.dart';
 import 'package:manda_aquela/presenter/auth/sign_up/controllers/sign_up_page_controller.dart';
 import 'package:manda_aquela/presenter/auth/sign_up/is_musician_or_contractor_page.dart';
 import 'package:manda_aquela/presenter/auth/sign_up/sign_up_page.dart';
@@ -57,21 +58,24 @@ class AuthModule extends Module {
         ),
         Bind<ForgotPasswordPageController>(
           (i) => ForgotPasswordPageController(
-              sendEmailCodeUsecase: i(),
-              sendResetNewPasswordUsecase: i(),
-              verifyEmailCodeUsecase: i()),
+            sendEmailCodeUsecase: i(),
+          ),
           export: true,
         ),
         Bind<SendEmailCodeUsecase>(
           (i) => RemoteSendEmailCodeUsecase(repository: i()),
           export: true,
         ),
-        Bind<VerifyEmailCodeUsecase>(
-          (i) => RemoteVerifyEmailCodeUsecase(repository: i()),
+        Bind<IsMusicianOrContractorController>(
+          (i) => IsMusicianOrContractorController(),
           export: true,
         ),
-        Bind<SendResetNewPasswordUsecase>(
-          (i) => RemoteSendResetNewPasswordUsecase(repository: i()),
+        Bind<AddressPageController>(
+          (i) => AddressPageController(),
+          export: true,
+        ),
+        Bind<AddImagePageController>(
+          (i) => AddImagePageController(),
           export: true,
         ),
       ];
@@ -80,8 +84,6 @@ class AuthModule extends Module {
   List<ModularRoute> get routes => [
         ChildRoute('/', child: (context, args) => const LoginPage()),
         ChildRoute('/sign_up', child: (_, __) => const SignUpPage()),
-        ChildRoute('/forgot_password',
-            child: (_, __) => const ForgotPasswordPage()),
         ChildRoute(
           '/is_musician_or_contractor',
           child: (_, __) => const IsMusicianOrContractorPage(),
@@ -91,8 +93,12 @@ class AuthModule extends Module {
           child: (_, __) => const SendEmailPage(),
         ),
         ChildRoute(
-          '/input_email_code',
-          child: (_, __) => const InputEmailCodePage(),
+          '/address',
+          child: (_, __) => const AddressPage(),
+        ),
+        ChildRoute(
+          '/add_image',
+          child: (_, __) => const AddImagePage(),
         ),
       ];
 }

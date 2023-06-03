@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:manda_aquela/color_schemes.g.dart';
 import 'package:manda_aquela/domain/entities/user_type.dart';
@@ -17,8 +18,7 @@ class IsMusicianOrContractorPage extends StatefulWidget {
 
 class _IsMusicianOrContractorPageState
     extends State<IsMusicianOrContractorPage> {
-  //TODO: ADD on Dependencie injection
-  final _controller = IsMusicianOrContractorController();
+  final _controller = Modular.get<IsMusicianOrContractorController>();
 
   @override
   Widget build(BuildContext context) {
@@ -73,10 +73,15 @@ class _IsMusicianOrContractorPageState
         )),
         bottomNavigationBar: SafeArea(
           child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
-              child: CustomButton(
-                  onPressed: _controller.isContinueButtonReady ? () {} : null,
-                  label: 'Continuar')),
+            padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
+            child: CustomButton(
+                onPressed: _controller.isContinueButtonReady
+                    ? () {
+                        Modular.to.pushNamed('/auth/add_image');
+                      }
+                    : null,
+                label: 'Continuar'),
+          ),
         ),
       ),
     );

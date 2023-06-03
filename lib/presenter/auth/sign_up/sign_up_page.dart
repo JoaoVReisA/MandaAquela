@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:manda_aquela/core/extensions/string_extensions.dart';
 import 'package:manda_aquela/presenter/auth/sign_up/controllers/sign_up_page_controller.dart';
 import 'package:manda_aquela/presenter/common/assets.dart';
 import 'package:manda_aquela/presenter/common/text_styles.dart';
@@ -58,6 +59,15 @@ class _SignUpPageState extends State<SignUpPage> {
                       label: Text("Email"),
                     ),
                     onChanged: _controller.setEmail,
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    validator: (value) {
+                      if (value != null) {
+                        if (value.isValidEmail) {
+                          return null;
+                        }
+                      }
+                      return 'Por favor digite um e-mail válido';
+                    },
                   ),
                   const SizedBox(
                     height: 12,

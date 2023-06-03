@@ -21,6 +21,7 @@ dependencies:
   google_fonts: ^4.0.3
   get: ^4.6.5
   firebase_auth: ^4.6.2
+  image_picker: ^0.8.7+5
 
 
 dev_dependencies:

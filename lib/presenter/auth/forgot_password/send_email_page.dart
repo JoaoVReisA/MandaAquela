@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:manda_aquela/core/extensions/string_extensions.dart';
 import 'package:manda_aquela/presenter/auth/forgot_password/controllers/forgot_password_page_controller.dart';
 import 'package:manda_aquela/presenter/common/assets.dart';
 import 'package:manda_aquela/presenter/common/text_styles.dart';
@@ -78,6 +79,15 @@ class _SendEmailPageState extends State<SendEmailPage> {
                       hintText: "Digite seu email",
                       label: Text("Email"),
                     ),
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    validator: (value) {
+                      if (value != null) {
+                        if (value.isValidEmail) {
+                          return null;
+                        }
+                      }
+                      return 'Por favor digite um e-mail válido';
+                    },
                   ),
                 ),
                 const Spacer()
@@ -89,7 +99,7 @@ class _SendEmailPageState extends State<SendEmailPage> {
           child: Padding(
             padding: const EdgeInsets.all(16),
             child: CustomButton(
-              onPressed: _controller.email.isNotEmpty
+              onPressed: _controller.isButtonReady
                   ? () {
                       _controller.onTapSendEmailButton();
                       showDialog(

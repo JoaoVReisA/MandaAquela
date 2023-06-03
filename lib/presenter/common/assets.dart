@@ -10,7 +10,10 @@ enum Assets {
   contractorDisplay('$base/contractor_display.png'),
   check('$base/icon_check.svg'),
   sendEmail('$base/send_email.svg'),
-  sendCode('$base/send_code.svg');
+  sendCode('$base/send_code.svg'),
+  addressHouse('$base/address_house.svg'),
+  findImage('$base/find_image.svg'),
+  galleryImage('$base/gallery_image.svg');
 
   static const String base = 'assets';
 
