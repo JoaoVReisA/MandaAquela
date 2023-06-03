@@ -20,6 +20,7 @@ dependencies:
   dio: ^5.0.1
   google_fonts: ^4.0.3
   get: ^4.6.5
+  firebase_auth: ^4.6.2
 
 
 dev_dependencies:
