@@ -27,7 +27,7 @@ class LoginPageController extends GetxController {
   Future<UserCredential?> onTapLoginButton() async {
     final response = await emailAuthLoginUsecase.call(
         email: _stateModel.email.value, password: _stateModel.password.value);
-
+    print(response!.user);
     return response;
   }
 }

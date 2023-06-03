@@ -8,27 +8,30 @@ class SignUpRepositoryImpl extends SignUpRepository {
   final HttpService httpService;
 
   @override
-  Future<bool> emailLogin(UserRequest userRequest) async {
+  Future<UserCredential?> emailLogin(UserRequest userRequest) async {
     try {
       final credential =
           await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: userRequest.email,
         password: userRequest.password,
       );
+
+      await credential.user?.updateDisplayName(userRequest.name);
+
       print(credential);
-      return true;
+      return credential;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         print('The password provided is too weak.');
-        return false;
+        rethrow;
       } else if (e.code == 'email-already-in-use') {
         print('The account already exists for that email.');
-        return false;
+        throw Exception(e.code);
       }
     } catch (e) {
       print(e);
-      return false;
+      rethrow;
     }
-    return false;
+    return null;
   }
 }

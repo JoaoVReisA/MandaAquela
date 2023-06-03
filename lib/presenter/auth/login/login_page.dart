@@ -1,12 +1,7 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:manda_aquela/data/repositories/auth_login_repository.dart';
-import 'package:manda_aquela/domain/usecase/login/email_auth_login_usecase.dart';
-import 'package:manda_aquela/infrastructure/network/dio_http_service.dart';
-import 'package:manda_aquela/infrastructure/network/http_error_handler.dart';
 import 'package:manda_aquela/presenter/auth/login/controllers/login_page_controller.dart';
 import 'package:manda_aquela/presenter/auth/widgets/social_media_button.dart';
 import 'package:manda_aquela/presenter/common/assets.dart';
@@ -22,12 +17,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  //TODO: DEPENDENCIE INJECTION IS NOT WORKING FUCK IT I'M DRUNK AND IM NOT ACCOMPLISHING TO DO RESOLVE THIS SHIT DAMN
-  //TODO: Serioulsly i don't fucking know what's going wrong with the dependencie injection
-  late final LoginPageController _controller = LoginPageController(
-      emailAuthLoginUsecase: RemoteEmailAuthLoginUsecase(
-          repository: RemoteAuthLoginRepository(
-              client: DioHttpService(Dio(), DioHttpErrorHandler()))));
+  final LoginPageController _controller = Modular.get<LoginPageController>();
 
   @override
   Widget build(BuildContext context) {
@@ -81,8 +71,8 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 CustomButton(
                   onPressed: _controller.isLoginButtonReady
-                      ? () {
-                          final response = _controller.onTapLoginButton();
+                      ? () async {
+                          final response = await _controller.onTapLoginButton();
                           if (response == null) {
                             Get.dialog(const Text('error'));
                           }

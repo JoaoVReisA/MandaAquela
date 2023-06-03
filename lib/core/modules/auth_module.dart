@@ -18,10 +18,11 @@ class AuthModule extends Module {
   @override
   List<Bind> get binds => [
         Bind<LoginPageController>(
-            (i) => LoginPageController(
-                  emailAuthLoginUsecase: i(),
-                ),
-            export: true),
+          (i) => LoginPageController(
+            emailAuthLoginUsecase: i(),
+          ),
+          export: true,
+        ),
         Bind<EmailAuthLoginUsecase>(
             export: true, (i) => RemoteEmailAuthLoginUsecase(repository: i())),
         Bind<GoogleAuthLoginUsecase>(

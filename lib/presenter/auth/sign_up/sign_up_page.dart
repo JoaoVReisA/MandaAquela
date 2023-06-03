@@ -85,9 +85,10 @@ class _SignUpPageState extends State<SignUpPage> {
                   ),
                   CustomButton(
                     onPressed: _controller.isSignUpButtonReady
-                        ? () {
-                            _controller.onTapReadyButton();
-                            Modular.to.navigate('/start/');
+                        ? () async {
+                            if (await _controller.onTapReadyButton()) {
+                              Modular.to.navigate('/start/');
+                            }
                           }
                         : null,
                     label: "Cadastrar-se",
