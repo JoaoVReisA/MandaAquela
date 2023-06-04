@@ -18,8 +18,10 @@ import 'package:manda_aquela/presenter/auth/sign_up/controllers/add_image_page_c
 import 'package:manda_aquela/presenter/auth/sign_up/controllers/address_page_controller.dart';
 import 'package:manda_aquela/presenter/auth/sign_up/controllers/is_musician_or_contractor_controller.dart';
 import 'package:manda_aquela/presenter/auth/sign_up/controllers/sign_up_page_controller.dart';
+import 'package:manda_aquela/presenter/auth/sign_up/controllers/social_media_page_controller.dart';
 import 'package:manda_aquela/presenter/auth/sign_up/is_musician_or_contractor_page.dart';
 import 'package:manda_aquela/presenter/auth/sign_up/sign_up_page.dart';
+import 'package:manda_aquela/presenter/auth/sign_up/social_media_page.dart';
 
 class AuthModule extends Module {
   @override
@@ -78,6 +80,10 @@ class AuthModule extends Module {
           (i) => AddImagePageController(),
           export: true,
         ),
+        Bind<SocialMediaPageController>(
+          (i) => SocialMediaPageController(),
+          export: true,
+        ),
       ];
 
   @override
@@ -99,6 +105,10 @@ class AuthModule extends Module {
         ChildRoute(
           '/add_image',
           child: (_, __) => const AddImagePage(),
+        ),
+        ChildRoute(
+          '/social_media',
+          child: (_, __) => const SocialMediaPage(),
         ),
       ];
 }

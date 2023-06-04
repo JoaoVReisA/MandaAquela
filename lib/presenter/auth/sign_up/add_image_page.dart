@@ -37,6 +37,8 @@ class _AddImagePageState extends State<AddImagePage> {
 
   @override
   Widget build(BuildContext context) {
+    final screenSize = MediaQuery.of(context).size;
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -69,7 +71,10 @@ class _AddImagePageState extends State<AddImagePage> {
                       },
                       child: SvgPicture.asset(Assets.galleryImage.path),
                     )
-                  : Image.file(File(_image!.path)),
+                  : SizedBox(
+                      width: screenSize.width * .60,
+                      height: screenSize.height * .30,
+                      child: Image.file(File(_image!.path))),
               const Spacer(),
             ],
           ),
@@ -81,7 +86,7 @@ class _AddImagePageState extends State<AddImagePage> {
           child: CustomButton(
             onPressed: _controller.isButtonReady
                 ? () async {
-                    Modular.to.navigate('/start/');
+                    Modular.to.navigate('/auth/address');
                   }
                 : null,
             label: "Enviar",

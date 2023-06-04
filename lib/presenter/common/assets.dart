@@ -13,7 +13,12 @@ enum Assets {
   sendCode('$base/send_code.svg'),
   addressHouse('$base/address_house.svg'),
   findImage('$base/find_image.svg'),
-  galleryImage('$base/gallery_image.svg');
+  galleryImage('$base/gallery_image.svg'),
+  socialMediaSelect('$base/social_media_select.svg'),
+  facebookBlackLogo('$base/facebook_black_logo.svg'),
+  instagramBlackLogo('$base/instagram_black_logo.svg'),
+  tikTokBlackLogo('$base/tik_tok_black_logo.svg'),
+  youtubeBlackLogo('$base/youtube_black_logo.svg');
 
   static const String base = 'assets';
 

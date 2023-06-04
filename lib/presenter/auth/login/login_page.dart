@@ -25,6 +25,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Obx(
       () => Scaffold(
+        resizeToAvoidBottomInset: true,
         body: SafeArea(
           child: Padding(
             padding: const EdgeInsets.all(16.0),

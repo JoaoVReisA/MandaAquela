@@ -94,7 +94,7 @@ class _AddressPageState extends State<AddressPage> {
             child: CustomButton(
               onPressed: _controller.isButtonReady
                   ? () async {
-                      Modular.to.navigate('/start/');
+                      Modular.to.navigate('/auth/social_media');
                     }
                   : null,
               label: "Enviar",
