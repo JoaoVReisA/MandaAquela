@@ -1,4 +1,5 @@
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:manda_aquela/data/repositories/auth_login_repository.dart';
 import 'package:manda_aquela/data/repositories/sign_up_repository.dart';
 import 'package:manda_aquela/domain/repositories/AuthRepository/auth_login_repository.dart';
@@ -77,7 +78,7 @@ class AuthModule extends Module {
           export: true,
         ),
         Bind<AddImagePageController>(
-          (i) => AddImagePageController(),
+          (i) => AddImagePageController(imagePicker: ImagePicker()),
           export: true,
         ),
         Bind<SocialMediaPageController>(
