@@ -135,6 +135,7 @@ class _SendEmailPageState extends State<SendEmailPage> {
 
   void _showSuccessDialog() {
     showDialog(
+      barrierDismissible: false,
       context: context,
       builder: (context) => CommonDialog(
         title: 'Email enviado com sucesso',
