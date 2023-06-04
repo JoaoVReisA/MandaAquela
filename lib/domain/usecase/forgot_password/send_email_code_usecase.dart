@@ -1,7 +1,7 @@
 import 'package:manda_aquela/domain/repositories/AuthRepository/sign_up_repository.dart';
 
 abstract class SendEmailCodeUsecase {
-  Future<void> call({required String email});
+  Future<bool> call({required String email});
 }
 
 class RemoteSendEmailCodeUsecase extends SendEmailCodeUsecase {
@@ -10,7 +10,7 @@ class RemoteSendEmailCodeUsecase extends SendEmailCodeUsecase {
   RemoteSendEmailCodeUsecase({required this.repository});
 
   @override
-  Future<void> call({required String email}) async {
-    await repository.sendResetPasswordEmailCode(email: email);
+  Future<bool> call({required String email}) async {
+    return await repository.sendResetPasswordEmailCode(email: email);
   }
 }

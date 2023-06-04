@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:manda_aquela/core/custom_exceptions.dart';
 import 'package:manda_aquela/domain/repositories/AuthRepository/auth_login_repository.dart';
 import 'package:manda_aquela/infrastructure/network/dio_http_service.dart';
 
@@ -16,11 +17,12 @@ class RemoteAuthLoginRepository extends AuthLoginRepository {
       return credential;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
-        print('No user found for that email.');
+        throw NotFoundException('Nenhum usuário encontrado com esse e-mail');
       } else if (e.code == 'wrong-password') {
-        print('Wrong password provided for that user.');
+        throw UnauthorizedException(
+            'Senha digitada incorreta para este usuário');
       }
+      throw BadRequestException(e.code);
     }
-    return null;
   }
 }

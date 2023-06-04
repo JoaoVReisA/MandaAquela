@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
+import 'package:manda_aquela/core/custom_exceptions.dart';
 import 'package:manda_aquela/core/extensions/string_extensions.dart';
 import 'package:manda_aquela/domain/usecase/login/email_auth_login_usecase.dart';
 
@@ -15,6 +16,9 @@ class LoginPageController extends GetxController {
 
   final EmailAuthLoginUsecase emailAuthLoginUsecase;
   final _stateModel = _LoginPageStateModel();
+
+  late void Function(String message) onLoginErrorFunction;
+
   void setEmail(String value) {
     _stateModel.email.value = value;
   }
@@ -27,10 +31,14 @@ class LoginPageController extends GetxController {
       _stateModel.isFullFilled && _stateModel.email.value.isValidEmail;
 
   Future<UserCredential?> onTapLoginButton() async {
-    final response = await emailAuthLoginUsecase.call(
-        email: _stateModel.email.value, password: _stateModel.password.value);
-
-    print(response?.user);
-    return response;
+    try {
+      final response = await emailAuthLoginUsecase.call(
+          email: _stateModel.email.value, password: _stateModel.password.value);
+      print(response?.user);
+      return response;
+    } on CustomException catch (e) {
+      onLoginErrorFunction(e.message);
+    }
+    return null;
   }
 }

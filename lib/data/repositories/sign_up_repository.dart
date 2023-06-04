@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:manda_aquela/core/custom_exceptions.dart';
 import 'package:manda_aquela/domain/entities/user_request.dart';
 import 'package:manda_aquela/domain/repositories/AuthRepository/sign_up_repository.dart';
 import 'package:manda_aquela/infrastructure/network/dio_http_service.dart';
@@ -22,45 +23,27 @@ class SignUpRepositoryImpl extends SignUpRepository {
       return credential;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
-        print('The password provided is too weak.');
-        rethrow;
+        throw BadRequestException('The password provided is too weak.');
       } else if (e.code == 'email-already-in-use') {
-        print('The account already exists for that email.');
-        throw Exception(e.code);
+        throw BadRequestException('The account already exists for that email.');
       }
     } catch (e) {
-      print(e);
       rethrow;
     }
     return null;
   }
 
   @override
-  Future<void> sendResetPasswordEmailCode({required String email}) async {
+  Future<bool> sendResetPasswordEmailCode({required String email}) async {
     try {
       await FirebaseAuth.instance.setLanguageCode("pt-br");
       await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
-    } catch (e) {
-      rethrow;
-    }
-  }
-
-  @override
-  Future<void> sendResetNewPassword(
-      {required String code, required String newPassword}) async {
-    try {
-      await FirebaseAuth.instance
-          .confirmPasswordReset(code: code, newPassword: newPassword);
-    } catch (e) {
-      rethrow;
-    }
-  }
-
-  @override
-  Future<String> verifyEmailCode({required String code}) async {
-    try {
-      final email = await FirebaseAuth.instance.verifyPasswordResetCode(code);
-      return email;
+      return true;
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'auth/user-not-found') {
+        throw BadRequestException('Usuário não encontrado');
+      }
+      throw BadRequestException(e.code);
     } catch (e) {
       rethrow;
     }

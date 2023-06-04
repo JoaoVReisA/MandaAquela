@@ -6,6 +6,7 @@ import 'package:manda_aquela/core/extensions/string_extensions.dart';
 import 'package:manda_aquela/presenter/auth/login/controllers/login_page_controller.dart';
 import 'package:manda_aquela/presenter/auth/widgets/social_media_button.dart';
 import 'package:manda_aquela/presenter/common/assets.dart';
+import 'package:manda_aquela/presenter/widgets/common_dialog/common_dialog.dart';
 import 'package:manda_aquela/presenter/widgets/custom_button/custom_button.dart';
 import 'package:manda_aquela/presenter/widgets/password_text_field/password_text_field.dart';
 
@@ -20,6 +21,12 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final LoginPageController _controller = Modular.get<LoginPageController>();
+
+  @override
+  void initState() {
+    _controller.onLoginErrorFunction = _showErrorDialog;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -84,11 +91,10 @@ class _LoginPageState extends State<LoginPage> {
                         ? () async {
                             final response =
                                 await _controller.onTapLoginButton();
-                            if (response == null) {
-                              _showDialog();
+                            if (response != null) {
+                              Modular.to
+                                  .navigate('/auth/is_musician_or_contractor');
                             }
-                            Modular.to
-                                .navigate('/auth/is_musician_or_contractor');
                           }
                         : null,
                     label: "Login",
@@ -168,9 +174,15 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  _showDialog() {
+  void _showErrorDialog(String message) {
     showDialog(
         context: context,
-        builder: (BuildContext context) => const Text('error'));
+        builder: (BuildContext context) => CommonDialog(
+            title: 'Aconteceu um erro inesperado',
+            bodyText: message,
+            buttonText: 'Ok',
+            onTap: () {
+              Modular.to.pop();
+            }));
   }
 }

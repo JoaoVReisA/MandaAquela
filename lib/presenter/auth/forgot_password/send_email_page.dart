@@ -21,6 +21,12 @@ class _SendEmailPageState extends State<SendEmailPage> {
   final _controller = Modular.get<ForgotPasswordPageController>();
 
   @override
+  void initState() {
+    _controller.onSendEmailError = _showErrorDialog;
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Obx(
       () => Scaffold(
@@ -100,26 +106,44 @@ class _SendEmailPageState extends State<SendEmailPage> {
             padding: const EdgeInsets.all(16),
             child: CustomButton(
               onPressed: _controller.isButtonReady
-                  ? () {
-                      _controller.onTapSendEmailButton();
-                      showDialog(
-                        context: context,
-                        builder: (context) => CommonDialog(
-                          title: 'Email enviado com sucesso',
-                          bodyText:
-                              'Verifique a sua caixa de entrada e prossiga com a alteração da senha seguindo os passos do email',
-                          buttonText: 'Ir para login',
-                          onTap: () {
-                            Modular.to.pushReplacementNamed('/auth/');
-                          },
-                        ),
-                      );
+                  ? () async {
+                      final response = await _controller.onTapSendEmailButton();
+                      if (response) {
+                        _showSuccessDialog();
+                      }
                     }
                   : null,
               label: "Enviar email",
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  void _showErrorDialog(String message) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) => CommonDialog(
+            title: 'Aconteceu um erro inesperado',
+            bodyText: message,
+            buttonText: 'Ok',
+            onTap: () {
+              Modular.to.pop();
+            }));
+  }
+
+  void _showSuccessDialog() {
+    showDialog(
+      context: context,
+      builder: (context) => CommonDialog(
+        title: 'Email enviado com sucesso',
+        bodyText:
+            'Verifique a sua caixa de entrada e prossiga com a alteração da senha seguindo os passos do email',
+        buttonText: 'Ir para login',
+        onTap: () {
+          Modular.to.pushReplacementNamed('/auth/');
+        },
       ),
     );
   }
