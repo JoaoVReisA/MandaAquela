@@ -26,9 +26,6 @@ class AppWidget extends StatelessWidget {
           ),
         ),
       ),
-      darkTheme: ThemeData(
-        colorScheme: darkColorScheme,
-      ),
       routeInformationParser: Modular.routeInformationParser,
       routerDelegate: Modular.routerDelegate,
       debugShowCheckedModeBanner: false,
