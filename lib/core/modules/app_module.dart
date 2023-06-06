@@ -1,4 +1,5 @@
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:manda_aquela/core/modules/auth_module.dart';
 import 'package:manda_aquela/core/modules/home_module.dart';
 import 'package:manda_aquela/core/modules/network_module.dart';
 import 'package:manda_aquela/core/modules/start_module.dart';
@@ -11,12 +12,14 @@ class AppModule extends Module {
   @override
   List<Module> get imports => [
         NetworkModule(),
+        AuthModule(),
       ];
 
   @override
   List<ModularRoute> get routes => [
         ChildRoute('/', child: (context, args) => const SplashPage()),
         ModuleRoute('/home/', module: HomeModule()),
+        ModuleRoute('/auth/', module: AuthModule()),
         ModuleRoute('/start/', module: StartModule()),
       ];
 }

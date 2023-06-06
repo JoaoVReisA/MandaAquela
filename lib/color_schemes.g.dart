@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 const lightColorScheme = ColorScheme(
   brightness: Brightness.light,
   primary: Color(0xFFE84118),
-  onPrimary: Color(0xFFFFFFFF),
+  onPrimary: Color(0xFF000000),
   primaryContainer: Color(0xFFFFDAD2),
   onPrimaryContainer: Color(0xFF3D0700),
   secondary: Color(0xFF9C88FF),
@@ -22,13 +22,13 @@ const lightColorScheme = ColorScheme(
   onBackground: Color(0xFF001F25),
   surface: Color(0xFFF8FDFF),
   onSurface: Color(0xFF001F25),
-  surfaceVariant: Color(0xFFF5DDD8),
+  surfaceVariant: Color(0xFF636363),
   onSurfaceVariant: Color(0xFF534340),
   outline: Color(0xFF727475),
   onInverseSurface: Color(0xFFD6F6FF),
   inverseSurface: Color(0xFF00363F),
   inversePrimary: Color(0xFFFFB4A3),
-  shadow: Color(0xFF000000),
+  shadow: Color(0xFF727475),
   surfaceTint: Color(0xFFB52700),
   outlineVariant: Color(0xFFD8C2BD),
   scrim: Color(0xFF000000),
@@ -67,3 +67,12 @@ const darkColorScheme = ColorScheme(
   outlineVariant: Color(0xFF534340),
   scrim: Color(0xFF000000),
 );
+
+class AppColors {
+  static const primary = Color(0xFFE84118);
+  static const secondary = Color(0xFF9C88FF);
+  static const tertiary = Color(0xFFD9D9D9);
+  static const white = Color(0xFFFFFFFF);
+  static const highlight = Color(0xFFFBC531);
+  static const success = Color(0xFF44BD32);
+}

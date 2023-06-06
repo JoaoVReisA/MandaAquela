@@ -1,97 +1,67 @@
 name: manda_aquela
 description: A new Flutter project.
 
-
-publish_to: 'none' 
-
-
-
-
-
-
-
-
-
-
-
-
+publish_to: "none"
 
 version: 1.0.0+1
 
 environment:
-  sdk: '>=2.19.2 <3.0.0'
-
-
-
-
-
-
+  sdk: ">=2.19.2 <3.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
 
-
-  
-  
   cupertino_icons: ^1.0.2
-  mobx: ^2.1.4
-  flutter_mobx: ^2.0.6+5
   flutter_modular: ^5.0.3
   firebase_core: ^2.7.0
   firebase_crashlytics: ^3.0.15
   flutter_svg: ^2.0.2
   dio: ^5.0.1
-  connectivity_plus: ^3.0.3
+  google_fonts: ^4.0.3
+  get: ^4.6.5
+  firebase_auth: ^4.6.2
+  image_picker: ^0.8.7+5
+  flutter_launcher_icons: ^0.13.1
+
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  
-  
-  
-  
-  
   flutter_lints: ^2.0.0
 
-
-
-
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/icon/icon.png"
 
 flutter:
-
-  
-  
-  
   uses-material-design: true
+  fonts:
+    - family: Outfit
+      fonts:
+        - asset: assets/fonts/Outfit/Outfit-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/Outfit/Outfit-Black.ttf
+          weight: 900
+        - asset: assets/fonts/Outfit/Outfit-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/Outfit/Outfit-ExtraBold.ttf
+          weight: 800
+        - asset: assets/fonts/Outfit/Outfit-ExtraLight.ttf
+          weight: 100
+        - asset: assets/fonts/Outfit/Outfit-Light.ttf
+          weight: 300
+        - asset: assets/fonts/Outfit/Outfit-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Outfit/Outfit-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/Outfit/Outfit-Thin.ttf
+          weight: 200
+        - asset: assets/fonts/Outfit/Outfit-VariableFont_wght.ttf
 
-  
   assets:
     - assets/
-
   
-  
-
-  
-  
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+    
