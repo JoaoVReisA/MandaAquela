@@ -138,10 +138,13 @@ class _LoginPageState extends State<LoginPage> {
                     height: 32,
                   ),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: const [
                       SocialMediaButton(assets: Assets.googleLogo),
+                      SizedBox(
+                        width: 16,
+                      ),
                       SocialMediaButton(assets: Assets.facebookLogo),
                     ],
                   ),
