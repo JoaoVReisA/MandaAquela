@@ -38,10 +38,12 @@ class SelectUserTypeWidget extends StatelessWidget {
           onTap: onTap,
           child: Image.asset(
             userType == UserType.musician
-                ? Assets.musicianDisplay.path
-                : Assets.contractorDisplay.path,
-            colorBlendMode: isSelected ? null : BlendMode.color,
-            color: isSelected ? null : Colors.grey[600],
+                ? isSelected
+                    ? Assets.musicianDisplay.path
+                    : Assets.musicianDisplayGrey.path
+                : isSelected
+                    ? Assets.contractorDisplay.path
+                    : Assets.contractorDisplayGrey.path,
           ),
         ),
       ],

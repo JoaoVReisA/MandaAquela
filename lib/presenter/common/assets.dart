@@ -18,7 +18,9 @@ enum Assets {
   facebookBlackLogo('$base/facebook_black_logo.svg'),
   instagramBlackLogo('$base/instagram_black_logo.svg'),
   tikTokBlackLogo('$base/tik_tok_black_logo.svg'),
-  youtubeBlackLogo('$base/youtube_black_logo.svg');
+  youtubeBlackLogo('$base/youtube_black_logo.svg'),
+  musicianDisplayGrey('$base/musician_display_grey.png'),
+  contractorDisplayGrey('$base/contractor_display_grey.png');
 
   static const String base = 'assets';
 

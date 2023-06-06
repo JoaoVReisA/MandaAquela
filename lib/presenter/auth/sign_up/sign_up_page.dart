@@ -92,7 +92,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     onPressed: _controller.isSignUpButtonReady
                         ? () async {
                             if (await _controller.onTapReadyButton()) {
-                              Modular.to.navigate('/start/');
+                              Modular.to.navigate('/auth/');
                             }
                           }
                         : null,
