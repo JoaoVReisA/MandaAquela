@@ -49,17 +49,17 @@ class _AddImagePageState extends State<AddImagePage> {
                   ),
                 ),
                 const Spacer(),
-                _controller.image == null
-                    ? InkWell(
-                        onTap: () async {
-                          _controller.getImage();
-                        },
-                        child: SvgPicture.asset(Assets.galleryImage.path),
-                      )
-                    : SizedBox(
-                        width: screenSize.width * .60,
-                        height: screenSize.height * .30,
-                        child: Image.file(File(_controller.image!.path))),
+                InkWell(
+                  onTap: () async {
+                    _controller.getImage();
+                  },
+                  child: _controller.image == null
+                      ? SvgPicture.asset(Assets.galleryImage.path)
+                      : SizedBox(
+                          width: screenSize.width * .60,
+                          height: screenSize.height * .30,
+                          child: Image.file(File(_controller.image!.path))),
+                ),
                 const Spacer(),
               ],
             ),
