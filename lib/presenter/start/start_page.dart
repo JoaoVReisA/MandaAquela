@@ -12,6 +12,13 @@ class StartPage extends StatefulWidget {
 
 class _StartPageState extends State<StartPage> {
   int currentIndex = 1;
+
+  @override
+  void initState() {
+    Modular.to.navigate('/start/home');
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,7 +29,7 @@ class _StartPageState extends State<StartPage> {
           switch (id) {
             case 0:
               currentIndex = id;
-              Modular.to.navigate('/start/profile');
+              Modular.to.navigate('/start/events');
               break;
             case 1:
               currentIndex = id;
@@ -30,7 +37,7 @@ class _StartPageState extends State<StartPage> {
               break;
             case 2:
               currentIndex = id;
-              Modular.to.navigate('/start/events');
+              Modular.to.navigate('/start/profile');
               break;
           }
           setState(() {});
@@ -38,7 +45,7 @@ class _StartPageState extends State<StartPage> {
         currentIndex: currentIndex,
         items: [
           const BottomNavigationBarItem(
-              icon: Icon(Icons.person), label: 'Perfil'),
+              icon: Icon(Icons.featured_play_list), label: 'Eventos'),
           BottomNavigationBarItem(
               icon: SvgPicture.asset(
                 Assets.logo.path,
@@ -51,7 +58,7 @@ class _StartPageState extends State<StartPage> {
               ),
               label: 'Home'),
           const BottomNavigationBarItem(
-              icon: Icon(Icons.featured_play_list), label: 'Eventos'),
+              icon: Icon(Icons.search), label: 'Search'),
         ],
         backgroundColor: Theme.of(context).colorScheme.background,
       ),
