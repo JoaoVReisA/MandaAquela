@@ -14,12 +14,6 @@ class _StartPageState extends State<StartPage> {
   int currentIndex = 1;
 
   @override
-  void initState() {
-    Modular.to.navigate('/start/home');
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
