@@ -47,6 +47,8 @@ class FinishSignUpController extends GetxController {
 
   void sendUserData() async {
     final user = await getUserData();
-    print(user);
+    print(user.name);
+    print(user.email);
+    print(user.id);
   }
 }
