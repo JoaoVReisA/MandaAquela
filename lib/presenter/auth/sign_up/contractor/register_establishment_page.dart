@@ -96,13 +96,26 @@ class _RegisterEstablishmentPageState extends State<RegisterEstablishmentPage> {
         bottomNavigationBar: SafeArea(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
-            child: CustomButton(
-              onPressed: _controller.isButtonReady
-                  ? () async {
-                      Modular.to.navigate('/auth/social_media');
-                    }
-                  : null,
-              label: "Enviar",
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                CustomButton(
+                  onPressed: _controller.isButtonReady
+                      ? () async {
+                          //TODO: Enviar dados state model
+                          Modular.to.pushNamed('/auth/social_media');
+                        }
+                      : null,
+                  label: "Enviar",
+                ),
+                TextButton(
+                  child: const Text('Não possuo um estabelecimento',
+                      style: TextStyle(decoration: TextDecoration.underline)),
+                  onPressed: () {
+                    Modular.to.pushNamed('/auth/social_media');
+                  },
+                )
+              ],
             ),
           ),
         ),

@@ -113,7 +113,7 @@ class _SocialMediaPageState extends State<SocialMediaPage> {
               ),
               CustomButton(
                 onPressed: () async {
-                  Modular.to.navigate('/start/');
+                  Modular.to.pushNamed('/auth/add_image');
                 },
                 label: "Enviar",
               ),
