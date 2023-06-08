@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:manda_aquela/color_schemes.g.dart';
 import 'package:manda_aquela/presenter/common/font_family.dart';
 
 class TextStyles {
@@ -32,5 +33,10 @@ class TextStyles {
   static final outfit18px400w = base.copyWith(
     fontSize: 18,
     fontWeight: FontWeight.w400,
+  );
+  static final outfit64px400wGreen = base.copyWith(
+    fontSize: 64,
+    fontWeight: FontWeight.w400,
+    color: AppColors.success,
   );
 }

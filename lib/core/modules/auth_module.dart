@@ -15,12 +15,21 @@ import 'package:manda_aquela/presenter/auth/login/controllers/login_page_control
 import 'package:manda_aquela/presenter/auth/login/login_page.dart';
 import 'package:manda_aquela/presenter/auth/sign_up/add_image_page.dart';
 import 'package:manda_aquela/presenter/auth/sign_up/address_page.dart';
+import 'package:manda_aquela/presenter/auth/sign_up/contractor/register_establishment_page.dart';
 import 'package:manda_aquela/presenter/auth/sign_up/controllers/add_image_page_controller.dart';
 import 'package:manda_aquela/presenter/auth/sign_up/controllers/address_page_controller.dart';
+import 'package:manda_aquela/presenter/auth/sign_up/controllers/finish_signup_controller.dart';
 import 'package:manda_aquela/presenter/auth/sign_up/controllers/is_musician_or_contractor_controller.dart';
+import 'package:manda_aquela/presenter/auth/sign_up/controllers/musician_description_page_controller.dart';
+import 'package:manda_aquela/presenter/auth/sign_up/controllers/musician_value_page_controller.dart';
+import 'package:manda_aquela/presenter/auth/sign_up/controllers/register_establishment_page_controller.dart';
+import 'package:manda_aquela/presenter/auth/sign_up/controllers/select_your_skills_page_controller.dart';
 import 'package:manda_aquela/presenter/auth/sign_up/controllers/sign_up_page_controller.dart';
 import 'package:manda_aquela/presenter/auth/sign_up/controllers/social_media_page_controller.dart';
 import 'package:manda_aquela/presenter/auth/sign_up/is_musician_or_contractor_page.dart';
+import 'package:manda_aquela/presenter/auth/sign_up/musician/musician_description_page.dart';
+import 'package:manda_aquela/presenter/auth/sign_up/musician/musician_value_page.dart';
+import 'package:manda_aquela/presenter/auth/sign_up/musician/select_your_skills_page.dart';
 import 'package:manda_aquela/presenter/auth/sign_up/sign_up_page.dart';
 import 'package:manda_aquela/presenter/auth/sign_up/social_media_page.dart';
 
@@ -85,6 +94,26 @@ class AuthModule extends Module {
           (i) => SocialMediaPageController(),
           export: true,
         ),
+        Bind<SelectYourSkillsPageController>(
+          (i) => SelectYourSkillsPageController(),
+          export: true,
+        ),
+        Bind<MusicianValuePageController>(
+          (i) => MusicianValuePageController(),
+          export: true,
+        ),
+        Bind<MusicianDescriptionPageController>(
+          (i) => MusicianDescriptionPageController(),
+          export: true,
+        ),
+        Bind<RegisterEstablishmentPageController>(
+          (i) => RegisterEstablishmentPageController(),
+          export: true,
+        ),
+        Bind<FinishSignUpController>(
+          (i) => FinishSignUpController(),
+          export: true,
+        ),
       ];
 
   @override
@@ -110,6 +139,22 @@ class AuthModule extends Module {
         ChildRoute(
           '/social_media',
           child: (_, __) => const SocialMediaPage(),
+        ),
+        ChildRoute(
+          '/select_skills',
+          child: (_, __) => const SelectYourSkillsPage(),
+        ),
+        ChildRoute(
+          '/musician_description',
+          child: (_, __) => const MusicianDescriptionPage(),
+        ),
+        ChildRoute(
+          '/musician_value',
+          child: (_, __) => const MusicianValuePage(),
+        ),
+        ChildRoute(
+          '/register_establishment',
+          child: (_, __) => const RegisterEstablishmentPage(),
         ),
       ];
 }

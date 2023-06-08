@@ -2,30 +2,37 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:manda_aquela/presenter/auth/sign_up/controllers/address_page_controller.dart';
+import 'package:manda_aquela/color_schemes.g.dart';
+import 'package:manda_aquela/presenter/auth/sign_up/controllers/register_establishment_page_controller.dart';
 import 'package:manda_aquela/presenter/common/assets.dart';
 import 'package:manda_aquela/presenter/common/text_styles.dart';
 import 'package:manda_aquela/presenter/widgets/custom_button/custom_button.dart';
 
-class AddressPage extends StatefulWidget {
-  const AddressPage({super.key});
+class RegisterEstablishmentPage extends StatefulWidget {
+  const RegisterEstablishmentPage({super.key});
 
   @override
-  State<AddressPage> createState() => _AddressPageState();
+  State<RegisterEstablishmentPage> createState() =>
+      _RegisterEstablishmentPageState();
 }
 
-class _AddressPageState extends State<AddressPage> {
-  final _controller = Modular.get<AddressPageController>();
+class _RegisterEstablishmentPageState extends State<RegisterEstablishmentPage> {
+  final _controller = Modular.get<RegisterEstablishmentPageController>();
 
   @override
   Widget build(BuildContext context) {
-    final screenSize = MediaQuery.of(context).size;
-
     return Obx(
       () => Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           elevation: 0,
+          title: Text(
+            'Cadastre um estabelecimento',
+            style: TextStyles.outfit15pxBold.copyWith(
+              color: AppColors.tertiary,
+            ),
+            textAlign: TextAlign.center,
+          ),
         ),
         body: SafeArea(
           child: SingleChildScrollView(
@@ -39,16 +46,14 @@ class _AddressPageState extends State<AddressPage> {
                   const SizedBox(
                     height: 15,
                   ),
-                  Text('Qual o seu endereço? ',
-                      style: TextStyles.outfit30px700w),
                   const SizedBox(height: 16),
                   TextFormField(
                     style: TextStyles.outfit15px400w,
                     decoration: const InputDecoration(
-                      hintText: "Rua",
-                      label: Text("Rua"),
+                      hintText: "Digite o nome do estabelecimento",
+                      label: Text("Digite o nome do estabelecimento"),
                     ),
-                    onChanged: _controller.setStreet,
+                    onChanged: _controller.setEstablishmentName,
                   ),
                   const SizedBox(
                     height: 18,
@@ -56,10 +61,10 @@ class _AddressPageState extends State<AddressPage> {
                   TextFormField(
                     style: TextStyles.outfit15px400w,
                     decoration: const InputDecoration(
-                      hintText: "Cidade",
-                      label: Text("Cidade"),
+                      hintText: "Tipo de estabelecimento",
+                      label: Text("Tipo de estabelecimento"),
                     ),
-                    onChanged: _controller.setCity,
+                    onChanged: _controller.setEstablishmentType,
                   ),
                   const SizedBox(
                     height: 12,
@@ -67,10 +72,10 @@ class _AddressPageState extends State<AddressPage> {
                   TextFormField(
                     style: TextStyles.outfit15px400w,
                     decoration: const InputDecoration(
-                      hintText: "Estado",
-                      label: Text("Estado"),
+                      hintText: "Digite o endereço",
+                      label: Text("Digite o endereço"),
                     ),
-                    onChanged: _controller.setState,
+                    onChanged: _controller.setAddress,
                   ),
                   const SizedBox(
                     height: 12,
@@ -78,10 +83,10 @@ class _AddressPageState extends State<AddressPage> {
                   TextFormField(
                     style: TextStyles.outfit15px400w,
                     decoration: const InputDecoration(
-                      hintText: "CEP",
-                      label: Text("CEP"),
+                      hintText: "Informe a capacidade do estabelecimento",
+                      label: Text("Informe a capacidade do estabelecimento"),
                     ),
-                    onChanged: _controller.setCep,
+                    onChanged: _controller.setCapacity,
                   ),
                 ],
               ),
@@ -91,13 +96,26 @@ class _AddressPageState extends State<AddressPage> {
         bottomNavigationBar: SafeArea(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
-            child: CustomButton(
-              onPressed: _controller.isButtonReady
-                  ? () async {
-                      Modular.to.pushNamed('/auth/social_media');
-                    }
-                  : null,
-              label: "Enviar",
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                CustomButton(
+                  onPressed: _controller.isButtonReady
+                      ? () async {
+                          //TODO: Enviar dados state model
+                          Modular.to.pushNamed('/auth/social_media');
+                        }
+                      : null,
+                  label: "Enviar",
+                ),
+                TextButton(
+                  child: const Text('Não possuo um estabelecimento',
+                      style: TextStyle(decoration: TextDecoration.underline)),
+                  onPressed: () {
+                    Modular.to.pushNamed('/auth/social_media');
+                  },
+                )
+              ],
             ),
           ),
         ),

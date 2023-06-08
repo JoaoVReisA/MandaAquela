@@ -5,6 +5,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:manda_aquela/presenter/auth/sign_up/controllers/add_image_page_controller.dart';
+import 'package:manda_aquela/presenter/auth/sign_up/controllers/finish_signup_controller.dart';
 import 'package:manda_aquela/presenter/common/assets.dart';
 import 'package:manda_aquela/presenter/common/text_styles.dart';
 import 'package:manda_aquela/presenter/widgets/custom_button/custom_button.dart';
@@ -18,6 +19,7 @@ class AddImagePage extends StatefulWidget {
 
 class _AddImagePageState extends State<AddImagePage> {
   final _controller = Modular.get<AddImagePageController>();
+  final _finishSignUpController = Modular.get<FinishSignUpController>();
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +73,8 @@ class _AddImagePageState extends State<AddImagePage> {
             child: CustomButton(
               onPressed: _controller.isButtonReady
                   ? () async {
-                      Modular.to.pushNamed('/auth/address');
+                      _finishSignUpController.sendUserData();
+                      Modular.to.pushNamed('/start/home/');
                     }
                   : null,
               label: "Enviar",

@@ -25,4 +25,13 @@ class SocialMediaPageController extends GetxController {
   void setTikTok(String value) {
     _stateModel.tikTok.value = value;
   }
+
+  List<String?> getSocialMedias() {
+    return [
+      _stateModel.instagram.value,
+      _stateModel.facebook.value,
+      _stateModel.tikTok.value,
+      _stateModel.youtube.value,
+    ];
+  }
 }
