@@ -18,9 +18,11 @@ import 'package:manda_aquela/presenter/auth/sign_up/address_page.dart';
 import 'package:manda_aquela/presenter/auth/sign_up/controllers/add_image_page_controller.dart';
 import 'package:manda_aquela/presenter/auth/sign_up/controllers/address_page_controller.dart';
 import 'package:manda_aquela/presenter/auth/sign_up/controllers/is_musician_or_contractor_controller.dart';
+import 'package:manda_aquela/presenter/auth/sign_up/controllers/select_your_skills_page_controller.dart';
 import 'package:manda_aquela/presenter/auth/sign_up/controllers/sign_up_page_controller.dart';
 import 'package:manda_aquela/presenter/auth/sign_up/controllers/social_media_page_controller.dart';
 import 'package:manda_aquela/presenter/auth/sign_up/is_musician_or_contractor_page.dart';
+import 'package:manda_aquela/presenter/auth/sign_up/musician/select_your_skills_page.dart';
 import 'package:manda_aquela/presenter/auth/sign_up/sign_up_page.dart';
 import 'package:manda_aquela/presenter/auth/sign_up/social_media_page.dart';
 
@@ -85,6 +87,10 @@ class AuthModule extends Module {
           (i) => SocialMediaPageController(),
           export: true,
         ),
+        Bind<SelectYourSkillsPageController>(
+          (i) => SelectYourSkillsPageController(),
+          export: true,
+        ),
       ];
 
   @override
@@ -110,6 +116,10 @@ class AuthModule extends Module {
         ChildRoute(
           '/social_media',
           child: (_, __) => const SocialMediaPage(),
+        ),
+        ChildRoute(
+          '/select_skills',
+          child: (_, __) => const SelectYourSkillsPage(),
         ),
       ];
 }

@@ -77,7 +77,11 @@ class _IsMusicianOrContractorPageState
             child: CustomButton(
                 onPressed: _controller.isContinueButtonReady
                     ? () {
-                        Modular.to.pushNamed('/auth/add_image');
+                        if (_controller.isMusicianSelected) {
+                          Modular.to.pushNamed('/auth/select_skills');
+                        } else {
+                          Modular.to.pushNamed('/auth/add_image');
+                        }
                       }
                     : null,
                 label: 'Continuar'),
