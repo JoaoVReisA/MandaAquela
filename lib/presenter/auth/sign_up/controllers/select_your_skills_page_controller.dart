@@ -4,36 +4,11 @@ import 'package:manda_aquela/domain/entities/skill.dart';
 class SelectYourSkillsPageController extends GetxController {
   SelectYourSkillsPageController();
 
-  final skills = <Skill>[
-    Skill(skillName: 'Guitarra', isSelected: false),
-    Skill(skillName: 'Piano', isSelected: false),
-    Skill(skillName: 'Teclado', isSelected: false),
-    Skill(skillName: 'Voz', isSelected: false),
-    Skill(skillName: 'violão', isSelected: false),
-    Skill(skillName: 'Saxofone', isSelected: false),
-    Skill(skillName: 'Baixo', isSelected: false),
-    Skill(skillName: 'Cavaquinho', isSelected: false),
-    Skill(skillName: 'tambor', isSelected: false),
-    Skill(skillName: 'Bateria', isSelected: false),
-    Skill(skillName: 'Triangulo', isSelected: false),
-    Skill(skillName: 'Dança', isSelected: false),
-  ].obs;
+  final skills = <Skill>[].obs;
 
   final _inputValue = ''.obs;
 
   final filteredList = <Skill>[].obs;
-
-  @override
-  void onInit() {
-    filteredList.addAll(skills);
-    super.onInit();
-  }
-
-  @override
-  void onReady() {
-    filteredList.addAll(skills);
-    super.onReady();
-  }
 
   void onChangedInputText(String value) {
     _inputValue.value = value;
@@ -53,6 +28,27 @@ class SelectYourSkillsPageController extends GetxController {
         return false;
       });
     }
+  }
+
+  void getSkillsList() {
+    skills.addAll(
+      [
+        Skill(skillName: 'Guitarra', isSelected: false),
+        Skill(skillName: 'Piano', isSelected: false),
+        Skill(skillName: 'Teclado', isSelected: false),
+        Skill(skillName: 'Voz', isSelected: false),
+        Skill(skillName: 'violão', isSelected: false),
+        Skill(skillName: 'Saxofone', isSelected: false),
+        Skill(skillName: 'Baixo', isSelected: false),
+        Skill(skillName: 'Cavaquinho', isSelected: false),
+        Skill(skillName: 'tambor', isSelected: false),
+        Skill(skillName: 'Bateria', isSelected: false),
+        Skill(skillName: 'Triangulo', isSelected: false),
+        Skill(skillName: 'Dança', isSelected: false),
+      ],
+    );
+
+    filteredList.addAll(skills);
   }
 
   List<Skill?> selectedList() {

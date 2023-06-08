@@ -25,7 +25,7 @@ class _SelectYourSkillsPageState extends State<SelectYourSkillsPage> {
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      _controller.filteredList.addAll(_controller.skills);
+      _controller.getSkillsList();
     });
   }
 
