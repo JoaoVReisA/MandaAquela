@@ -10,6 +10,8 @@ class SelectYourSkillsPageController extends GetxController {
 
   final filteredList = <Skill>[].obs;
 
+  bool get isButtonReady => selectedList().isNotEmpty;
+
   void onChangedInputText(String value) {
     _inputValue.value = value;
     final list = skills.where((e) =>

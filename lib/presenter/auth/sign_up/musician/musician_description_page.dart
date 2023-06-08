@@ -1,33 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:manda_aquela/color_schemes.g.dart';
-import 'package:manda_aquela/domain/entities/skill.dart';
-import 'package:manda_aquela/presenter/auth/sign_up/controllers/select_your_skills_page_controller.dart';
-import 'package:manda_aquela/presenter/auth/widgets/skill_card.dart';
+import 'package:manda_aquela/presenter/auth/sign_up/controllers/musician_description_page_controller.dart';
 import 'package:manda_aquela/presenter/common/assets.dart';
 import 'package:manda_aquela/presenter/common/text_styles.dart';
 import 'package:manda_aquela/presenter/widgets/custom_button/custom_button.dart';
 
-class SelectYourSkillsPage extends StatefulWidget {
-  const SelectYourSkillsPage({super.key});
+class MusicianDescriptionPage extends StatefulWidget {
+  const MusicianDescriptionPage({super.key});
 
   @override
-  State<SelectYourSkillsPage> createState() => _SelectYourSkillsPageState();
+  State<MusicianDescriptionPage> createState() =>
+      _MusicianDescriptionPageState();
 }
 
-class _SelectYourSkillsPageState extends State<SelectYourSkillsPage> {
-  final _controller = Modular.get<SelectYourSkillsPageController>();
-
-  @override
-  void initState() {
-    super.initState();
-
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      _controller.getSkillsList();
-    });
-  }
+class _MusicianDescriptionPageState extends State<MusicianDescriptionPage> {
+  final _controller = Modular.get<MusicianDescriptionPageController>();
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +26,7 @@ class _SelectYourSkillsPageState extends State<SelectYourSkillsPage> {
         resizeToAvoidBottomInset: true,
         appBar: AppBar(
           title: Text(
-            'Selecione as suas habilidades',
+            'Nos informe algumas características sobre você',
             style: TextStyles.outfit15pxBold.copyWith(
               color: AppColors.tertiary,
             ),
@@ -57,7 +47,7 @@ class _SelectYourSkillsPageState extends State<SelectYourSkillsPage> {
                   height: 32,
                 ),
                 Text(
-                  'Selecione suas habilidades',
+                  'Agora nos conte um pouco mais sobre você',
                   textAlign: TextAlign.start,
                   style:
                       TextStyles.outfit15px400w.copyWith(color: Colors.black),
@@ -67,38 +57,20 @@ class _SelectYourSkillsPageState extends State<SelectYourSkillsPage> {
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  child: TextFormField(
-                    onChanged: _controller.onChangedInputText,
-                    decoration: InputDecoration(
-                      label: const Text('Busque aqui'),
-                      suffixIcon: Image.asset(Assets.guitarIcon.path),
+                  child: SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.30,
+                    child: TextFormField(
+                      onChanged: _controller.setDescription,
+                      maxLines: 7,
+                      decoration: const InputDecoration(
+                        contentPadding: EdgeInsets.symmetric(vertical: 40),
+                        label: Text('Informe uma breve descrição...'),
+                      ),
                     ),
                   ),
                 ),
                 const SizedBox(
                   height: 8,
-                ),
-                Expanded(
-                  child: SingleChildScrollView(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        ..._controller.filteredList.map(
-                          (e) => SkillCard(
-                            skill: Skill(
-                              skillName: e.skillName,
-                              isSelected: e.isSelected,
-                            ),
-                            onTap: () {
-                              e.isSelected = !e.isSelected;
-                              _controller.selectElement(e);
-                              setState(() {});
-                            },
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
                 ),
               ],
             ),
@@ -110,9 +82,7 @@ class _SelectYourSkillsPageState extends State<SelectYourSkillsPage> {
             child: CustomButton(
               onPressed: _controller.isButtonReady
                   ? () async {
-                      _controller.selectedList();
-
-                      Modular.to.pushNamed('/auth/musician_description');
+                      Modular.to.pushNamed('/auth/musician_value');
                     }
                   : null,
               label: "Enviar",
