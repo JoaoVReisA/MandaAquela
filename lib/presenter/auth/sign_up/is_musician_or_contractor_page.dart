@@ -80,7 +80,7 @@ class _IsMusicianOrContractorPageState
                         if (_controller.isMusicianSelected) {
                           Modular.to.pushNamed('/auth/select_skills');
                         } else {
-                          Modular.to.pushNamed('/auth/add_image');
+                          Modular.to.pushNamed('/auth/register_establishment');
                         }
                       }
                     : null,
