@@ -18,6 +18,7 @@ import 'package:manda_aquela/presenter/auth/sign_up/address_page.dart';
 import 'package:manda_aquela/presenter/auth/sign_up/contractor/register_establishment_page.dart';
 import 'package:manda_aquela/presenter/auth/sign_up/controllers/add_image_page_controller.dart';
 import 'package:manda_aquela/presenter/auth/sign_up/controllers/address_page_controller.dart';
+import 'package:manda_aquela/presenter/auth/sign_up/controllers/finish_signup_controller.dart';
 import 'package:manda_aquela/presenter/auth/sign_up/controllers/is_musician_or_contractor_controller.dart';
 import 'package:manda_aquela/presenter/auth/sign_up/controllers/musician_description_page_controller.dart';
 import 'package:manda_aquela/presenter/auth/sign_up/controllers/musician_value_page_controller.dart';
@@ -107,6 +108,10 @@ class AuthModule extends Module {
         ),
         Bind<RegisterEstablishmentPageController>(
           (i) => RegisterEstablishmentPageController(),
+          export: true,
+        ),
+        Bind<FinishSignUpController>(
+          (i) => FinishSignUpController(),
           export: true,
         ),
       ];

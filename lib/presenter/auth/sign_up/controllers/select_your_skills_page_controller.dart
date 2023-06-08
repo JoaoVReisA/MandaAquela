@@ -10,7 +10,7 @@ class SelectYourSkillsPageController extends GetxController {
 
   final filteredList = <Skill>[].obs;
 
-  bool get isButtonReady => selectedList().isNotEmpty;
+  bool get isButtonReady => selectedList()?.isNotEmpty ?? false;
 
   void onChangedInputText(String value) {
     _inputValue.value = value;
@@ -53,7 +53,7 @@ class SelectYourSkillsPageController extends GetxController {
     filteredList.addAll(skills);
   }
 
-  List<Skill?> selectedList() {
+  List<Skill?>? selectedList() {
     final list = skills.map((element) {
       if (element.isSelected) {
         return element;
@@ -63,6 +63,9 @@ class SelectYourSkillsPageController extends GetxController {
     list.removeWhere(
       (element) => element == null,
     );
+    if (list.isEmpty) {
+      return null;
+    }
     return list;
   }
 }

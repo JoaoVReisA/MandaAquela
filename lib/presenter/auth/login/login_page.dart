@@ -89,8 +89,7 @@ class _LoginPageState extends State<LoginPage> {
                   CustomButton(
                     onPressed: _controller.isLoginButtonReady
                         ? () async {
-                            final response =
-                                await _controller.onTapLoginButton();
+                            final response = await _controller.doUserLogin();
                             if (response != null) {
                               Modular.to
                                   .navigate('/auth/is_musician_or_contractor');

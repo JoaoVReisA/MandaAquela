@@ -1,8 +1,8 @@
-import 'package:manda_aquela/domain/entities/user.dart';
+import 'package:manda_aquela/domain/entities/user_entity.dart';
 import 'package:manda_aquela/domain/repositories/AuthRepository/auth_login_repository.dart';
 
 abstract class GoogleAuthLoginUsecase {
-  Future<User> call();
+  Future<UserEntity> call();
 }
 
 class RemoteGoogleAuthLoginUsecase extends GoogleAuthLoginUsecase {
@@ -10,7 +10,7 @@ class RemoteGoogleAuthLoginUsecase extends GoogleAuthLoginUsecase {
   final AuthLoginRepository repository;
 
   @override
-  Future<User> call() {
+  Future<UserEntity> call() {
     // TODO: implement call
     throw UnimplementedError();
   }
