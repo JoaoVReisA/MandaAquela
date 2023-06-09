@@ -1,6 +1,11 @@
+import 'dart:io';
+
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:manda_aquela/data/repositories/events_repository.dart';
 import 'package:manda_aquela/data/repositories/musician_repository.dart';
+import 'package:manda_aquela/domain/repositories/events_repository/events_repository.dart';
 import 'package:manda_aquela/domain/repositories/musician_repository/musician_repository.dart';
+import 'package:manda_aquela/domain/usecase/events/fetch_events_list_usecase.dart';
 import 'package:manda_aquela/domain/usecase/musician/fetch_musician_list_usecase.dart';
 import 'package:manda_aquela/presenter/home/home_page_controller.dart';
 
@@ -10,12 +15,24 @@ class HomeModule extends Module {
   @override
   List<Bind> get binds => [
         Bind<HomePageController>(
-            (i) => HomePageController(fetchMusicianListUsecase: i())),
-        Bind<FetchMusicianListUsecase>(
-          (i) => RemoteFetchMusicianListUsecase(repository: i()),
+          (i) => HomePageController(
+            fetchMusicianListUsecase: i(),
+            fetchEventsListUsecase: i(),
+          ),
+          export: true,
         ),
-        Bind<MusicianRepository>(
-          (i) => MusicianRepositoryImpl(client: i()),
+        Bind<FetchMusicianListUsecase>(
+            (i) => RemoteFetchMusicianListUsecase(repository: i()),
+            export: true),
+        Bind<MusicianRepository>((i) => MusicianRepositoryImpl(client: i()),
+            export: true),
+        Bind<FetchEventsListUsecase>(
+          (i) => RemoteFetchEventsListUsecase(repository: i()),
+          export: true,
+        ),
+        Bind<EventsRepository>(
+          (i) => EventsRepositoryImpl(client: i<HttpClient>()),
+          export: true,
         ),
       ];
 

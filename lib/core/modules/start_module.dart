@@ -10,6 +10,9 @@ class StartModule extends Module {
   final List<Bind> binds = [];
 
   @override
+  List<Module> get imports => [HomeModule()];
+
+  @override
   final List<ModularRoute> routes = [
     ChildRoute(
       '/',

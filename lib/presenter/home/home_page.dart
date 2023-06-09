@@ -3,10 +3,12 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:manda_aquela/color_schemes.g.dart';
+import 'package:manda_aquela/domain/entities/musician.dart';
 import 'package:manda_aquela/domain/entities/user_firebase_info.dart';
 import 'package:manda_aquela/presenter/common/assets.dart';
 import 'package:manda_aquela/presenter/common/text_styles.dart';
 import 'package:manda_aquela/presenter/home/home_page_controller.dart';
+import 'package:manda_aquela/presenter/home/widgets/events_card.dart';
 import 'package:manda_aquela/presenter/home/widgets/musician_card.dart';
 import 'package:manda_aquela/presenter/widgets/common_dialog/signup_dialog.dart';
 
@@ -19,10 +21,14 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final _controller = Modular.get<HomePageController>();
+
   @override
   void initState() {
-    _controller.fetchMusicianList();
-    _controller.fetchEventsList();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      _controller.fetchMusicianList();
+      _controller.fetchEventsList();
+      _controller.generateEventsAndMusiciansList();
+    });
     super.initState();
   }
 
@@ -76,18 +82,21 @@ class _HomePageState extends State<HomePage> {
               SizedBox(
                 height: 400,
                 child: PageView.builder(
-                    itemCount: _controller.musicianList.length,
+                    itemCount: _controller.eventsAndMusicianList.length,
                     itemBuilder: (context, index) {
-                      final musician = _controller.musicianList[index];
-                      return MusicianCard(
-                        musicianName: musician.name,
-                        musicianRate: musician.rate,
-                        genres: '',
-                        musicianValue: musician.value,
-                        onTapContacts: () {},
-                        onTapGoToProfile: () {},
-                        skills: _controller.getSkillsString(musician.skills),
-                      );
+                      final item = _controller.eventsAndMusicianList[index];
+                      if (item is Musician) {
+                        return MusicianCard(
+                          musicianName: item.name,
+                          musicianRate: item.rate,
+                          genres: '',
+                          musicianValue: item.value,
+                          onTapContacts: () {},
+                          onTapGoToProfile: () {},
+                          skills: _controller.getSkillsString(item.skills),
+                        );
+                      }
+                      return EventsCard(event: item);
                     }),
               )
             ],
