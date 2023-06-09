@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:manda_aquela/color_schemes.g.dart';
 import 'package:manda_aquela/presenter/common/assets.dart';
 import 'package:manda_aquela/presenter/common/text_styles.dart';
@@ -16,7 +16,8 @@ class MusicianCard extends StatelessWidget {
       required this.skills,
       required this.genres,
       required this.onTapGoToProfile,
-      required this.onTapContacts});
+      required this.onTapContacts,
+      required this.imageUrl});
 
   final String musicianName;
   final double musicianValue;
@@ -25,6 +26,7 @@ class MusicianCard extends StatelessWidget {
   final String genres;
   final VoidCallback onTapGoToProfile;
   final VoidCallback onTapContacts;
+  final String imageUrl;
 
   @override
   Widget build(BuildContext context) {
@@ -49,14 +51,31 @@ class MusicianCard extends StatelessWidget {
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Container(
-                  decoration: BoxDecoration(
-                    color: Colors.amber,
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                  width: 150,
-                  height: 150,
-                ),
+                imageUrl.isNotEmpty
+                    ? SizedBox(
+                        width: 150,
+                        height: 150,
+                        child: Image.network(
+                          imageUrl,
+                          errorBuilder: (context, error, stackTrace) =>
+                              Container(
+                            decoration: BoxDecoration(
+                              color: Colors.amber,
+                              borderRadius: BorderRadius.circular(16),
+                            ),
+                            width: 150,
+                            height: 150,
+                          ),
+                        ),
+                      )
+                    : Container(
+                        decoration: BoxDecoration(
+                          color: Colors.amber,
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                        width: 150,
+                        height: 150,
+                      ),
                 const SizedBox(
                   width: 16,
                 ),

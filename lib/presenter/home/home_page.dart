@@ -88,6 +88,7 @@ class _HomePageState extends State<HomePage> {
                           musicianName: item.name,
                           musicianRate: item.rate,
                           genres: '',
+                          imageUrl: item.imageUrl,
                           musicianValue: item.value,
                           onTapContacts: () {},
                           onTapGoToProfile: () {},
