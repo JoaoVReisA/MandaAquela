@@ -1,5 +1,6 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:manda_aquela/core/modules/auth_module.dart';
+import 'package:manda_aquela/core/modules/events_module.dart';
 import 'package:manda_aquela/core/modules/home_module.dart';
 import 'package:manda_aquela/core/modules/network_module.dart';
 import 'package:manda_aquela/core/modules/start_module.dart';
@@ -14,6 +15,7 @@ class AppModule extends Module {
         NetworkModule(),
         AuthModule(),
         HomeModule(),
+        EventsModule(),
       ];
 
   @override
@@ -22,5 +24,6 @@ class AppModule extends Module {
         ModuleRoute('/home/', module: HomeModule()),
         ModuleRoute('/auth/', module: AuthModule()),
         ModuleRoute('/start/', module: StartModule()),
+        ModuleRoute('/events/', module: EventsModule()),
       ];
 }

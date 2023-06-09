@@ -93,7 +93,9 @@ class _HomePageState extends State<HomePage> {
                   'Cadastre um evento ou uma oportunidade, uma oportunidade representa um trabalho a ser oferecido. Eventos possuem oportunidades',
               labelButtonLeft: 'Evento',
               labelButtonRight: 'Oportunidade',
-              onTapButtonLeft: () {},
+              onTapButtonLeft: () {
+                Modular.to.pushNamed('/events/register');
+              },
               onTapButtonRight: () {},
             ),
           );
