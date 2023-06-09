@@ -1,13 +1,13 @@
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:manda_aquela/domain/entities/event.dart';
 import 'package:manda_aquela/domain/repositories/events_repository/events_repository.dart';
+import 'package:manda_aquela/infrastructure/network/dio_http_service.dart';
 
 class EventsRepositoryImpl extends EventsRepository {
   EventsRepositoryImpl({required this.client});
 
-  final HttpClient client;
+  final HttpService client;
 
   @override
   Future<List<Events>> fetchEventsList() async {

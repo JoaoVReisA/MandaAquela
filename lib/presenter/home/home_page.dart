@@ -24,11 +24,9 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      _controller.fetchMusicianList();
-      _controller.fetchEventsList();
-      _controller.generateEventsAndMusiciansList();
-    });
+    _controller.fetchMusicianList();
+    _controller.fetchEventsList();
+    _controller.generateEventsAndMusiciansList();
     super.initState();
   }
 
@@ -98,7 +96,7 @@ class _HomePageState extends State<HomePage> {
                       }
                       return EventsCard(event: item);
                     }),
-              )
+              ),
             ],
           ),
         ),

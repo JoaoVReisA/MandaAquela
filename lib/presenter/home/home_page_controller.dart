@@ -15,7 +15,9 @@ class HomePageController extends GetxController {
   final musicianList = <Musician>[].obs;
   final eventsList = <Events>[].obs;
 
-  final eventsAndMusicianList = <dynamic>[];
+  final _eventsAndMusicianList = <dynamic>[].obs;
+
+  List<dynamic> get eventsAndMusicianList => _eventsAndMusicianList.value;
 
   void fetchMusicianList() async {
     final list = await fetchMusicianListUsecase();
@@ -28,9 +30,9 @@ class HomePageController extends GetxController {
   }
 
   void generateEventsAndMusiciansList() {
-    eventsAndMusicianList.addAll(musicianList);
-    eventsAndMusicianList.addAll(eventsList);
-    eventsAndMusicianList.shuffle();
+    _eventsAndMusicianList.addAll(musicianList);
+    _eventsAndMusicianList.addAll(eventsList);
+    _eventsAndMusicianList.shuffle();
   }
 
   String getSkillsString(List<String> skills) {
