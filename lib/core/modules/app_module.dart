@@ -3,6 +3,7 @@ import 'package:manda_aquela/core/modules/auth_module.dart';
 import 'package:manda_aquela/core/modules/events_module.dart';
 import 'package:manda_aquela/core/modules/home_module.dart';
 import 'package:manda_aquela/core/modules/network_module.dart';
+import 'package:manda_aquela/core/modules/search_module.dart';
 import 'package:manda_aquela/core/modules/start_module.dart';
 import 'package:manda_aquela/presenter/splash/splash_page.dart';
 
@@ -16,6 +17,7 @@ class AppModule extends Module {
         AuthModule(),
         HomeModule(),
         EventsModule(),
+        SearchModule()
       ];
 
   @override

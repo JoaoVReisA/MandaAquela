@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:manda_aquela/color_schemes.g.dart';
+import 'package:manda_aquela/core/extensions/date_time_extensions.dart';
 import 'package:manda_aquela/domain/entities/event.dart';
 import 'package:manda_aquela/presenter/common/assets.dart';
 import 'package:manda_aquela/presenter/common/text_styles.dart';
@@ -54,8 +55,7 @@ class EventsCard extends StatelessWidget {
                   width: 4,
                 ),
                 Text(
-                  //TODO: ADD Date formatter
-                  event.date.toString(),
+                  event.date.toFormattedString,
                   style:
                       TextStyles.outfit15px400w.copyWith(color: Colors.white),
                 ),
