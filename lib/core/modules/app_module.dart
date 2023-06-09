@@ -13,6 +13,7 @@ class AppModule extends Module {
   List<Module> get imports => [
         NetworkModule(),
         AuthModule(),
+        HomeModule(),
       ];
 
   @override

@@ -75,4 +75,7 @@ class AppColors {
   static const white = Color(0xFFFFFFFF);
   static const highlight = Color(0xFFFBC531);
   static const success = Color(0xFF44BD32);
+  static const textGrey = Color(0xFF6D6A6A);
+  static const fadeRed = Color(0xFFC23616);
+  static const fadePink = Color(0xFFC21654);
 }
