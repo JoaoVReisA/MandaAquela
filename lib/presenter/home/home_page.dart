@@ -6,8 +6,8 @@ import 'package:manda_aquela/domain/entities/user_firebase_info.dart';
 import 'package:manda_aquela/presenter/common/assets.dart';
 import 'package:manda_aquela/presenter/common/text_styles.dart';
 import 'package:manda_aquela/presenter/home/home_page_controller.dart';
-import 'package:manda_aquela/presenter/home/widgets/musician_card.dart';
-import 'package:manda_aquela/presenter/widgets/common_dialog/common_dialog.dart';
+import 'package:manda_aquela/presenter/home/widgets/events_card.dart';
+import 'package:manda_aquela/presenter/widgets/common_dialog/signup_dialog.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -21,6 +21,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     _controller.fetchMusicianList();
+    _controller.fetchEventsList();
     super.initState();
   }
 
@@ -71,17 +72,11 @@ class _HomePageState extends State<HomePage> {
             SizedBox(
               height: 400,
               child: PageView.builder(
-                  itemCount: _controller.musicianList.length,
+                  itemCount: _controller.eventsList.length,
                   itemBuilder: (context, index) {
-                    final musician = _controller.musicianList[index];
-                    return MusicianCard(
-                      musicianName: musician.name,
-                      musicianRate: musician.rate,
-                      musicianValue: musician.value,
-                      skills: _controller.getSkillsString(musician.skills),
-                      genres: 'Pagode/Samba',
-                      onTapContacts: () {},
-                      onTapGoToProfile: () {},
+                    final event = _controller.eventsList[index];
+                    return EventsCard(
+                      event: event,
                     );
                   }),
             )
@@ -92,12 +87,14 @@ class _HomePageState extends State<HomePage> {
         onPressed: () {
           showDialog(
             context: context,
-            builder: (context) => CommonDialog(
+            builder: (context) => SignUpDialog(
               title: 'Cadastrar',
               bodyText:
                   'Cadastre um evento ou uma oportunidade, uma oportunidade representa um trabalho a ser oferecido. Eventos possuem oportunidades',
-              buttonText: 'Cadastrar',
-              onTap: () {},
+              labelButtonLeft: 'Evento',
+              labelButtonRight: 'Oportunidade',
+              onTapButtonLeft: () {},
+              onTapButtonRight: () {},
             ),
           );
         },

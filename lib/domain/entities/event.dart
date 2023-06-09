@@ -1,8 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:manda_aquela/domain/entities/establishment.dart';
 
-class Event {
-  Event({
+class Events {
+  Events({
     required this.name,
     this.establishment,
     required this.address,

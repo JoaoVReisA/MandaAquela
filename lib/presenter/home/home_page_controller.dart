@@ -1,9 +1,11 @@
 import 'package:get/get.dart';
+import 'package:manda_aquela/domain/entities/establishment.dart';
+import 'package:manda_aquela/domain/entities/event.dart';
 import 'package:manda_aquela/domain/entities/musician.dart';
 
 class HomePageController extends GetxController {
   final musicianList = <Musician>[].obs;
-  final _eventsList = <Musician>[].obs;
+  final eventsList = <Events>[].obs;
 
   void fetchMusicianList() {
     //TODO: add api call
@@ -27,6 +29,52 @@ class HomePageController extends GetxController {
         imageUrl: 'imageUrl',
         rate: 4,
         value: 100.0,
+      ),
+    ]);
+  }
+
+  void fetchEventsList() {
+    //TODO: add api call
+    eventsList.addAll([
+      Events(
+        name: 'name',
+        address: 'address',
+        date: DateTime(2000),
+        establishment: Establishment(
+            name: 'Bar do bira',
+            type: 'type',
+            address: 'Endereço ',
+            capacity: 35),
+      ),
+      Events(
+        name: 'name',
+        address: 'address',
+        date: DateTime(2000),
+        establishment: Establishment(
+            name: 'Bar do bira',
+            type: 'type',
+            address: 'Endereço ',
+            capacity: 35),
+      ),
+      Events(
+        name: 'name',
+        address: 'address',
+        date: DateTime(2000),
+        establishment: Establishment(
+            name: 'Bar do bira',
+            type: 'type',
+            address: 'Endereço ',
+            capacity: 35),
+      ),
+      Events(
+        name: 'name',
+        address: 'address',
+        date: DateTime(2000),
+        establishment: Establishment(
+            name: 'Bar do bira',
+            type: 'type',
+            address: 'Endereço ',
+            capacity: 35),
       ),
     ]);
   }

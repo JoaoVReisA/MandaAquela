@@ -10,7 +10,7 @@ import 'package:manda_aquela/presenter/widgets/custom_button/custom_outlined_but
 class EventsCard extends StatelessWidget {
   const EventsCard({super.key, required this.event});
 
-  final Event event;
+  final Events event;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -19,15 +19,16 @@ class EventsCard extends StatelessWidget {
         padding: const EdgeInsets.all(24),
         height: 400,
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16),
-            gradient: const LinearGradient(
-              begin: Alignment.bottomLeft,
-              end: Alignment.topRight,
-              colors: [
-                AppColors.highlight,
-                AppColors.fadePink,
-              ],
-            )),
+          borderRadius: BorderRadius.circular(16),
+          gradient: const LinearGradient(
+            begin: Alignment.bottomLeft,
+            end: Alignment.topRight,
+            colors: [
+              AppColors.highlight,
+              AppColors.fadePink,
+            ],
+          ),
+        ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -42,10 +43,18 @@ class EventsCard extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
               ),
             ]),
+            const Spacer(),
             Row(
               children: [
-                const Icon(Icons.calendar_month),
+                const Icon(
+                  Icons.calendar_month,
+                  color: Colors.white,
+                ),
+                const SizedBox(
+                  width: 4,
+                ),
                 Text(
+                  //TODO: ADD Date formatter
                   event.date.toString(),
                   style:
                       TextStyles.outfit15px400w.copyWith(color: Colors.white),
@@ -54,7 +63,13 @@ class EventsCard extends StatelessWidget {
             ),
             Row(
               children: [
-                const Icon(Icons.home_work),
+                const Icon(
+                  Icons.home_work,
+                  color: Colors.white,
+                ),
+                const SizedBox(
+                  width: 4,
+                ),
                 Text(
                   event.establishment?.name ?? '',
                   style:
@@ -64,20 +79,27 @@ class EventsCard extends StatelessWidget {
             ),
             Row(
               children: [
-                const Icon(Icons.location_on),
+                const Icon(
+                  Icons.location_on,
+                  color: Colors.white,
+                ),
+                const SizedBox(
+                  width: 4,
+                ),
                 Text(
-                  event.establishment?.name ?? '',
+                  event.establishment?.address ?? '',
                   style:
                       TextStyles.outfit15px400w.copyWith(color: Colors.white),
                 ),
               ],
             ),
+            const Spacer(),
             Row(
               children: [
                 Expanded(
                   child: CustomButton(
                     onPressed: () {},
-                    label: 'ir para o evento',
+                    label: 'ir para evento',
                     height: 30,
                     textColor: AppColors.primary,
                     backgroundColor: Colors.white,
@@ -88,7 +110,7 @@ class EventsCard extends StatelessWidget {
                 ),
                 Expanded(
                     child: CustomOutlinedButton(
-                        label: 'oportunidade', onTap: () {}))
+                        label: 'Oportunidade', onTap: () {}))
               ],
             )
           ],
