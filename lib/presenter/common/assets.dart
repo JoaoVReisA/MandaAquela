@@ -26,7 +26,8 @@ enum Assets {
   musicalNoteIcon('$base/icon_musical_note.svg'),
   moneyIcon('$base/icon_money.svg'),
   eventsPeople('$base/events_people.svg'),
-  eventGlobal('$base/event_global.svg');
+  eventGlobal('$base/event_global.svg'),
+  opportunityMan('$base/opportunity_man.svg');
 
   static const String base = 'assets';
 

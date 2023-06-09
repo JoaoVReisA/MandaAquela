@@ -3,6 +3,8 @@ import 'package:manda_aquela/data/repositories/musician_repository.dart';
 import 'package:manda_aquela/domain/repositories/musician_repository/musician_repository.dart';
 import 'package:manda_aquela/domain/usecase/musician/fetch_musician_list_usecase.dart';
 import 'package:manda_aquela/presenter/home/home_page_controller.dart';
+import 'package:manda_aquela/presenter/oportunity/register_oportunity.dart';
+import 'package:manda_aquela/presenter/oportunity/register_opportunity_controller.dart';
 
 import '../../presenter/home/home_page.dart';
 
@@ -21,10 +23,16 @@ class HomeModule extends Module {
             export: true),
         Bind<MusicianRepository>((i) => MusicianRepositoryImpl(client: i()),
             export: true),
+        Bind<RegisterOpportunityController>(
+          (i) => RegisterOpportunityController(),
+          export: true,
+        ),
       ];
 
   @override
   List<ModularRoute> get routes => [
         ChildRoute('/', child: (context, args) => const HomePage()),
+        ChildRoute('/register_opportunity',
+            child: (context, args) => const RegisterOpportunity()),
       ];
 }
