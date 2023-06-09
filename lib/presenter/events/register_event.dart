@@ -118,7 +118,7 @@ class _SignUpEventState extends State<RegisterEvent> {
             child: CustomButton(
               onPressed: _controller.isButtonReady
                   ? () async {
-                      Modular.to.navigate('/start/home/');
+                      Modular.to.pop();
                     }
                   : null,
               label: "Enviar",
