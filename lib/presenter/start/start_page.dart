@@ -31,7 +31,7 @@ class _StartPageState extends State<StartPage> {
               break;
             case 2:
               currentIndex = id;
-              Modular.to.navigate('/start/profile');
+              Modular.to.navigate('/start/search');
               break;
           }
           setState(() {});
