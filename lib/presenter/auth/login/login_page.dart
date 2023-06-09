@@ -91,8 +91,7 @@ class _LoginPageState extends State<LoginPage> {
                         ? () async {
                             final response = await _controller.doUserLogin();
                             if (response != null) {
-                              Modular.to
-                                  .navigate('/auth/is_musician_or_contractor');
+                              Modular.to.navigate('/start/home/');
                             }
                           }
                         : null,

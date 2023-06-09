@@ -22,7 +22,11 @@ enum Assets {
   musicianDisplayGrey('$base/musician_display_grey.png'),
   contractorDisplayGrey('$base/contractor_display_grey.png'),
   musicianGuitar('$base/musician_guitar.svg'),
-  guitarIcon('$base/icon_guitar.png');
+  guitarIcon('$base/icon_guitar.png'),
+  musicalNoteIcon('$base/icon_musical_note.svg'),
+  moneyIcon('$base/icon_money.svg'),
+  eventsPeople('$base/events_people.svg'),
+  eventGlobal('$base/event_global.svg');
 
   static const String base = 'assets';
 

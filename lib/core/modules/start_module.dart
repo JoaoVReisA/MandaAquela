@@ -1,6 +1,6 @@
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:manda_aquela/core/modules/events_module.dart';
 import 'package:manda_aquela/core/modules/home_module.dart';
-import 'package:manda_aquela/presenter/events/events_page.dart';
 import 'package:manda_aquela/presenter/profile/profile_page.dart';
 
 import '../../presenter/start/start_page.dart';
@@ -17,7 +17,7 @@ class StartModule extends Module {
       children: [
         ModuleRoute('/home', module: HomeModule()),
         ChildRoute('/profile', child: (_, __) => const ProfilePage()),
-        ChildRoute('/events', child: (_, __) => const EventsPage()),
+        ModuleRoute('/events', module: EventsModule()),
       ],
     ),
   ];
