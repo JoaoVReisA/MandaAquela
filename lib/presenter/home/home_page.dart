@@ -24,16 +24,16 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
-    _controller.fetchMusicianList();
-    _controller.fetchEventsList();
-    _controller.generateEventsAndMusiciansList();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      _controller.generateEventsAndMusiciansList();
+    });
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Obx(
-      () => Scaffold(
+    return Container(
+      child: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           centerTitle: false,
@@ -77,26 +77,32 @@ class _HomePageState extends State<HomePage> {
               const SizedBox(
                 height: 8,
               ),
-              SizedBox(
-                height: 400,
-                child: PageView.builder(
-                    itemCount: _controller.eventsAndMusicianList.length,
-                    itemBuilder: (context, index) {
-                      final item = _controller.eventsAndMusicianList[index];
-                      if (item is Musician) {
-                        return MusicianCard(
-                          musicianName: item.name,
-                          musicianRate: item.rate,
-                          genres: '',
-                          imageUrl: item.imageUrl,
-                          musicianValue: item.value,
-                          onTapContacts: () {},
-                          onTapGoToProfile: () {},
-                          skills: _controller.getSkillsString(item.skills),
-                        );
-                      }
-                      return EventsCard(event: item);
-                    }),
+              Obx(
+                () => _controller.pageState.isSuccess
+                    ? SizedBox(
+                        height: 400,
+                        child: PageView.builder(
+                            itemCount: _controller.eventsAndMusicianList.length,
+                            itemBuilder: (context, index) {
+                              final item =
+                                  _controller.eventsAndMusicianList[index];
+                              if (item is Musician) {
+                                return MusicianCard(
+                                  musicianName: item.name,
+                                  musicianRate: item.rate,
+                                  genres: '',
+                                  imageUrl: item.imageUrl,
+                                  musicianValue: item.value,
+                                  onTapContacts: () {},
+                                  onTapGoToProfile: () {},
+                                  skills:
+                                      _controller.getSkillsString(item.skills),
+                                );
+                              }
+                              return EventsCard(event: item);
+                            }),
+                      )
+                    : const Center(child: CircularProgressIndicator()),
               ),
             ],
           ),

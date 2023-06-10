@@ -17,19 +17,29 @@ class HomePageController extends GetxController {
 
   final _eventsAndMusicianList = <dynamic>[].obs;
 
+  RxStatus pageState = RxStatus.empty();
+
   List<dynamic> get eventsAndMusicianList => _eventsAndMusicianList.value;
 
-  void fetchMusicianList() async {
+  Future<void> fetchMusicianList() async {
+    pageState = RxStatus.loading();
     final list = await fetchMusicianListUsecase();
     musicianList.addAll(list);
+    pageState = RxStatus.success();
   }
 
-  void fetchEventsList() async {
+  Future<void> fetchEventsList() async {
+    pageState = RxStatus.loading();
+
     final list = await fetchEventsListUsecase();
     eventsList.addAll(list);
+
+    pageState = RxStatus.success();
   }
 
-  void generateEventsAndMusiciansList() {
+  void generateEventsAndMusiciansList() async {
+    await fetchMusicianList();
+    await fetchEventsList();
     _eventsAndMusicianList.addAll(musicianList);
     _eventsAndMusicianList.addAll(eventsList);
     _eventsAndMusicianList.shuffle();

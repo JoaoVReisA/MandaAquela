@@ -5,7 +5,12 @@ import 'package:manda_aquela/presenter/search/search_page.dart';
 class SearchModule extends Module {
   @override
   List<Bind> get binds => [
-        Bind<SearchPageController>((i) => SearchPageController()),
+        Bind<SearchPageController>(
+          (i) => SearchPageController(
+            fetchEventsListUsecase: i(),
+            fetchMusicianListUsecase: i(),
+          ),
+        ),
       ];
 
   @override
