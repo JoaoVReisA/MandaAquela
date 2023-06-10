@@ -115,7 +115,7 @@ class _HomePageState extends State<HomePage> {
                   Modular.to.pushNamed('/events/register');
                 },
                 onTapButtonRight: () {
-                  Modular.to.pushNamed('/start/home/register_opportunity');
+                  Modular.to.pushNamed('/home/register_opportunity');
                 },
               ),
             );

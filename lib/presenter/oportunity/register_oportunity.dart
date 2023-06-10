@@ -24,9 +24,9 @@ class _RegisterOpportunityState extends State<RegisterOpportunity> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         title: Text(
-          'Antes de começarmos, precisamos saber o porque está aqui',
-          style: TextStyles.outfit15pxBold.copyWith(
-            color: AppColors.tertiary,
+          'Cadastre uma oportunidade',
+          style: TextStyles.outfit18px700w.copyWith(
+            color: AppColors.textGrey,
           ),
           textAlign: TextAlign.center,
         ),
@@ -68,10 +68,21 @@ class _RegisterOpportunityState extends State<RegisterOpportunity> {
                 TextFormField(
                   style: TextStyles.outfit15px400w,
                   decoration: const InputDecoration(
-                    hintText: "City",
-                    label: Text("City"),
+                    hintText: "Cidade",
+                    label: Text("Cidade"),
                   ),
                   onChanged: _controller.setCity,
+                ),
+                const SizedBox(
+                  height: 12,
+                ),
+                TextFormField(
+                  style: TextStyles.outfit15px400w,
+                  decoration: const InputDecoration(
+                    hintText: "Valor",
+                    label: Text("Valor"),
+                  ),
+                  onChanged: _controller.setValue,
                 ),
                 const SizedBox(
                   height: 12,
@@ -87,24 +98,28 @@ class _RegisterOpportunityState extends State<RegisterOpportunity> {
                 const SizedBox(
                   height: 16,
                 ),
-                Text(
-                  'Vimos que ainda não criou uma oportunidade',
-                  style: TextStyles.outfit15pxBold.copyWith(
-                    color: AppColors.textGrey,
+                TextFormField(
+                  style: TextStyles.outfit15px400w,
+                  decoration: const InputDecoration(
+                    hintText: "Categoria",
+                    label: Text("Categoria"),
                   ),
-                  textAlign: TextAlign.center,
+                  onChanged: _controller.setCategory,
                 ),
-                TextButton(
-                  child: const Text(
-                    'Cadastrar',
-                    style: TextStyle(decoration: TextDecoration.underline),
-                    textAlign: TextAlign.center,
+                const SizedBox(
+                  height: 16,
+                ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.20,
+                  child: TextFormField(
+                    onChanged: _controller.setDescription,
+                    maxLines: 7,
+                    decoration: const InputDecoration(
+                      contentPadding: EdgeInsets.symmetric(vertical: 40),
+                      label: Text('Informe uma breve descrição...'),
+                    ),
                   ),
-                  onPressed: () {
-                    //TODO: GO to oportunity page
-                    // Modular.to.pushNamed('/auth/social_media');
-                  },
-                )
+                ),
               ],
             ),
           ),
@@ -114,9 +129,11 @@ class _RegisterOpportunityState extends State<RegisterOpportunity> {
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
           child: CustomButton(
-            onPressed: () async {
-              Modular.to.pop();
-            },
+            onPressed: _controller.isButtonReady
+                ? () async {
+                    Modular.to.pop();
+                  }
+                : null,
             label: "Enviar",
           ),
         ),
