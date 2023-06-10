@@ -27,7 +27,7 @@ class EventsRepositoryImpl extends EventsRepository {
             "date": 1640979000000
         },
         {
-            "name": "Evento bem legal",
+            "name": "Festa Junina",
             "establishment": {
                 "name": "Bar do bira",
                 "type": "Bar",
@@ -38,7 +38,7 @@ class EventsRepositoryImpl extends EventsRepository {
             "date": 1640979000000
         },
         {
-            "name": "Evento bem legal",
+            "name": "Show de rock",
             "establishment": {
                 "name": "Bar do bira",
                 "type": "Bar",
@@ -49,7 +49,7 @@ class EventsRepositoryImpl extends EventsRepository {
             "date": 1640979000000
         },
         {
-            "name": "Evento bem legal",
+            "name": "Show de funk",
             "establishment": {
                 "name": "Bar do bira",
                 "type": "Bar",
@@ -60,7 +60,7 @@ class EventsRepositoryImpl extends EventsRepository {
             "date": 1640979000000
         },
         {
-            "name": "Evento bem legal",
+            "name": "Aquelas coisa",
             "establishment": {
                 "name": "Bar do bira",
                 "type": "Bar",
