@@ -103,8 +103,7 @@ class _SignUpEventState extends State<RegisterEvent> {
                       textAlign: TextAlign.center,
                     ),
                     onPressed: () {
-                      //TODO: GO to oportunity page
-                      // Modular.to.pushNamed('/auth/social_media');
+                      Modular.to.pushNamed('/home/register_opportunity');
                     },
                   )
                 ],
