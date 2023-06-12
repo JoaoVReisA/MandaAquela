@@ -22,6 +22,9 @@ class HomePageController extends GetxController {
   List<dynamic> get eventsAndMusicianList => _eventsAndMusicianList.value;
 
   Future<void> fetchMusicianList() async {
+    if (musicianList.isNotEmpty) {
+      return;
+    }
     pageState = RxStatus.loading();
     final list = await fetchMusicianListUsecase();
     musicianList.addAll(list);
@@ -29,6 +32,9 @@ class HomePageController extends GetxController {
   }
 
   Future<void> fetchEventsList() async {
+    if (eventsList.isNotEmpty) {
+      return;
+    }
     pageState = RxStatus.loading();
 
     final list = await fetchEventsListUsecase();
@@ -38,6 +44,9 @@ class HomePageController extends GetxController {
   }
 
   void generateEventsAndMusiciansList() async {
+    if (_eventsAndMusicianList.isNotEmpty) {
+      return;
+    }
     await fetchMusicianList();
     await fetchEventsList();
     _eventsAndMusicianList.addAll(musicianList);
