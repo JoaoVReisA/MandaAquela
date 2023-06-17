@@ -12,7 +12,7 @@ class EmailSignUpUsecase extends SignUpUsecase {
 
   @override
   Future<bool> call({required UserRequest userRequest}) async {
-    signUpRepository.emailSignUp(userRequest);
+    await signUpRepository.emailSignUp(userRequest);
     return true;
   }
 }

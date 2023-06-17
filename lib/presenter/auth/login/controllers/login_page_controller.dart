@@ -4,6 +4,7 @@ import 'package:manda_aquela/core/custom_exceptions.dart';
 import 'package:manda_aquela/core/extensions/string_extensions.dart';
 import 'package:manda_aquela/domain/entities/user_firebase_info.dart';
 import 'package:manda_aquela/domain/usecase/login/email_auth_login_usecase.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class _LoginPageStateModel {
   final email = ''.obs;
@@ -39,6 +40,9 @@ class LoginPageController extends GetxController {
       UserFirebaseInfo.instance.email = response?.user!.email;
       UserFirebaseInfo.instance.name = response?.user!.displayName;
       UserFirebaseInfo.instance.uid = response?.user!.uid;
+
+      final prefs = await SharedPreferences.getInstance();
+      prefs.setString('uid', response?.user!.uid ?? '');
 
       print(response?.user);
 
