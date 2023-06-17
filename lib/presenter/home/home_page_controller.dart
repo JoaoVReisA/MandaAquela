@@ -15,11 +15,9 @@ class HomePageController extends GetxController {
   final musicianList = <Musician>[].obs;
   final eventsList = <Events>[].obs;
 
-  final _eventsAndMusicianList = <dynamic>[].obs;
+  final eventsAndMusicianList = <dynamic>[].obs;
 
   RxStatus pageState = RxStatus.empty();
-
-  List<dynamic> get eventsAndMusicianList => _eventsAndMusicianList.value;
 
   Future<void> fetchMusicianList() async {
     if (musicianList.isNotEmpty) {
@@ -44,14 +42,14 @@ class HomePageController extends GetxController {
   }
 
   void generateEventsAndMusiciansList() async {
-    if (_eventsAndMusicianList.isNotEmpty) {
+    if (eventsAndMusicianList.isNotEmpty) {
       return;
     }
     await fetchMusicianList();
     await fetchEventsList();
-    _eventsAndMusicianList.addAll(musicianList);
-    _eventsAndMusicianList.addAll(eventsList);
-    _eventsAndMusicianList.shuffle();
+    eventsAndMusicianList.addAll(musicianList);
+    eventsAndMusicianList.addAll(eventsList);
+    eventsAndMusicianList.shuffle();
   }
 
   String getSkillsString(List<String> skills) {

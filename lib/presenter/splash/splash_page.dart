@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:manda_aquela/domain/entities/user_firebase_info.dart';
 import 'package:manda_aquela/presenter/common/assets.dart';
 
 class SplashPage extends StatefulWidget {
@@ -21,7 +22,11 @@ class _SplashPageState extends State<SplashPage> {
           seconds: 3,
         ),
         () async {
-          Modular.to.navigate('/auth/');
+          if (UserFirebaseInfo.instance.uid != null) {
+            Modular.to.navigate('/start/home');
+          } else {
+            Modular.to.navigate('/auth/');
+          }
         },
       );
     });
