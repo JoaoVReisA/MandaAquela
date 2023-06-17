@@ -1,8 +1,10 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:get/get.dart';
+import 'package:manda_aquela/data/models/contractor_request.dart';
 import 'package:manda_aquela/data/models/musician_request.dart';
 import 'package:manda_aquela/domain/entities/user_firebase_info.dart';
 import 'package:manda_aquela/domain/usecase/login/token_auth_login_usecase.dart';
+import 'package:manda_aquela/domain/usecase/sign_up/contractor_sign_up_usecase.dart';
 import 'package:manda_aquela/domain/usecase/sign_up/musician_sign_up_usecase.dart';
 import 'package:manda_aquela/presenter/auth/sign_up/controllers/add_image_page_controller.dart';
 import 'package:manda_aquela/presenter/auth/sign_up/controllers/address_page_controller.dart';
@@ -17,10 +19,14 @@ class FinishSignUpController extends GetxController {
   FinishSignUpController({
     required this.musicianSignUpUsecase,
     required this.tokenAuthLoginUseCase,
+    required this.contractorSignUpUsecase,
   });
 
   final MusicianSignUpUsecase musicianSignUpUsecase;
   final TokenAuthLoginUseCase tokenAuthLoginUseCase;
+  final ContractorSignUpUsecase contractorSignUpUsecase;
+
+  // Page controllers
   final _addImagePageController = Modular.get<AddImagePageController>();
   final _addressPageController = Modular.get<AddressPageController>();
   final _isMusicianOrContractorController =
@@ -52,26 +58,16 @@ class FinishSignUpController extends GetxController {
 
       return musician;
     } else {
-      //TODO: Return contractor object
-      return '';
+      final contractor = ContractorRequest(
+        uuid: UserFirebaseInfo.instance.uid ?? 'id',
+        address: _addressPageController.getAddress().toModel(),
+        description: _musicianDescriptionController.description,
+        establishment:
+            _registerEstablishmentController.getEstablishment()?.toModel(),
+        socialMedia: _socialMediaController.getSocialMedias(),
+      );
+      return contractor;
     }
-
-    // final user = UserEntity(
-    //   id: UserFirebaseInfo.instance.uid ?? 'id',
-    //   name: UserFirebaseInfo.instance.name ?? 'Name',
-    //   email: UserFirebaseInfo.instance.email ?? 'email',
-    //   isMusician: _isMusicianOrContractorController.isMusicianSelected,
-    //   isContractor: _isMusicianOrContractorController.isContractorSelected,
-    //   description: _musicianDescriptionController.description,
-    //   socialMedias: _socialMediaController.getSocialMedias(),
-    //   address: _addressPageController.getAddress(),
-    //   establishment: _registerEstablishmentController.getEstablishment(),
-    //   image: _addImagePageController.image?.mimeType,
-    //   musicianValue: _musicianValueController.musicianValue,
-    //   skills: _selectYourSkillsController.selectedList(),
-    // );
-
-    // return user;
   }
 
   Future<void> sendUserData() async {
@@ -83,7 +79,11 @@ class FinishSignUpController extends GetxController {
 
         await tokenAuthLoginUseCase.call(token: user.uuid);
       } else {
-        //TODO: ADD Create contractor call
+        final response = await contractorSignUpUsecase.call(
+          contractor: user as ContractorRequest,
+        );
+
+        await tokenAuthLoginUseCase.call(token: user.uuid);
       }
     } catch (e) {
       //add error modal

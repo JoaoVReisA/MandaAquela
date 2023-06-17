@@ -2,8 +2,8 @@
 import 'dart:convert';
 
 import 'package:manda_aquela/data/models/address_model.dart';
+import 'package:manda_aquela/data/models/establishment_model.dart';
 import 'package:manda_aquela/data/models/skill_model.dart';
-import 'package:manda_aquela/domain/entities/establishment.dart';
 import 'package:manda_aquela/domain/entities/social_media.dart';
 
 class UserModel {
@@ -36,7 +36,7 @@ class UserModel {
   final String? token;
 
   //Contractor only
-  final List<Establishment>? establishments;
+  final List<EstablishmentModel>? establishments;
 
   //Musician only
   final List<SkillModel>? skills;
@@ -82,9 +82,9 @@ class UserModel {
           : null,
       token: map['token'] != null ? map['token'] as String : null,
       establishments: map['establishments'] != null
-          ? List<Establishment>.from(
-              (map['establishments'] as List<dynamic>).map<Establishment?>(
-                (x) => Establishment.fromMap(x as Map<String, dynamic>),
+          ? List<EstablishmentModel>.from(
+              (map['establishments'] as List<dynamic>).map<EstablishmentModel?>(
+                (x) => EstablishmentModel.fromMap(x as Map<String, dynamic>),
               ),
             )
           : null,

@@ -1,5 +1,5 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'dart:convert';
+import 'package:manda_aquela/data/models/establishment_model.dart';
+import 'package:manda_aquela/domain/entities/establishment_type.dart';
 
 class Establishment {
   Establishment(
@@ -9,30 +9,16 @@ class Establishment {
       required this.capacity});
 
   final String name;
-  final String type;
+  final List<EstablishmentType> type;
   final String address;
   final int capacity;
 
-  Map<String, dynamic> toMap() {
-    return <String, dynamic>{
-      'name': name,
-      'type': type,
-      'address': address,
-      'capacity': capacity,
-    };
-  }
-
-  factory Establishment.fromMap(Map<String, dynamic> map) {
-    return Establishment(
-      name: map['name'] as String,
-      type: map['type'] as String,
-      address: map['address'] as String,
-      capacity: map['capacity'] as int,
+  EstablishmentModel toModel() {
+    return EstablishmentModel(
+      name: name,
+      type: type.map((e) => e.toModel()).toList(),
+      address: address,
+      capacity: capacity,
     );
   }
-
-  String toJson() => json.encode(toMap());
-
-  factory Establishment.fromJson(String source) =>
-      Establishment.fromMap(json.decode(source) as Map<String, dynamic>);
 }

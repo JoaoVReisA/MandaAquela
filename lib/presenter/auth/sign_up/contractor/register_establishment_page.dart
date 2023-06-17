@@ -3,6 +3,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:manda_aquela/color_schemes.g.dart';
+import 'package:manda_aquela/domain/entities/establishment_type.dart';
 import 'package:manda_aquela/presenter/auth/sign_up/controllers/register_establishment_page_controller.dart';
 import 'package:manda_aquela/presenter/common/assets.dart';
 import 'package:manda_aquela/presenter/common/text_styles.dart';
@@ -18,6 +19,14 @@ class RegisterEstablishmentPage extends StatefulWidget {
 
 class _RegisterEstablishmentPageState extends State<RegisterEstablishmentPage> {
   final _controller = Modular.get<RegisterEstablishmentPageController>();
+
+  @override
+  void initState() {
+    _controller.getEstablishmentTypes();
+    super.initState();
+  }
+
+  EstablishmentType? dropdownValue;
 
   @override
   Widget build(BuildContext context) {
@@ -58,13 +67,34 @@ class _RegisterEstablishmentPageState extends State<RegisterEstablishmentPage> {
                   const SizedBox(
                     height: 18,
                   ),
-                  TextFormField(
-                    style: TextStyles.outfit15px400w,
-                    decoration: const InputDecoration(
-                      hintText: "Tipo de estabelecimento",
-                      label: Text("Tipo de estabelecimento"),
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 8),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      border: Border.all(color: Colors.grey),
                     ),
-                    onChanged: _controller.setEstablishmentType,
+
+                    //TODO: SELECIONAR VÄRIOS TIPOS DE ESTABELECIMENTO
+                    child: DropdownButton<EstablishmentType>(
+                      borderRadius: BorderRadius.circular(8),
+                      isExpanded: true,
+                      value: _controller.selectedEstablishmentType,
+                      // icon: const Icon(Icons.arrow_downward),
+                      elevation: 16,
+                      style: const TextStyle(color: AppColors.primary),
+                      onChanged: _controller.setEstablishmentType,
+                      underline: Container(
+                        color: Colors.transparent,
+                      ),
+                      items: _controller.establishmentTypes
+                          .map<DropdownMenuItem<EstablishmentType>>(
+                              (EstablishmentType value) {
+                        return DropdownMenuItem<EstablishmentType>(
+                          value: value,
+                          child: Text(value.name),
+                        );
+                      }).toList(),
+                    ),
                   ),
                   const SizedBox(
                     height: 12,
@@ -102,8 +132,7 @@ class _RegisterEstablishmentPageState extends State<RegisterEstablishmentPage> {
                 CustomButton(
                   onPressed: _controller.isButtonReady
                       ? () async {
-                          //TODO: Enviar dados state model
-                          Modular.to.pushNamed('/auth/social_media');
+                          Modular.to.pushNamed('/auth/address');
                         }
                       : null,
                   label: "Enviar",
@@ -112,7 +141,7 @@ class _RegisterEstablishmentPageState extends State<RegisterEstablishmentPage> {
                   child: const Text('Não possuo um estabelecimento',
                       style: TextStyle(decoration: TextDecoration.underline)),
                   onPressed: () {
-                    Modular.to.pushNamed('/auth/social_media');
+                    Modular.to.pushNamed('/auth/address');
                   },
                 )
               ],
