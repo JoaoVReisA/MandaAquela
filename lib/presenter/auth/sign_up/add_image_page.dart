@@ -73,7 +73,7 @@ class _AddImagePageState extends State<AddImagePage> {
             child: CustomButton(
               onPressed: _controller.isButtonReady
                   ? () async {
-                      _finishSignUpController.sendUserData();
+                      await _finishSignUpController.sendUserData();
                       Modular.to.pushNamed('/start/home/');
                     }
                   : null,

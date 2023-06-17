@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:manda_aquela/domain/entities/event.dart';
 import 'package:manda_aquela/domain/entities/musician.dart';
+import 'package:manda_aquela/domain/entities/skill.dart';
 import 'package:manda_aquela/domain/usecase/events/fetch_events_list_usecase.dart';
 import 'package:manda_aquela/domain/usecase/musician/fetch_musician_list_usecase.dart';
 
@@ -52,11 +53,11 @@ class HomePageController extends GetxController {
     eventsAndMusicianList.shuffle();
   }
 
-  String getSkillsString(List<String> skills) {
+  String getSkillsString(List<Skill> skills) {
     String skillsString = '';
 
-    for (String skill in skills) {
-      skillsString += '$skill-';
+    for (Skill skill in skills) {
+      skillsString += '${skill.skillName}-';
     }
     final strList = skillsString.split('');
     strList.removeLast();

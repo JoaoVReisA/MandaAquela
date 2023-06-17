@@ -94,7 +94,7 @@ class _HomePageState extends State<HomePage> {
                                 onTapContacts: () {},
                                 onTapGoToProfile: () {},
                                 skills:
-                                    _controller.getSkillsString(item.skills),
+                                    '_controller.getSkillsString(item.skills)',
                               );
                             }
                             return EventsCard(event: item);

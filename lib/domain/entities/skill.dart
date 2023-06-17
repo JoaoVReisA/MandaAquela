@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:manda_aquela/data/models/skill_model.dart';
 
 class Skill extends Equatable {
   Skill({
@@ -12,4 +13,11 @@ class Skill extends Equatable {
 
   @override
   List<Object?> get props => [skillName];
+
+  SkillModel toModel() {
+    return SkillModel(
+      id: id,
+      name: skillName,
+    );
+  }
 }

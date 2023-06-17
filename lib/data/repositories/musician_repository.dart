@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:manda_aquela/core/endpoints.dart';
 import 'package:manda_aquela/data/models/skill_model.dart';
 import 'package:manda_aquela/domain/entities/musician.dart';
 import 'package:manda_aquela/domain/entities/skill.dart';
@@ -106,8 +107,7 @@ class MusicianRepositoryImpl extends MusicianRepository {
   @override
   Future<List<Skill>> fetchSkillList() async {
     try {
-      final response =
-          await client.get('http://localhost:3333/skill/skills', {});
+      final response = await client.get('${Endpoints.base}/skill/skills', {});
       final data = jsonDecode(response.body)["data"]["skill"];
       final skillList = <Skill>[];
 

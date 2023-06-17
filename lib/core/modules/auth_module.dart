@@ -8,7 +8,9 @@ import 'package:manda_aquela/domain/usecase/forgot_password/send_email_code_usec
 import 'package:manda_aquela/domain/usecase/login/email_auth_login_usecase.dart';
 import 'package:manda_aquela/domain/usecase/login/facebook_auth_login.dart';
 import 'package:manda_aquela/domain/usecase/login/google_auth_login.dart';
-import 'package:manda_aquela/domain/usecase/login/sign_up_usecase.dart';
+import 'package:manda_aquela/domain/usecase/login/token_auth_login_usecase.dart';
+import 'package:manda_aquela/domain/usecase/sign_up/musician_sign_up_usecase.dart';
+import 'package:manda_aquela/domain/usecase/sign_up/sign_up_usecase.dart';
 import 'package:manda_aquela/presenter/auth/forgot_password/controllers/forgot_password_page_controller.dart';
 import 'package:manda_aquela/presenter/auth/forgot_password/send_email_page.dart';
 import 'package:manda_aquela/presenter/auth/login/controllers/login_page_controller.dart';
@@ -39,6 +41,7 @@ class AuthModule extends Module {
         Bind<LoginPageController>(
           (i) => LoginPageController(
             emailAuthLoginUsecase: i(),
+            tokenAuthLoginUseCase: i(),
           ),
           export: true,
         ),
@@ -113,9 +116,19 @@ class AuthModule extends Module {
           export: true,
         ),
         Bind<FinishSignUpController>(
-          (i) => FinishSignUpController(),
+          (i) => FinishSignUpController(
+            musicianSignUpUsecase: i(),
+            tokenAuthLoginUseCase: i(),
+          ),
           export: true,
         ),
+        Bind<MusicianSignUpUsecase>(
+            (i) => MusicianSignUpUsecaseImpl(signUpRepository: i()),
+            export: true),
+        Bind<TokenAuthLoginUseCase>(
+          (i) => TokenAuthLoginUseCaseImpl(authLoginRepository: i()),
+          export: true,
+        )
       ];
 
   @override
