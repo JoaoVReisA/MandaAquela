@@ -31,7 +31,7 @@ class DioHttpService implements HttpService {
   }
 
   void _setupHeaders() {
-    _client.options.headers[Headers.contentTypeHeader] = ContentType.json;
+    _client.options.headers[Headers.contentTypeHeader] = 'application/json';
 
     if (AuthToken.instance.token.isNotEmpty) {
       _client.options.headers['Authorization'] =

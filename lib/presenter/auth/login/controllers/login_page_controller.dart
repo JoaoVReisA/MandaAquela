@@ -43,6 +43,8 @@ class LoginPageController extends GetxController {
 
       final prefs = await SharedPreferences.getInstance();
       prefs.setString('uid', response?.user!.uid ?? '');
+      prefs.setString('name', response?.user!.displayName ?? '');
+      prefs.setString('email', response?.user!.email ?? '');
 
       print(response?.user);
 

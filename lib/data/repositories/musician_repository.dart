@@ -1,7 +1,8 @@
 import 'dart:convert';
 
-import 'package:manda_aquela/data/repositories/jsonFixture/fixture_reader.dart';
+import 'package:manda_aquela/data/models/skill_model.dart';
 import 'package:manda_aquela/domain/entities/musician.dart';
+import 'package:manda_aquela/domain/entities/skill.dart';
 import 'package:manda_aquela/domain/repositories/musician_repository/musician_repository.dart';
 import 'package:manda_aquela/infrastructure/network/dio_http_service.dart';
 
@@ -97,6 +98,24 @@ class MusicianRepositoryImpl extends MusicianRepository {
       }
 
       return musicianList;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<List<Skill>> fetchSkillList() async {
+    try {
+      final response =
+          await client.get('http://localhost:3333/skill/skills', {});
+      final data = jsonDecode(response.body)["data"]["skill"];
+      final skillList = <Skill>[];
+
+      for (dynamic item in data) {
+        skillList.add(SkillModel.fromMap(item).toEntity());
+      }
+
+      return skillList;
     } catch (e) {
       rethrow;
     }

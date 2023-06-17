@@ -86,6 +86,7 @@ class _SelectYourSkillsPageState extends State<SelectYourSkillsPage> {
                         ..._controller.filteredList.map(
                           (e) => SkillCard(
                             skill: Skill(
+                              id: e.id,
                               skillName: e.skillName,
                               isSelected: e.isSelected,
                             ),

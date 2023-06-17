@@ -1,8 +1,11 @@
 import 'package:get/get.dart';
 import 'package:manda_aquela/domain/entities/skill.dart';
+import 'package:manda_aquela/domain/usecase/musician/fetch_skill_list_usecase.dart';
 
 class SelectYourSkillsPageController extends GetxController {
-  SelectYourSkillsPageController();
+  SelectYourSkillsPageController({required this.fetchSkillListUsecase});
+
+  final FetchSkillListUsecase fetchSkillListUsecase;
 
   final skills = <Skill>[].obs;
 
@@ -32,25 +35,14 @@ class SelectYourSkillsPageController extends GetxController {
     }
   }
 
-  void getSkillsList() {
-    skills.addAll(
-      [
-        Skill(skillName: 'Guitarra', isSelected: false),
-        Skill(skillName: 'Piano', isSelected: false),
-        Skill(skillName: 'Teclado', isSelected: false),
-        Skill(skillName: 'Voz', isSelected: false),
-        Skill(skillName: 'violão', isSelected: false),
-        Skill(skillName: 'Saxofone', isSelected: false),
-        Skill(skillName: 'Baixo', isSelected: false),
-        Skill(skillName: 'Cavaquinho', isSelected: false),
-        Skill(skillName: 'tambor', isSelected: false),
-        Skill(skillName: 'Bateria', isSelected: false),
-        Skill(skillName: 'Triangulo', isSelected: false),
-        Skill(skillName: 'Dança', isSelected: false),
-      ],
-    );
-
-    filteredList.addAll(skills);
+  void getSkillsList() async {
+    try {
+      final list = await fetchSkillListUsecase();
+      skills.addAll(list);
+      filteredList.addAll(skills);
+    } catch (e) {
+      print(e);
+    }
   }
 
   List<Skill?>? selectedList() {

@@ -95,7 +95,9 @@ class AuthModule extends Module {
           export: true,
         ),
         Bind<SelectYourSkillsPageController>(
-          (i) => SelectYourSkillsPageController(),
+          (i) => SelectYourSkillsPageController(
+            fetchSkillListUsecase: i(),
+          ),
           export: true,
         ),
         Bind<MusicianValuePageController>(
