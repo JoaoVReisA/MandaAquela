@@ -1,4 +1,10 @@
 enum Assets {
+  calendar('$base/calendar_month.svg'),
+  storefront('$base/storefront.svg'),
+  person('$base/person.svg'),
+  star('$base/star.svg'),
+  money('$base/monetization_on.svg'),
+  alarm('$base/alarm.svg'),
   logo('$base/logo.svg'),
   musician('$base/musician.svg'),
   googleLogo('$base/google_logo.svg'),

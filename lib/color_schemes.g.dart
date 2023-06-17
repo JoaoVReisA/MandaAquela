@@ -75,4 +75,8 @@ class AppColors {
   static const white = Color(0xFFFFFFFF);
   static const highlight = Color(0xFFFBC531);
   static const success = Color(0xFF44BD32);
+  static const black = Color(0xFF1D192B);
+  static const gray = Color(0xFF6D6A6A);
+  static const green = Color(0xFF23C220);
+  static const yellow = Color(0xFFFBC531);
 }
