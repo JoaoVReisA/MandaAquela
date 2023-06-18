@@ -35,9 +35,9 @@ class _SignUpEventState extends State<RegisterEvent> {
           backgroundColor: Colors.transparent,
           elevation: 0,
           title: Text(
-            'Antes de começarmos, precisamos saber o porque está aqui',
+            'Cadastre um evento',
             style: TextStyles.outfit15pxBold.copyWith(
-              color: AppColors.tertiary,
+              color: AppColors.textGrey,
             ),
             textAlign: TextAlign.center,
           ),
