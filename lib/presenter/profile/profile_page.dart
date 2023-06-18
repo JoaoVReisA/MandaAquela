@@ -8,6 +8,8 @@ import 'package:manda_aquela/presenter/common/text_styles.dart';
 import 'package:manda_aquela/presenter/profile/controller/profile_page_controller.dart';
 import 'package:manda_aquela/presenter/profile/widgets/description_widget.dart';
 import 'package:manda_aquela/presenter/profile/widgets/profile_action_button.dart';
+import 'package:manda_aquela/presenter/widgets/bottom_sheets/contacts_bottom_sheet.dart';
+import 'package:manda_aquela/presenter/widgets/common_dialog/signup_dialog.dart';
 import 'package:manda_aquela/presenter/widgets/rate/rate_notes.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -54,10 +56,33 @@ class _ProfilePageState extends State<ProfilePage> {
                 children: [
                   Row(
                     children: [
+                      IconButton(
+                          onPressed: () {
+                            Modular.to.pop();
+                          },
+                          icon: const Icon(
+                            Icons.chevron_left,
+                            color: Colors.white,
+                          )),
                       const Spacer(),
                       IconButton(
                           onPressed: () {
-                            _controller.logout();
+                            showDialog(
+                              context: context,
+                              builder: (context) => SignUpDialog(
+                                title: 'Deseja sair do app?',
+                                bodyText:
+                                    'Tem certeza que deseja sair do Manda Aquela?',
+                                labelButtonLeft: 'cancelar',
+                                labelButtonRight: 'sair',
+                                onTapButtonLeft: () {
+                                  Modular.to.pop();
+                                },
+                                onTapButtonRight: () {
+                                  _controller.logout();
+                                },
+                              ),
+                            );
                           },
                           icon: const Icon(
                             Icons.logout,
@@ -94,7 +119,23 @@ class _ProfilePageState extends State<ProfilePage> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           ProfileActionButton(
-            onTap: () {},
+            onTap: () async {
+              showModalBottomSheet(
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(24),
+                    topRight: Radius.circular(24),
+                  ),
+                ),
+                isScrollControlled: true,
+                context: context,
+                builder: (context) {
+                  return ContactsBottomSheet(
+                    socialMedias: _controller.userModel?.socialMedia ?? [],
+                  );
+                },
+              );
+            },
             text: 'Contato',
             icon: const Icon(
               Icons.contact_emergency_outlined,
@@ -176,17 +217,27 @@ class _ProfilePageState extends State<ProfilePage> {
                   const SizedBox(
                     width: 4,
                   ),
-                  RateNotes(rate: _controller.userModel?.rate ?? 4),
+                  RateNotes(rate: _controller.userModel?.rate ?? 0),
                 ],
               ),
-              Text(
-                _controller.userModel?.fee ?? '',
-                style: TextStyles.outfit18px700w.copyWith(color: Colors.white),
-              ),
-              Text(
-                _controller.getSkillsStrings,
-                style: TextStyles.outfit15px400w.copyWith(color: Colors.grey),
-              ),
+              _controller.userModel?.fee != null
+                  ? Text(
+                      'R\$ ${_controller.userModel?.fee!}',
+                      style: TextStyles.outfit18px700w
+                          .copyWith(color: AppColors.success),
+                    )
+                  : Text(
+                      'Contratante',
+                      style: TextStyles.outfit18px700w
+                          .copyWith(color: Colors.grey),
+                    ),
+              _controller.userModel?.skills != null
+                  ? Text(
+                      _controller.getSkillsStrings,
+                      style: TextStyles.outfit15px400w
+                          .copyWith(color: Colors.grey),
+                    )
+                  : const SizedBox.shrink(),
             ],
           )
         ],
