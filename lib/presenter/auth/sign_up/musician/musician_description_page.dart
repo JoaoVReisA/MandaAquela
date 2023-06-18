@@ -82,7 +82,7 @@ class _MusicianDescriptionPageState extends State<MusicianDescriptionPage> {
             child: CustomButton(
               onPressed: _controller.isButtonReady
                   ? () async {
-                      Modular.to.pushNamed('/auth/musician_value');
+                      Modular.to.pushNamed('/auth/add_image');
                     }
                   : null,
               label: "Enviar",

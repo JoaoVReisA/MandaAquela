@@ -86,6 +86,7 @@ class _SelectYourSkillsPageState extends State<SelectYourSkillsPage> {
                         ..._controller.filteredList.map(
                           (e) => SkillCard(
                             skill: Skill(
+                              id: e.id,
                               skillName: e.skillName,
                               isSelected: e.isSelected,
                             ),
@@ -112,7 +113,7 @@ class _SelectYourSkillsPageState extends State<SelectYourSkillsPage> {
                   ? () async {
                       _controller.selectedList();
 
-                      Modular.to.pushNamed('/auth/musician_description');
+                      Modular.to.pushNamed('/auth/musician_value');
                     }
                   : null,
               label: "Enviar",

@@ -1,7 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
-import 'package:manda_aquela/domain/entities/establishment.dart';
+import 'package:manda_aquela/data/models/establishment_model.dart';
 
 class Events {
   Events({
@@ -12,7 +12,7 @@ class Events {
   });
 
   final String name;
-  final Establishment? establishment;
+  final EstablishmentModel? establishment;
   final String address;
   final DateTime date;
 
@@ -29,7 +29,8 @@ class Events {
     return Events(
       name: map['name'] as String,
       establishment: map['establishment'] != null
-          ? Establishment.fromMap(map['establishment'] as Map<String, dynamic>)
+          ? EstablishmentModel.fromMap(
+              map['establishment'] as Map<String, dynamic>)
           : null,
       address: map['address'] as String,
       date: DateTime.fromMillisecondsSinceEpoch(map['date'] as int),

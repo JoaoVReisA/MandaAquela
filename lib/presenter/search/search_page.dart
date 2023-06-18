@@ -74,7 +74,7 @@ class _SearchPageState extends State<SearchPage> {
                           musicianValue: item.value,
                           onTapContacts: () {},
                           onTapGoToProfile: () {},
-                          skills: _controller.getSkillsString(item.skills),
+                          skills: '_controller.getSkillsString(item.skills)',
                         );
                       }
                       return EventsCard(event: item);

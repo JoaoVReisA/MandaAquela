@@ -37,14 +37,14 @@ class AddressPageController extends GetxController {
     _stateModel.cep.value = value;
   }
 
-  Address? getAddress() {
-    if (_stateModel.isFullFilled) {
-      return Address(
-          cep: _stateModel.cep.value,
-          city: _stateModel.city.value,
-          state: _stateModel.state.value,
-          street: _stateModel.street.value);
-    }
-    return null;
+  Address getAddress() {
+    return Address(
+      zipCode: _stateModel.cep.value,
+      city: _stateModel.city.value,
+      state: _stateModel.state.value,
+      street: _stateModel.street.value,
+      neighborhood: '',
+      number: 0,
+    );
   }
 }

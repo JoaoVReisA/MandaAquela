@@ -1,14 +1,20 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:manda_aquela/data/repositories/auth_login_repository.dart';
+import 'package:manda_aquela/data/repositories/establishment_repository.dart';
 import 'package:manda_aquela/data/repositories/sign_up_repository.dart';
 import 'package:manda_aquela/domain/repositories/AuthRepository/auth_login_repository.dart';
 import 'package:manda_aquela/domain/repositories/AuthRepository/sign_up_repository.dart';
+import 'package:manda_aquela/domain/repositories/establishment_repository.dart';
+import 'package:manda_aquela/domain/usecase/establishment/get_establishment_types_usecase.dart';
 import 'package:manda_aquela/domain/usecase/forgot_password/send_email_code_usecase.dart';
 import 'package:manda_aquela/domain/usecase/login/email_auth_login_usecase.dart';
 import 'package:manda_aquela/domain/usecase/login/facebook_auth_login.dart';
 import 'package:manda_aquela/domain/usecase/login/google_auth_login.dart';
-import 'package:manda_aquela/domain/usecase/login/sign_up_usecase.dart';
+import 'package:manda_aquela/domain/usecase/login/token_auth_login_usecase.dart';
+import 'package:manda_aquela/domain/usecase/sign_up/contractor_sign_up_usecase.dart';
+import 'package:manda_aquela/domain/usecase/sign_up/musician_sign_up_usecase.dart';
+import 'package:manda_aquela/domain/usecase/sign_up/sign_up_usecase.dart';
 import 'package:manda_aquela/presenter/auth/forgot_password/controllers/forgot_password_page_controller.dart';
 import 'package:manda_aquela/presenter/auth/forgot_password/send_email_page.dart';
 import 'package:manda_aquela/presenter/auth/login/controllers/login_page_controller.dart';
@@ -39,6 +45,7 @@ class AuthModule extends Module {
         Bind<LoginPageController>(
           (i) => LoginPageController(
             emailAuthLoginUsecase: i(),
+            tokenAuthLoginUseCase: i(),
           ),
           export: true,
         ),
@@ -95,7 +102,9 @@ class AuthModule extends Module {
           export: true,
         ),
         Bind<SelectYourSkillsPageController>(
-          (i) => SelectYourSkillsPageController(),
+          (i) => SelectYourSkillsPageController(
+            fetchSkillListUsecase: i(),
+          ),
           export: true,
         ),
         Bind<MusicianValuePageController>(
@@ -107,11 +116,34 @@ class AuthModule extends Module {
           export: true,
         ),
         Bind<RegisterEstablishmentPageController>(
-          (i) => RegisterEstablishmentPageController(),
+          (i) => RegisterEstablishmentPageController(
+              getEstablishmentTypesUseCase: i()),
           export: true,
         ),
         Bind<FinishSignUpController>(
-          (i) => FinishSignUpController(),
+          (i) => FinishSignUpController(
+              musicianSignUpUsecase: i(),
+              tokenAuthLoginUseCase: i(),
+              contractorSignUpUsecase: i()),
+          export: true,
+        ),
+        Bind<MusicianSignUpUsecase>(
+            (i) => MusicianSignUpUsecaseImpl(signUpRepository: i()),
+            export: true),
+        Bind<TokenAuthLoginUseCase>(
+          (i) => TokenAuthLoginUseCaseImpl(authLoginRepository: i()),
+          export: true,
+        ),
+        Bind<EstablishmentRepository>(
+          (i) => EstablishmentRepositoryImpl(client: i()),
+          export: true,
+        ),
+        Bind<GetEstablishmentTypesUseCase>(
+          (i) => RemoteGetEstablishmentTypesUseCase(repository: i()),
+          export: true,
+        ),
+        Bind<ContractorSignUpUsecase>(
+          (i) => RemoteContractorSignUpUsecase(signUpRepository: i()),
           export: true,
         ),
       ];

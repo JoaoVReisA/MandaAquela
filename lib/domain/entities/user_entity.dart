@@ -9,7 +9,6 @@ class UserEntity {
     required this.email,
     required this.isMusician,
     required this.isContractor,
-    required this.isSignUpCompleted,
     required this.description,
     required this.socialMedias,
     this.address,
@@ -24,7 +23,6 @@ class UserEntity {
   final String email;
   final bool isMusician;
   final bool isContractor;
-  final bool isSignUpCompleted;
   final String description;
   final List<String?> socialMedias;
   final String? image;
