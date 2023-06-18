@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/svg.dart';
@@ -7,6 +8,8 @@ import 'package:manda_aquela/presenter/common/assets.dart';
 import 'package:manda_aquela/presenter/common/text_styles.dart';
 import 'package:manda_aquela/presenter/events/controller/register_event_controller.dart';
 import 'package:manda_aquela/presenter/widgets/custom_button/custom_button.dart';
+import 'package:manda_aquela/presenter/widgets/custom_date_picker.dart';
+import 'package:manda_aquela/presenter/widgets/date_picker_widget.dart';
 
 class RegisterEvent extends StatefulWidget {
   const RegisterEvent({super.key});
@@ -56,13 +59,28 @@ class _SignUpEventState extends State<RegisterEvent> {
                   const SizedBox(
                     height: 18,
                   ),
-                  TextFormField(
-                    style: TextStyles.outfit15px400w,
-                    decoration: const InputDecoration(
-                      hintText: "Selecione a data",
-                      label: Text("Selecione a data"),
-                    ),
-                    onChanged: _controller.setDate,
+                  DatePickerWidget(
+                    onTap: () {
+                      showCupertinoModalPopup<void>(
+                        context: context,
+                        builder: (BuildContext context) => CustomDatePicker(
+                          onTapCancel: () {
+                            Modular.to.pop();
+                          },
+                          onTapNext: () {
+                            Modular.to.pop();
+                          },
+                          child: CupertinoDatePicker(
+                            initialDateTime:
+                                _controller.dateTime ?? DateTime.now(),
+                            mode: CupertinoDatePickerMode.date,
+                            use24hFormat: true,
+                            onDateTimeChanged: _controller.setDate,
+                          ),
+                        ),
+                      );
+                    },
+                    dateTime: _controller.dateTime,
                   ),
                   const SizedBox(
                     height: 4,
@@ -88,6 +106,14 @@ class _SignUpEventState extends State<RegisterEvent> {
                   ),
                   const SizedBox(
                     height: 16,
+                  ),
+                  TextFormField(
+                    style: TextStyles.outfit15px400w,
+                    decoration: const InputDecoration(
+                      hintText: "Categoria",
+                      label: Text("Categoria"),
+                    ),
+                    onChanged: _controller.setCapacity,
                   ),
                   Text(
                     'Vimos que ainda não criou uma oportunidade',
