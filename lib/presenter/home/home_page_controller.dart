@@ -4,20 +4,19 @@ import 'package:manda_aquela/domain/entities/event.dart';
 import 'package:manda_aquela/domain/entities/musician.dart';
 import 'package:manda_aquela/domain/entities/skill.dart';
 import 'package:manda_aquela/domain/usecase/events/fetch_events_list_usecase.dart';
-import 'package:manda_aquela/domain/usecase/login/token_auth_login_usecase.dart';
+import 'package:manda_aquela/domain/usecase/get_cached_user_data_usecase.dart';
 import 'package:manda_aquela/domain/usecase/musician/fetch_musician_list_usecase.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class HomePageController extends GetxController {
   HomePageController({
     required this.fetchMusicianListUsecase,
     required this.fetchEventsListUsecase,
-    required this.tokenAuthLoginUseCase,
+    required this.getCachedUserDataUsecase,
   });
 
   final FetchMusicianListUsecase fetchMusicianListUsecase;
   final FetchEventsListUsecase fetchEventsListUsecase;
-  final TokenAuthLoginUseCase tokenAuthLoginUseCase;
+  final GetCachedUserDataUsecase getCachedUserDataUsecase;
 
   final musicianList = <Musician>[].obs;
   final eventsList = <Events>[].obs;
@@ -79,12 +78,8 @@ class HomePageController extends GetxController {
   }
 
   Future<void> getUserModel() async {
-    String uid = '';
-    await SharedPreferences.getInstance()
-        .then((value) => uid = value.getString('uid') ?? '');
-
-    final response = await tokenAuthLoginUseCase.call(token: uid);
+    final response = await getCachedUserDataUsecase.call();
     userModel.value = response;
-    print(userModel.value?.photoUrl);
+    print("HOME PAGE $userModel");
   }
 }

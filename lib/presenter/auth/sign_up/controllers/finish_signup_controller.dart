@@ -56,6 +56,7 @@ class FinishSignUpController extends GetxController {
         fee: _musicianValueController.musicianValue.toString(),
         address: _addressPageController.getAddress().toModel(),
         socialMedia: _socialMediaController.getSocialMedias(),
+        imageBase64: base64Image,
       );
 
       return musician;

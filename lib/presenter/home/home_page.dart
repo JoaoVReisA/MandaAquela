@@ -51,8 +51,11 @@ class _HomePageState extends State<HomePage> {
                 width: 60,
                 height: 60,
                 child: CircleAvatar(
-                    backgroundImage: NetworkImage(
-                        _controller.userModel.value?.photoUrl ?? '')),
+                  backgroundColor: AppColors.primary,
+                  backgroundImage: _controller.userModel.value?.photoUrl != null
+                      ? NetworkImage(_controller.userModel.value!.photoUrl!)
+                      : null,
+                ),
               ),
             )
           ],

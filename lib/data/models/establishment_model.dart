@@ -11,14 +11,14 @@ class EstablishmentModel {
       required this.capacity});
 
   final String name;
-  final List<EstablishmentTypeModel> type;
+  final List<EstablishmentTypeModel>? type;
   final String address;
   final int capacity;
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'name': name,
-      'types': type.map((x) => x.toMap()).toList(),
+      'types': type?.map((x) => x.toMap()).toList(),
       'address': address,
       'capacity': capacity,
     };
@@ -27,11 +27,14 @@ class EstablishmentModel {
   factory EstablishmentModel.fromMap(Map<String, dynamic> map) {
     return EstablishmentModel(
       name: map['name'] as String,
-      type: List<EstablishmentTypeModel>.from(
-        (map['types'] as List<dynamic>).map<EstablishmentTypeModel>(
-          (x) => EstablishmentTypeModel.fromMap(x as Map<String, dynamic>),
-        ),
-      ),
+      type: map['types'] != null
+          ? List<EstablishmentTypeModel>.from(
+              (map['types'] as List<dynamic>).map<EstablishmentTypeModel>(
+                (x) =>
+                    EstablishmentTypeModel.fromMap(x as Map<String, dynamic>),
+              ),
+            )
+          : null,
       address: map['address'] as String,
       capacity: map['capacity'] as int,
     );

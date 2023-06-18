@@ -10,6 +10,10 @@ class TextStyles {
     fontWeight: FontWeight.w700,
   );
 
+  static final outfit12px400w = base.copyWith(
+    fontSize: 12,
+    fontWeight: FontWeight.w400,
+  );
   static final outfit15px400w = base.copyWith(
     fontSize: 15,
     fontWeight: FontWeight.w400,

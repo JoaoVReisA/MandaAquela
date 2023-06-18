@@ -106,4 +106,9 @@ class UserModel {
 
   factory UserModel.fromJson(String source) =>
       UserModel.fromMap(json.decode(source) as Map<String, dynamic>);
+
+  @override
+  String toString() {
+    return 'UserModel(id: $id, description: $description, name: $name, email: $email, type: $type, isSignedUp: $isSignedUp, photoUrl: $photoUrl, rate: $rate, socialMedia: $socialMedia, token: $token, establishments: $establishments, skills: $skills, address: $address, fee: $fee)';
+  }
 }
