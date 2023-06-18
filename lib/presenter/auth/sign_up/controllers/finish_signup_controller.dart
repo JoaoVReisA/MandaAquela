@@ -47,6 +47,8 @@ class FinishSignUpController extends GetxController {
           ?.map((e) => e!.toModel())
           .toList();
 
+      final base64Image = await _addImagePageController.imageBase64();
+
       final musician = MusicianRequest(
         uuid: UserFirebaseInfo.instance.uid ?? 'id',
         description: _musicianDescriptionController.description,
@@ -58,6 +60,8 @@ class FinishSignUpController extends GetxController {
 
       return musician;
     } else {
+      final base64Image = await _addImagePageController.imageBase64();
+
       final contractor = ContractorRequest(
         uuid: UserFirebaseInfo.instance.uid ?? 'id',
         address: _addressPageController.getAddress().toModel(),
@@ -65,6 +69,7 @@ class FinishSignUpController extends GetxController {
         establishment:
             _registerEstablishmentController.getEstablishment()?.toModel(),
         socialMedia: _socialMediaController.getSocialMedias(),
+        imageBase64: base64Image,
       );
       return contractor;
     }

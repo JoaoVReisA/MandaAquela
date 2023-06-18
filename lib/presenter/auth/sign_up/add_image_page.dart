@@ -74,7 +74,7 @@ class _AddImagePageState extends State<AddImagePage> {
               onPressed: _controller.isButtonReady
                   ? () async {
                       await _finishSignUpController.sendUserData();
-                      // Modular.to.pushNamed('/start/home/');
+                      Modular.to.pushNamed('/start/home/');
                     }
                   : null,
               label: "Enviar",

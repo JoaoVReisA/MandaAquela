@@ -11,13 +11,15 @@ class ContractorRequest {
       required this.description,
       required this.socialMedia,
       required this.establishment,
-      required this.address});
+      required this.address,
+      this.imageBase64});
 
   final String uuid;
   final String description;
   final List<SocialMedia>? socialMedia;
   final EstablishmentModel? establishment;
   final AddressModel address;
+  final String? imageBase64;
   final String userType = 'contractor';
 
   Map<String, dynamic> toMap() {
@@ -27,6 +29,7 @@ class ContractorRequest {
       'socialMedia': socialMedia?.map((x) => x.toMap()).toList(),
       'establishment': establishment?.toMap(),
       'address': address.toMap(),
+      'image': imageBase64,
       'userType': userType,
     };
   }
@@ -36,13 +39,14 @@ class ContractorRequest {
       uuid: map['uuid'] as String,
       description: map['description'] as String,
       socialMedia: List<SocialMedia>.from(
-        (map['socialMedia'] as List<int>).map<SocialMedia>(
+        (map['socialMedia'] as List<dynamic>).map<SocialMedia>(
           (x) => SocialMedia.fromMap(x as Map<String, dynamic>),
         ),
       ),
       establishment: EstablishmentModel.fromMap(
           map['establishment'] as Map<String, dynamic>),
       address: AddressModel.fromMap(map['address'] as Map<String, dynamic>),
+      imageBase64: map['imageBase64'] as String,
     );
   }
 

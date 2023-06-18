@@ -12,6 +12,7 @@ class MusicianRequest {
     required this.skills,
     required this.fee,
     required this.address,
+    this.imageBase64,
     this.socialMedia,
   });
 
@@ -21,6 +22,7 @@ class MusicianRequest {
   final List<SkillModel> skills;
   final String fee;
   final AddressModel address;
+  final String? imageBase64;
   final String userType = 'musician';
 
   Map<String, dynamic> toMap() {
@@ -31,6 +33,7 @@ class MusicianRequest {
       'skills': skills.map((x) => x.toMap()).toList(),
       'fee': fee,
       'address': address.toMap(),
+      'image': imageBase64,
       'userType': userType,
     };
   }
@@ -41,7 +44,7 @@ class MusicianRequest {
       description: map['description'] as String,
       socialMedia: map['socialMedia'] != null
           ? List<SocialMedia>.from(
-              (map['socialMedia'] as List<int>).map<SocialMedia?>(
+              (map['socialMedia'] as List<dynamic>).map<SocialMedia?>(
                 (x) => SocialMedia.fromMap(x as Map<String, dynamic>),
               ),
             )
@@ -53,6 +56,7 @@ class MusicianRequest {
       ),
       fee: map['fee'] as String,
       address: AddressModel.fromMap(map['address'] as Map<String, dynamic>),
+      imageBase64: map['imageBase64'] as String,
     );
   }
 
