@@ -3,10 +3,11 @@ import 'package:flutter_svg/svg.dart';
 import 'package:manda_aquela/color_schemes.g.dart';
 import 'package:manda_aquela/presenter/common/assets.dart';
 import 'package:manda_aquela/presenter/common/text_styles.dart';
+import 'package:manda_aquela/presenter/events/widget/rating_component.dart';
 import 'package:manda_aquela/presenter/widgets/svg_and_text/svg_and_text.dart';
 
-class HistoryCard extends StatelessWidget {
-  const HistoryCard({super.key});
+class InterestedMusicianCard extends StatelessWidget {
+  const InterestedMusicianCard({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -31,69 +32,57 @@ class HistoryCard extends StatelessWidget {
             children: [
               Expanded(
                 child: Padding(
-                  padding: const EdgeInsets.all(8),
+                  padding: const EdgeInsets.symmetric(vertical: 12),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
+                      Image.asset(
+                        Assets.greg.path,
+                        width: 48,
+                        height: 48,
+                      ),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Festa junina',
-                            style: TextStyles.poppins14px700w
+                            'Greg pontepretano sanfoneiro',
+                            style: TextStyles.poppins10px700w
                                 .copyWith(color: AppColors.gray),
-                          ),
-                          const SizedBox(height: 8),
-                          SvgAndText(
-                            dividerWidth: 8,
-                            iconSize: 16,
-                            assetName: Assets.calendar,
-                            text: Text(
-                              '21/07/2022',
-                              style: TextStyles.poppins8px500w
-                                  .copyWith(color: AppColors.gray),
-                            ),
                           ),
                           const SizedBox(height: 8),
                           SvgAndText(
                             dividerWidth: 6,
                             iconSize: 16,
-                            assetName: Assets.alarm,
+                            assetName: Assets.piano,
                             text: Text(
-                              '18:30 - 21:30',
+                              'Sanfona, Canto, Animador...',
                               style: TextStyles.poppins8px500w
                                   .copyWith(color: AppColors.gray),
                             ),
                           ),
+                          const SizedBox(height: 4),
+                          SvgAndText(
+                            dividerWidth: 0,
+                            iconSize: 20,
+                            assetName: Assets.done,
+                            iconColor: AppColors.blue,
+                            text: Text(
+                              'Aceitar',
+                              style: TextStyles.poppins10px700w
+                                  .copyWith(color: AppColors.blue),
+                            ),
+                          ),
                         ],
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(right: 15),
+                      const Padding(
+                        padding: EdgeInsets.only(right: 6),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            SvgAndText(
-                              dividerWidth: 8,
-                              iconSize: 20,
-                              assetName: Assets.money,
-                              text: Text(
-                                'R\$ 900,00',
-                                style: TextStyles.poppins10px500w
-                                    .copyWith(color: AppColors.green),
-                              ),
-                            ),
-                            const SizedBox(height: 5),
-                            SvgAndText(
-                              dividerWidth: 8,
-                              iconSize: 20,
-                              assetName: Assets.storefront,
-                              text: Text(
-                                'Bar do Bira',
-                                style: TextStyles.poppins14px700w
-                                    .copyWith(color: AppColors.gray),
-                              ),
-                            ),
+                            RatingComponent(
+                              rate: 3,
+                            )
                           ],
                         ),
                       )
@@ -102,15 +91,20 @@ class HistoryCard extends StatelessWidget {
                 ),
               ),
               Container(
-                color: AppColors.yellow,
+                constraints: const BoxConstraints(minWidth: 65),
+                color: AppColors.green,
                 child: Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(12.0),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      SvgPicture.asset(Assets.star.path),
+                      SvgPicture.asset(Assets.money.path,
+                          colorFilter: const ColorFilter.mode(
+                              AppColors.white, BlendMode.srcIn)),
+                      const SizedBox(height: 4),
                       Text(
-                        'Concluído',
+                        'R\$ \n 90,00',
+                        textAlign: TextAlign.center,
                         style: TextStyles.poppins10px500w
                             .copyWith(color: AppColors.white),
                       )

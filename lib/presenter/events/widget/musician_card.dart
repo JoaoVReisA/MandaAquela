@@ -3,10 +3,11 @@ import 'package:flutter_svg/svg.dart';
 import 'package:manda_aquela/color_schemes.g.dart';
 import 'package:manda_aquela/presenter/common/assets.dart';
 import 'package:manda_aquela/presenter/common/text_styles.dart';
+import 'package:manda_aquela/presenter/events/widget/rating_component.dart';
 import 'package:manda_aquela/presenter/widgets/svg_and_text/svg_and_text.dart';
 
-class HistoryCard extends StatelessWidget {
-  const HistoryCard({super.key});
+class MusicianCard extends StatelessWidget {
+  const MusicianCard({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -31,19 +32,35 @@ class HistoryCard extends StatelessWidget {
             children: [
               Expanded(
                 child: Padding(
-                  padding: const EdgeInsets.all(8),
+                  padding: const EdgeInsets.symmetric(vertical: 8),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
+                      Image.asset(
+                        Assets.greg.path,
+                        width: 48,
+                        height: 48,
+                      ),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Festa junina',
-                            style: TextStyles.poppins14px700w
+                            'Greg pontepretano',
+                            style: TextStyles.poppins10px700w
                                 .copyWith(color: AppColors.gray),
                           ),
-                          const SizedBox(height: 8),
+                          const SizedBox(height: 4),
+                          SvgAndText(
+                            dividerWidth: 6,
+                            iconSize: 16,
+                            assetName: Assets.piano,
+                            text: Text(
+                              'Sanfona, Canto, Animador...',
+                              style: TextStyles.poppins8px500w
+                                  .copyWith(color: AppColors.gray),
+                            ),
+                          ),
+                          const SizedBox(height: 4),
                           SvgAndText(
                             dividerWidth: 8,
                             iconSize: 16,
@@ -54,7 +71,7 @@ class HistoryCard extends StatelessWidget {
                                   .copyWith(color: AppColors.gray),
                             ),
                           ),
-                          const SizedBox(height: 8),
+                          const SizedBox(height: 4),
                           SvgAndText(
                             dividerWidth: 6,
                             iconSize: 16,
@@ -67,33 +84,15 @@ class HistoryCard extends StatelessWidget {
                           ),
                         ],
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(right: 15),
+                      const Padding(
+                        padding: EdgeInsets.only(right: 6),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            SvgAndText(
-                              dividerWidth: 8,
-                              iconSize: 20,
-                              assetName: Assets.money,
-                              text: Text(
-                                'R\$ 900,00',
-                                style: TextStyles.poppins10px500w
-                                    .copyWith(color: AppColors.green),
-                              ),
-                            ),
-                            const SizedBox(height: 5),
-                            SvgAndText(
-                              dividerWidth: 8,
-                              iconSize: 20,
-                              assetName: Assets.storefront,
-                              text: Text(
-                                'Bar do Bira',
-                                style: TextStyles.poppins14px700w
-                                    .copyWith(color: AppColors.gray),
-                              ),
-                            ),
+                            RatingComponent(
+                              rate: 4,
+                            )
                           ],
                         ),
                       )
@@ -102,15 +101,16 @@ class HistoryCard extends StatelessWidget {
                 ),
               ),
               Container(
-                color: AppColors.yellow,
+                color: AppColors.green,
+                constraints: const BoxConstraints(minWidth: 65),
                 child: Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(12.0),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      SvgPicture.asset(Assets.star.path),
+                      SvgPicture.asset(Assets.done.path),
                       Text(
-                        'Concluído',
+                        'Aceito!',
                         style: TextStyles.poppins10px500w
                             .copyWith(color: AppColors.white),
                       )

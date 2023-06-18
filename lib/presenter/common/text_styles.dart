@@ -49,8 +49,7 @@ class TextStyles {
   );
 
   static final poppins8px500w = poppins.copyWith(
-    fontSize: 14,
-    letterSpacing: 0.5,
+    fontSize: 8,
     fontWeight: FontWeight.w500,
   );
 
@@ -58,5 +57,16 @@ class TextStyles {
     fontSize: 10,
     letterSpacing: 0.5,
     fontWeight: FontWeight.w500,
+  );
+
+  static final poppins10px700w = poppins.copyWith(
+    fontSize: 10,
+    letterSpacing: 0.5,
+    fontWeight: FontWeight.w700,
+  );
+
+  static final outfit25px700w = base.copyWith(
+    fontSize: 25,
+    fontWeight: FontWeight.w700,
   );
 }

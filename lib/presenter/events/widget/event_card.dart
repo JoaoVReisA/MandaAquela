@@ -10,6 +10,7 @@ class EventCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: const EdgeInsets.only(bottom: 12),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
         color: Colors.white,
@@ -36,7 +37,7 @@ class EventCard extends StatelessWidget {
               const SizedBox(height: 8),
               SvgAndText(
                 dividerWidth: 8,
-                iconSize: 20,
+                iconSize: 16,
                 assetName: Assets.calendar,
                 text: Text(
                   '21/07/2022',
@@ -46,8 +47,8 @@ class EventCard extends StatelessWidget {
               ),
               const SizedBox(height: 8),
               SvgAndText(
-                dividerWidth: 8,
-                iconSize: 20,
+                dividerWidth: 6,
+                iconSize: 16,
                 assetName: Assets.alarm,
                 text: Text(
                   '18:30 - 21:30',
