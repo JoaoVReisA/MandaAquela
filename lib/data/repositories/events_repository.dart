@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:manda_aquela/core/endpoints.dart';
+import 'package:manda_aquela/data/models/event_request.dart';
 import 'package:manda_aquela/domain/entities/event.dart';
 import 'package:manda_aquela/domain/repositories/events_repository/events_repository.dart';
 import 'package:manda_aquela/infrastructure/network/dio_http_service.dart';
@@ -79,6 +81,16 @@ class EventsRepositoryImpl extends EventsRepository {
         eventsList.add(Events.fromMap(item));
       }
       return eventsList;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<void> registerEvent({required EventRequest event}) async {
+    try {
+      await client.post('${Endpoints.base}/events/event', event.toMap(), {});
+      print(event.toString());
     } catch (e) {
       rethrow;
     }
