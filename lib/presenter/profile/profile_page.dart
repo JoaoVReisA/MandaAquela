@@ -9,6 +9,8 @@ import 'package:manda_aquela/presenter/profile/controller/profile_page_controlle
 import 'package:manda_aquela/presenter/profile/widgets/description_widget.dart';
 import 'package:manda_aquela/presenter/profile/widgets/profile_action_button.dart';
 import 'package:manda_aquela/presenter/widgets/bottom_sheets/contacts_bottom_sheet.dart';
+import 'package:manda_aquela/presenter/widgets/bottom_sheets/establishment_bottom_sheet.dart';
+import 'package:manda_aquela/presenter/widgets/bottom_sheets/skills_bottom_sheet.dart';
 import 'package:manda_aquela/presenter/widgets/common_dialog/signup_dialog.dart';
 import 'package:manda_aquela/presenter/widgets/rate/rate_notes.dart';
 
@@ -143,7 +145,23 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
           ),
           ProfileActionButton(
-            onTap: () {},
+            onTap: () {
+              showModalBottomSheet(
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(24),
+                    topRight: Radius.circular(24),
+                  ),
+                ),
+                isScrollControlled: true,
+                context: context,
+                builder: (context) {
+                  return SkillsBottomSheet(
+                    skills: _controller.skills,
+                  );
+                },
+              );
+            },
             text: 'Habilidades',
             icon: SvgPicture.asset(
               Assets.musicalNoteIcon.path,
@@ -158,7 +176,23 @@ class _ProfilePageState extends State<ProfilePage> {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         ProfileActionButton(
-          onTap: () {},
+          onTap: () {
+            showModalBottomSheet(
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(24),
+                  topRight: Radius.circular(24),
+                ),
+              ),
+              isScrollControlled: true,
+              context: context,
+              builder: (context) {
+                return ContactsBottomSheet(
+                  socialMedias: _controller.userModel?.socialMedia ?? [],
+                );
+              },
+            );
+          },
           text: 'Contato',
           icon: const Icon(
             Icons.contact_emergency_outlined,
@@ -166,7 +200,23 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
         ),
         ProfileActionButton(
-          onTap: () {},
+          onTap: () {
+            showModalBottomSheet(
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(24),
+                  topRight: Radius.circular(24),
+                ),
+              ),
+              isScrollControlled: true,
+              context: context,
+              builder: (context) {
+                return EstablishmentBottomSheet(
+                  establishments: _controller.establishments,
+                );
+              },
+            );
+          },
           text: 'Estabelecimentos',
           icon: const Icon(
             Icons.cabin_outlined,

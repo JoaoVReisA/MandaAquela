@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:manda_aquela/color_schemes.g.dart';
-import 'package:manda_aquela/domain/entities/social_media.dart';
-import 'package:manda_aquela/presenter/common/assets.dart';
+import 'package:manda_aquela/domain/entities/establishment.dart';
 import 'package:manda_aquela/presenter/common/text_styles.dart';
 import 'package:manda_aquela/presenter/widgets/custom_button/custom_button.dart';
 
-class ContactsBottomSheet extends StatelessWidget {
-  const ContactsBottomSheet({super.key, required this.socialMedias});
+class EstablishmentBottomSheet extends StatelessWidget {
+  const EstablishmentBottomSheet({super.key, required this.establishments});
 
-  final List<SocialMedia> socialMedias;
+  final List<Establishment> establishments;
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
@@ -49,20 +47,22 @@ class ContactsBottomSheet extends StatelessWidget {
               padding: const EdgeInsets.all(16.0),
               child: ListView.builder(
                 itemBuilder: (context, index) {
-                  return socialMedias[index].link.isNotEmpty
-                      ? Padding(
-                          padding: const EdgeInsets.only(bottom: 16.0),
-                          child: Row(
-                            children: [
-                              _buildSocialMediaIcon(socialMedias[index].type),
-                              const SizedBox(width: 8),
-                              Text(socialMedias[index].link),
-                            ],
-                          ),
-                        )
-                      : const SizedBox.shrink();
+                  return Padding(
+                    padding: const EdgeInsets.only(bottom: 16.0),
+                    child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                          color: Colors.grey[100],
+                        ),
+                        padding: const EdgeInsets.all(16),
+                        child: Text(
+                          establishments[index].name,
+                          style: TextStyles.outfit15px400w
+                              .copyWith(color: AppColors.primary),
+                        )),
+                  );
                 },
-                itemCount: socialMedias.length,
+                itemCount: establishments.length,
                 shrinkWrap: true,
               ),
             ),
@@ -82,41 +82,5 @@ class ContactsBottomSheet extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  Widget _buildSocialMediaIcon(String type) {
-    switch (type) {
-      case 'instagram':
-        return SvgPicture.asset(
-          Assets.instagramBlackLogo.path,
-          height: 48,
-          width: 48,
-        );
-      case 'facebook':
-        return SvgPicture.asset(
-          Assets.facebookBlackLogo.path,
-          height: 48,
-          width: 48,
-        );
-      case 'tiktok':
-        return SvgPicture.asset(
-          Assets.tikTokBlackLogo.path,
-          height: 48,
-          width: 48,
-        );
-      case 'youtube':
-        return SvgPicture.asset(
-          Assets.youtubeBlackLogo.path,
-          height: 48,
-          width: 48,
-        );
-
-      default:
-        return SvgPicture.asset(
-          Assets.youtubeBlackLogo.path,
-          height: 48,
-          width: 48,
-        );
-    }
   }
 }

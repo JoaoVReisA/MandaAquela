@@ -1,6 +1,8 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:get/get.dart';
 import 'package:manda_aquela/data/models/user_model.dart';
+import 'package:manda_aquela/domain/entities/establishment.dart';
+import 'package:manda_aquela/domain/entities/skill.dart';
 import 'package:manda_aquela/domain/usecase/get_cached_user_data_usecase.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -12,6 +14,12 @@ class ProfilePageController extends GetxController {
   final _userModel = Rxn<UserModel>();
 
   UserModel? get userModel => _userModel.value;
+
+  List<Skill> get skills =>
+      _userModel.value?.skills?.map((e) => e.toEntity()).toList() ?? [];
+
+  List<Establishment> get establishments =>
+      _userModel.value?.establishments?.map((e) => e.toEntity()).toList() ?? [];
 
   Future<void> getUserModel() async {
     final response = await getCachedUserData.call();

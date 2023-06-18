@@ -2,6 +2,7 @@
 import 'dart:convert';
 
 import 'package:manda_aquela/data/models/establishment_type_model.dart';
+import 'package:manda_aquela/domain/entities/establishment.dart';
 
 class EstablishmentModel {
   EstablishmentModel(
@@ -44,4 +45,13 @@ class EstablishmentModel {
 
   factory EstablishmentModel.fromJson(String source) =>
       EstablishmentModel.fromMap(json.decode(source) as Map<String, dynamic>);
+
+  Establishment toEntity() {
+    return Establishment(
+      name: name,
+      type: type?.map((e) => e.toEntity()).toList() ?? [],
+      address: address,
+      capacity: capacity,
+    );
+  }
 }
