@@ -11,7 +11,12 @@ class EventsModule extends Module {
   @override
   List<Bind> get binds => [
         Bind.singleton<RegisterEventController>(
-            (i) => RegisterEventController()),
+          (i) => RegisterEventController(
+            registerEventUseCase: i(),
+            getCachedUserDataUsecase: i(),
+            fetchEventsCategoriesUseCase: i(),
+          ),
+        ),
         Bind.singleton<FetchEventsListUsecase>(
             (i) => RemoteFetchEventsListUsecase(repository: i()),
             export: true),
@@ -21,6 +26,11 @@ class EventsModule extends Module {
         Bind<RegisterEventUseCase>(
           (i) => RemoteRegisterEventUseCase(eventRepository: i()),
         ),
+        Bind<FetchEventsListUsecase>(
+          (i) => RemoteFetchEventsListUsecase(
+            repository: i(),
+          ),
+        )
       ];
 
   @override

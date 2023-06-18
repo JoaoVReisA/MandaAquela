@@ -1,8 +1,10 @@
 import 'dart:convert';
 
 import 'package:manda_aquela/core/endpoints.dart';
+import 'package:manda_aquela/data/models/event_category_model.dart';
 import 'package:manda_aquela/data/models/event_request.dart';
 import 'package:manda_aquela/domain/entities/event.dart';
+import 'package:manda_aquela/domain/entities/event_category.dart';
 import 'package:manda_aquela/domain/repositories/events_repository/events_repository.dart';
 import 'package:manda_aquela/infrastructure/network/dio_http_service.dart';
 
@@ -91,6 +93,22 @@ class EventsRepositoryImpl extends EventsRepository {
     try {
       await client.post('${Endpoints.base}/events/event', event.toMap(), {});
       print(event.toString());
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<List<EventCategory>> fetchEventsCategories() async {
+    try {
+      final response =
+          await client.get('${Endpoints.base}/events/categories', {});
+      final data = jsonDecode(response.body)["data"];
+      final categories = <EventCategory>[];
+      for (dynamic item in data) {
+        categories.add(EventCategoryModel.fromMap(item).toEntity());
+      }
+      return categories;
     } catch (e) {
       rethrow;
     }

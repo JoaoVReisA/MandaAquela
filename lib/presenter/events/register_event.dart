@@ -22,6 +22,12 @@ class _SignUpEventState extends State<RegisterEvent> {
   final _controller = Modular.get<RegisterEventController>();
 
   @override
+  void initState() {
+    _controller.getEventsCategories();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Obx(
       () => Scaffold(
@@ -107,6 +113,8 @@ class _SignUpEventState extends State<RegisterEvent> {
                   const SizedBox(
                     height: 16,
                   ),
+
+                  //TODO : ADD Dropdown with categories
                   TextFormField(
                     style: TextStyles.outfit15px400w,
                     decoration: const InputDecoration(
