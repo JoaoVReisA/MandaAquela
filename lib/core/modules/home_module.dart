@@ -14,6 +14,7 @@ class HomeModule extends Module {
   List<Bind> get binds => [
         Bind<HomePageController>(
           (i) => HomePageController(
+            tokenAuthLoginUseCase: i(),
             fetchMusicianListUsecase: i(),
             fetchEventsListUsecase: i(),
           ),

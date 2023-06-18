@@ -28,7 +28,7 @@ class EstablishmentModel {
     return EstablishmentModel(
       name: map['name'] as String,
       type: List<EstablishmentTypeModel>.from(
-        (map['type'] as List<dynamic>).map<EstablishmentTypeModel>(
+        (map['types'] as List<dynamic>).map<EstablishmentTypeModel>(
           (x) => EstablishmentTypeModel.fromMap(x as Map<String, dynamic>),
         ),
       ),

@@ -4,7 +4,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:manda_aquela/color_schemes.g.dart';
 import 'package:manda_aquela/domain/entities/musician.dart';
-import 'package:manda_aquela/domain/entities/user_firebase_info.dart';
 import 'package:manda_aquela/presenter/common/assets.dart';
 import 'package:manda_aquela/presenter/common/text_styles.dart';
 import 'package:manda_aquela/presenter/home/home_page_controller.dart';
@@ -24,9 +23,8 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      _controller.generateEventsAndMusiciansList();
-    });
+    _controller.initHomePage();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {});
     super.initState();
   }
 
@@ -37,7 +35,7 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Colors.transparent,
         centerTitle: false,
         title: Text(
-          'Olá,\n${UserFirebaseInfo.instance.name}',
+          'Olá,\n${_controller.userModel.value?.name ?? 'Usuário'}',
           style: TextStyles.outfit18px700w.copyWith(color: AppColors.textGrey),
         ),
         elevation: 0,
@@ -47,11 +45,12 @@ class _HomePageState extends State<HomePage> {
             onTap: () {
               //TODO: Go to profile page
             },
-            child: Container(
+            child: SizedBox(
               width: 60,
               height: 60,
-              decoration: const BoxDecoration(
-                  shape: BoxShape.circle, color: AppColors.primary),
+              child: CircleAvatar(
+                  backgroundImage: NetworkImage(
+                      _controller.userModel.value?.photoUrl ?? '')),
             ),
           )
         ],
