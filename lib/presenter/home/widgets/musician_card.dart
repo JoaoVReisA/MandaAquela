@@ -157,7 +157,10 @@ class MusicianCard extends StatelessWidget {
                   width: 8,
                 ),
                 Expanded(
-                    child: CustomOutlinedButton(label: 'Contato', onTap: () {}))
+                    child: CustomOutlinedButton(
+                  label: 'Contato',
+                  onTap: onTapContacts,
+                ))
               ],
             )
           ],
