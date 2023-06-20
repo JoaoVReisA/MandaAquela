@@ -20,7 +20,7 @@ class MusicianCard extends StatelessWidget {
       required this.imageUrl});
 
   final String musicianName;
-  final double musicianValue;
+  final String musicianValue;
   final int musicianRate;
   final String skills;
   final String genres;

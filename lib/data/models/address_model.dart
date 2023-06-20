@@ -1,6 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
+import 'package:manda_aquela/domain/entities/address.dart';
+
 class AddressModel {
   AddressModel({
     required this.street,
@@ -44,4 +46,15 @@ class AddressModel {
 
   factory AddressModel.fromJson(String source) =>
       AddressModel.fromMap(json.decode(source) as Map<String, dynamic>);
+
+  Address toEntity() {
+    return Address(
+      street: street,
+      city: city,
+      state: state,
+      zipCode: zipCode,
+      neighborhood: neighborhood,
+      number: number,
+    );
+  }
 }

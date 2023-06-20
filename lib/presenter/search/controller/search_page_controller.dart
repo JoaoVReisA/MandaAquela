@@ -1,17 +1,22 @@
 import 'package:get/get.dart';
+import 'package:manda_aquela/data/models/user_model.dart';
 import 'package:manda_aquela/domain/entities/event.dart';
 import 'package:manda_aquela/domain/entities/musician.dart';
 import 'package:manda_aquela/domain/entities/skill.dart';
 import 'package:manda_aquela/domain/usecase/events/fetch_events_list_usecase.dart';
+import 'package:manda_aquela/domain/usecase/get_cached_user_data_usecase.dart';
 import 'package:manda_aquela/domain/usecase/musician/fetch_musician_list_usecase.dart';
 
 class SearchPageController extends GetxController {
   SearchPageController(
       {required this.fetchMusicianListUsecase,
-      required this.fetchEventsListUsecase});
+      required this.fetchEventsListUsecase,
+      required this.getCachedUserDataUsecase});
 
   final FetchMusicianListUsecase fetchMusicianListUsecase;
   final FetchEventsListUsecase fetchEventsListUsecase;
+  final GetCachedUserDataUsecase getCachedUserDataUsecase;
+  final userModel = Rxn<UserModel>();
 
   final searchInput = ''.obs;
 
@@ -60,7 +65,8 @@ class SearchPageController extends GetxController {
       return;
     }
     // pageState = RxStatus.loading();
-    final list = await fetchMusicianListUsecase();
+    final list =
+        await fetchMusicianListUsecase(musicianId: userModel.value!.id!);
     musicianList.addAll(list);
     // pageState = RxStatus.success();
   }
@@ -98,5 +104,11 @@ class SearchPageController extends GetxController {
     strList.removeLast();
     skillsString = strList.join();
     return skillsString;
+  }
+
+  Future<void> getUserModel() async {
+    final response = await getCachedUserDataUsecase.call();
+    userModel.value = response;
+    print("HOME PAGE $userModel");
   }
 }

@@ -34,7 +34,8 @@ class HomePageController extends GetxController {
       return;
     }
     pageState = RxStatus.loading();
-    final list = await fetchMusicianListUsecase();
+    final list =
+        await fetchMusicianListUsecase(musicianId: userModel.value!.id!);
     musicianList.addAll(list);
     pageState = RxStatus.success();
   }

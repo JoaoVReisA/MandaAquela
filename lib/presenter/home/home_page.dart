@@ -96,8 +96,8 @@ class _HomePageState extends State<HomePage> {
                                   musicianName: item.name,
                                   musicianRate: item.rate,
                                   genres: '',
-                                  imageUrl: item.imageUrl,
-                                  musicianValue: item.value,
+                                  imageUrl: item.photoUrl ?? '',
+                                  musicianValue: item.fee,
                                   onTapContacts: () {
                                     showModalBottomSheet(
                                       shape: const RoundedRectangleBorder(

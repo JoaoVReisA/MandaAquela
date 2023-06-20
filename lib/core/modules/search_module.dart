@@ -9,6 +9,7 @@ class SearchModule extends Module {
           (i) => SearchPageController(
             fetchEventsListUsecase: i(),
             fetchMusicianListUsecase: i(),
+            getCachedUserDataUsecase: i(),
           ),
         ),
       ];
