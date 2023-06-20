@@ -15,9 +15,9 @@ class SignUpDialog extends StatelessWidget {
 
   final String title;
   final String bodyText;
-  final String labelButtonLeft;
+  final String? labelButtonLeft;
   final String labelButtonRight;
-  final VoidCallback onTapButtonLeft;
+  final VoidCallback? onTapButtonLeft;
   final VoidCallback onTapButtonRight;
 
   @override
@@ -54,14 +54,16 @@ class SignUpDialog extends StatelessWidget {
             ),
             Row(
               children: [
-                Expanded(
-                  // height: 30,
-                  // width: double.infinity,
-                  child: CustomButton(
-                    onPressed: onTapButtonLeft,
-                    label: labelButtonLeft,
-                  ),
-                ),
+                labelButtonLeft != null
+                    ? Expanded(
+                        // height: 30,
+                        // width: double.infinity,
+                        child: CustomButton(
+                          onPressed: onTapButtonLeft,
+                          label: labelButtonLeft!,
+                        ),
+                      )
+                    : const SizedBox.shrink(),
                 const SizedBox(
                   width: 8,
                 ),

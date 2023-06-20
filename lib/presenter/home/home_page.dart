@@ -171,7 +171,8 @@ class _HomePageState extends State<HomePage> {
                 title: 'Cadastrar',
                 bodyText:
                     'Cadastre um evento ou uma oportunidade, uma oportunidade representa um trabalho a ser oferecido. Eventos possuem oportunidades',
-                labelButtonLeft: 'Evento',
+                labelButtonLeft:
+                    _controller.userType == 'contractor' ? 'Evento' : null,
                 labelButtonRight: 'Oportunidade',
                 onTapButtonLeft: () {
                   if (_controller.userType == 'contractor') {
