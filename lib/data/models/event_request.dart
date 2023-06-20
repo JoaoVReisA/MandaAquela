@@ -53,8 +53,8 @@ class EventRequest {
       'description': description,
       'capacity': capacity,
       'categoryId': categoryId,
-      'contractId': contractId,
-      'opportunity': opportunity.toMap(),
+      'contractorId': contractId,
+      'oportunity': opportunity.toMap(),
     };
   }
 

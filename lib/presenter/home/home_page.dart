@@ -113,6 +113,7 @@ class _HomePageState extends State<HomePage> {
                                         return OportunityBottomSheet(
                                           oportunities: [
                                             Oportunity(
+                                                city: 'Sorocaba',
                                                 id: 'ASDSADASD',
                                                 date: DateTime(2000),
                                                 description: 'description',
@@ -123,6 +124,7 @@ class _HomePageState extends State<HomePage> {
                                                       name: 'Rock', id: '1')
                                                 ]),
                                             Oportunity(
+                                                city: 'Sorocaba',
                                                 id: 'ASDSADASD',
                                                 date: DateTime(2000),
                                                 description: 'description',
@@ -133,6 +135,7 @@ class _HomePageState extends State<HomePage> {
                                                       name: 'Rock', id: '1')
                                                 ]),
                                             Oportunity(
+                                                city: 'Sorocaba',
                                                 id: 'ASDSADASD',
                                                 date: DateTime(2000),
                                                 description: 'description',
@@ -171,7 +174,9 @@ class _HomePageState extends State<HomePage> {
                 labelButtonLeft: 'Evento',
                 labelButtonRight: 'Oportunidade',
                 onTapButtonLeft: () {
-                  Modular.to.pushNamed('/events/register');
+                  if (_controller.userModel.value?.type == 'contractor') {
+                    Modular.to.pushNamed('/events/register');
+                  }
                 },
                 onTapButtonRight: () {
                   Modular.to.pushNamed('/home/register_opportunity');

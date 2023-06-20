@@ -10,16 +10,19 @@ class Oportunity {
     required this.name,
     required this.value,
     required this.musicStyle,
+    required this.city,
   });
 
   final String id;
   final DateTime date;
   final String description;
   final String name;
+  final String city;
   final String value;
   final List<MusicStyle> musicStyle;
 
   OpportunityModel toModel() => OpportunityModel(
+        city: city,
         id: id,
         date: date,
         description: description,

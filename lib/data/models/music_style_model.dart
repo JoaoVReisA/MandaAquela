@@ -1,6 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
+import 'package:manda_aquela/domain/entities/music_style.dart';
+
 class MusicStyleModel {
   MusicStyleModel({
     required this.id,
@@ -28,4 +30,9 @@ class MusicStyleModel {
 
   factory MusicStyleModel.fromJson(String source) =>
       MusicStyleModel.fromMap(json.decode(source) as Map<String, dynamic>);
+
+  MusicStyle toEntity() => MusicStyle(
+        id: id,
+        name: name,
+      );
 }

@@ -91,8 +91,8 @@ class EventsRepositoryImpl extends EventsRepository {
   @override
   Future<void> registerEvent({required EventRequest event}) async {
     try {
-      await client.post('${Endpoints.base}/events/event', event.toMap(), {});
-      print(event.toString());
+      print(event.toJson());
+      await client.post('${Endpoints.base}/events/event', event.toJson(), {});
     } catch (e) {
       rethrow;
     }
@@ -101,9 +101,8 @@ class EventsRepositoryImpl extends EventsRepository {
   @override
   Future<List<EventCategory>> fetchEventsCategories() async {
     try {
-      final response =
-          await client.get('${Endpoints.base}/events/categories', {});
-      final data = jsonDecode(response.body)["data"];
+      final response = await client.get('${Endpoints.base}/categories', {});
+      final data = jsonDecode(response.body)["data"]["categories"];
       final categories = <EventCategory>[];
       for (dynamic item in data) {
         categories.add(EventCategoryModel.fromMap(item).toEntity());
