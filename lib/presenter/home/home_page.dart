@@ -3,15 +3,13 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:manda_aquela/color_schemes.g.dart';
-import 'package:manda_aquela/domain/entities/music_style.dart';
 import 'package:manda_aquela/domain/entities/musician.dart';
-import 'package:manda_aquela/domain/entities/oportunity.dart';
 import 'package:manda_aquela/presenter/common/assets.dart';
 import 'package:manda_aquela/presenter/common/text_styles.dart';
 import 'package:manda_aquela/presenter/home/home_page_controller.dart';
 import 'package:manda_aquela/presenter/home/widgets/events_card.dart';
 import 'package:manda_aquela/presenter/home/widgets/musician_card.dart';
-import 'package:manda_aquela/presenter/widgets/bottom_sheets/opotunity_bottom_sheet.dart';
+import 'package:manda_aquela/presenter/widgets/bottom_sheets/contacts_bottom_sheet.dart';
 import 'package:manda_aquela/presenter/widgets/common_dialog/signup_dialog.dart';
 
 class HomePage extends StatefulWidget {
@@ -110,42 +108,8 @@ class _HomePageState extends State<HomePage> {
                                       useRootNavigator: true,
                                       context: context,
                                       builder: (context) {
-                                        return OportunityBottomSheet(
-                                          oportunities: [
-                                            Oportunity(
-                                                city: 'Sorocaba',
-                                                id: 'ASDSADASD',
-                                                date: DateTime(2000),
-                                                description: 'description',
-                                                name: 'name',
-                                                value: 'value',
-                                                musicStyle: [
-                                                  MusicStyle(
-                                                      name: 'Rock', id: '1')
-                                                ]),
-                                            Oportunity(
-                                                city: 'Sorocaba',
-                                                id: 'ASDSADASD',
-                                                date: DateTime(2000),
-                                                description: 'description',
-                                                name: 'name',
-                                                value: 'value',
-                                                musicStyle: [
-                                                  MusicStyle(
-                                                      name: 'Rock', id: '1')
-                                                ]),
-                                            Oportunity(
-                                                city: 'Sorocaba',
-                                                id: 'ASDSADASD',
-                                                date: DateTime(2000),
-                                                description: 'description',
-                                                name: 'name',
-                                                value: 'value',
-                                                musicStyle: [
-                                                  MusicStyle(
-                                                      name: 'Rock', id: '1')
-                                                ]),
-                                          ],
+                                        return ContactsBottomSheet(
+                                          socialMedias: item.socialMedia,
                                         );
                                       },
                                     );

@@ -38,10 +38,15 @@ class EventsCard extends StatelessWidget {
               const SizedBox(
                 width: 16,
               ),
-              Text(
-                event.name,
-                style: TextStyles.outfit18px700w.copyWith(color: Colors.white),
-                overflow: TextOverflow.ellipsis,
+              SizedBox(
+                width: 110,
+                child: Text(
+                  event.name,
+                  style:
+                      TextStyles.outfit18px700w.copyWith(color: Colors.white),
+                  overflow: TextOverflow.fade,
+                  softWrap: false,
+                ),
               ),
             ]),
             const Spacer(),

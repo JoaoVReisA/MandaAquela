@@ -83,11 +83,16 @@ class MusicianCard extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      musicianName,
-                      style: TextStyles.outfit18px700w
-                          .copyWith(color: Colors.white),
-                      overflow: TextOverflow.ellipsis,
+                    SizedBox(
+                      width: 110,
+                      child: Text(
+                        musicianName,
+                        style: TextStyles.outfit18px700w
+                            .copyWith(color: Colors.white),
+                        overflow: TextOverflow.fade,
+                        softWrap: false,
+                        maxLines: 1,
+                      ),
                     ),
                     const SizedBox(
                       height: 16,
