@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:manda_aquela/presenter/events/widget/bottom_sheets/bottom_sheet_base.dart';
+import 'package:manda_aquela/presenter/events/widget/details_page_base.dart';
 import 'package:manda_aquela/presenter/events/widget/interested_card.dart';
 
 class InterestedBottomSheet extends StatelessWidget {
@@ -26,7 +28,10 @@ class InterestedBottomSheet extends StatelessWidget {
       content: ListView.builder(
         itemCount: 2,
         shrinkWrap: true,
-        itemBuilder: (context, index) => const InterestedCard(),
+        itemBuilder: (context, index) => GestureDetector(
+            onTap: () => Modular.to.push(MaterialPageRoute<void>(
+                builder: (_) => const DetailsPageBase())),
+            child: const InterestedCard()),
       ),
     );
   }

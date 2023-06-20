@@ -1,6 +1,7 @@
 enum Assets {
   greg('$base/example_image.png'),
   calendar('$base/calendar_month.svg'),
+  backButton('$base/back_button.svg'),
   musicNote('$base/music_note.svg'),
   piano('$base/piano.svg'),
   done('$base/done.svg'),
