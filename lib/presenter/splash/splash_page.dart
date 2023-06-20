@@ -22,6 +22,14 @@ class _SplashPageState extends State<SplashPage> {
         ),
         () async {
           Modular.to.navigate('/start/');
+          // String uid = '';
+          // await SharedPreferences.getInstance()
+          //     .then((value) => uid = value.getString('userData') ?? '');
+          // if (uid.isNotEmpty) {
+          //   Modular.to.navigate('/start/home');
+          // } else {
+          //   Modular.to.navigate('/auth/');
+          // }
         },
       );
     });

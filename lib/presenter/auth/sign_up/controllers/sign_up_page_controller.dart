@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'package:manda_aquela/core/extensions/string_extensions.dart';
 import 'package:manda_aquela/domain/entities/user_request.dart';
-import 'package:manda_aquela/domain/usecase/login/sign_up_usecase.dart';
+import 'package:manda_aquela/domain/usecase/sign_up/sign_up_usecase.dart';
 
 class _SignUpPageStateModel {
   final name = ''.obs;

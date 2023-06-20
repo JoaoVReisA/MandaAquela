@@ -1,7 +1,9 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:manda_aquela/core/modules/auth_module.dart';
+import 'package:manda_aquela/core/modules/events_module.dart';
 import 'package:manda_aquela/core/modules/home_module.dart';
 import 'package:manda_aquela/core/modules/network_module.dart';
+import 'package:manda_aquela/core/modules/search_module.dart';
 import 'package:manda_aquela/core/modules/start_module.dart';
 import 'package:manda_aquela/presenter/splash/splash_page.dart';
 
@@ -13,6 +15,9 @@ class AppModule extends Module {
   List<Module> get imports => [
         NetworkModule(),
         AuthModule(),
+        HomeModule(),
+        EventsModule(),
+        SearchModule()
       ];
 
   @override
@@ -21,5 +26,6 @@ class AppModule extends Module {
         ModuleRoute('/home/', module: HomeModule()),
         ModuleRoute('/auth/', module: AuthModule()),
         ModuleRoute('/start/', module: StartModule()),
+        ModuleRoute('/events/', module: EventsModule()),
       ];
 }

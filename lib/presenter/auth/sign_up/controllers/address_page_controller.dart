@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:manda_aquela/domain/entities/address.dart';
 
 class _AddressPageStateModel {
   final street = ''.obs;
@@ -34,5 +35,16 @@ class AddressPageController extends GetxController {
 
   void setCep(String value) {
     _stateModel.cep.value = value;
+  }
+
+  Address getAddress() {
+    return Address(
+      zipCode: _stateModel.cep.value,
+      city: _stateModel.city.value,
+      state: _stateModel.state.value,
+      street: _stateModel.street.value,
+      neighborhood: '',
+      number: 0,
+    );
   }
 }

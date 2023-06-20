@@ -81,4 +81,7 @@ class AppColors {
   static const yellow = Color(0xFFFBC531);
   static const lightGray = Color(0xFFD7D7D7);
   static const blue = Color(0xFF5887E4);
+  static const textGrey = Color(0xFF6D6A6A);
+  static const fadeRed = Color(0xFFC23616);
+  static const fadePink = Color(0xFFC21654);
 }

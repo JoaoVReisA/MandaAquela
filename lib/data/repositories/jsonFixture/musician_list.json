@@ -1,0 +1,76 @@
+{
+    "code": 0,
+    "data": [
+        {
+            "name" : "Thiaguinho",
+            "skills" : [
+                "Pagode",
+                "Samba", 
+                "Violão",
+                "Canto"
+            ],
+            "imageUrl": "https://cdn.ligadosgames.com/imagens/logo-de-flamengo-dls.jpg",
+            "rate": 4,
+            "value": 300.0
+        },
+        {
+            "name" : "Belo",
+            "skills" : [
+                "Pagode",
+                "Samba", 
+                "Violão",
+                "Canto"
+            ],
+            "imageUrl": "https://cdn.ligadosgames.com/imagens/logo-de-flamengo-dls.jpg",
+            "rate": 5,
+            "value": 400.0
+        },
+        {
+            "name" : "Jimmy Hendrix",
+            "skills" : [
+                "Rock",
+                "Guitarra", 
+                "Violão",
+                "Canto"
+            ],
+            "imageUrl": "https://cdn.ligadosgames.com/imagens/logo-de-flamengo-dls.jpg",
+            "rate": 3,
+            "value": 200.0
+        },
+        {
+            "name" : "MF DOOM",
+            "skills" : [
+                "Rap",
+                "Hip Hop", 
+                "Canto"
+            ],
+            "imageUrl": "https://cdn.ligadosgames.com/imagens/logo-de-flamengo-dls.jpg",
+            "rate": 5,
+            "value": 600.0
+        },
+        {
+            "name" : "Jorge ben Jor",
+            "skills" : [
+                "Samba", 
+                "Violão",
+                "Canto",
+                "MPB"
+            ],
+            "imageUrl": "https://cdn.ligadosgames.com/imagens/logo-de-flamengo-dls.jpg",
+            "rate": 5,
+            "value": 200.0
+        },
+        {
+            "name" : "Xamã",
+            "skills" : [
+                "Pagode",
+                "Samba", 
+                "Violão",
+                "Canto"
+            ],
+            "imageUrl": "https://cdn.ligadosgames.com/imagens/logo-de-flamengo-dls.jpg",
+            "rate": 1,
+            "value": 150.0
+        }
+    ]
+}

@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:manda_aquela/domain/entities/social_media.dart';
 
 class _SocialMediaPageStateModel {
   final instagram = ''.obs;
@@ -24,5 +25,14 @@ class SocialMediaPageController extends GetxController {
 
   void setTikTok(String value) {
     _stateModel.tikTok.value = value;
+  }
+
+  List<SocialMedia>? getSocialMedias() {
+    return [
+      SocialMedia(link: _stateModel.instagram.value, type: 'instagram'),
+      SocialMedia(link: _stateModel.facebook.value, type: 'facebook'),
+      SocialMedia(link: _stateModel.tikTok.value, type: 'tiktok'),
+      SocialMedia(link: _stateModel.youtube.value, type: 'youtube'),
+    ];
   }
 }

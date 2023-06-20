@@ -14,12 +14,6 @@ class _StartPageState extends State<StartPage> {
   int currentIndex = 1;
 
   @override
-  void initState() {
-    Modular.to.navigate('/start/home');
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
@@ -33,11 +27,11 @@ class _StartPageState extends State<StartPage> {
               break;
             case 1:
               currentIndex = id;
-              Modular.to.navigate('/start/home');
+              Modular.to.navigate('/start/home/');
               break;
             case 2:
               currentIndex = id;
-              Modular.to.navigate('/start/profile');
+              Modular.to.navigate('/start/search');
               break;
           }
           setState(() {});

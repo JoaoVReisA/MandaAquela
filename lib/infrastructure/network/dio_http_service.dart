@@ -10,8 +10,8 @@ abstract class HttpService {
   Future<CustomHttpResponse> get(String url, Map<String, dynamic> queryParams,
       {Map<String, String>? headers});
 
-  Future<CustomHttpResponse> post(String url, dynamic body,
-      ContentType contentType, Map<String, dynamic> queryParams);
+  Future<CustomHttpResponse> post(
+      String url, dynamic body, Map<String, dynamic> queryParams);
 
   Future<CustomHttpResponse> put(String url, dynamic body,
       ContentType contentType, Map<String, dynamic> queryParams);
@@ -31,7 +31,7 @@ class DioHttpService implements HttpService {
   }
 
   void _setupHeaders() {
-    _client.options.headers[Headers.contentTypeHeader] = ContentType.json;
+    _client.options.headers[Headers.contentTypeHeader] = 'application/json';
 
     if (AuthToken.instance.token.isNotEmpty) {
       _client.options.headers['Authorization'] =
@@ -88,8 +88,8 @@ class DioHttpService implements HttpService {
   }
 
   @override
-  Future<CustomHttpResponse> post(String url, dynamic body,
-      ContentType contentType, Map<String, dynamic> queryParams) async {
+  Future<CustomHttpResponse> post(
+      String url, dynamic body, Map<String, dynamic> queryParams) async {
     try {
       final response = await _client.post(
         url,
@@ -100,13 +100,14 @@ class DioHttpService implements HttpService {
       return CustomHttpResponse(
           body: response.data, statusCode: response.statusCode);
     } on DioError catch (e) {
+      print(e);
       throw await _errorHandler.handleError(e);
     }
   }
 
   Future<CustomHttpResponse> refreshToken(
       String path, String refreshToken) async {
-    final response = await post(path, refreshToken, ContentType.text, {});
+    final response = await post(path, refreshToken, {});
     return response;
   }
 }
