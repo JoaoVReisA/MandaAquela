@@ -4,7 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:manda_aquela/color_schemes.g.dart';
 import 'package:manda_aquela/presenter/common/assets.dart';
 import 'package:manda_aquela/presenter/common/text_styles.dart';
-import 'package:manda_aquela/presenter/oportunity/register_opportunity_controller.dart';
+import 'package:manda_aquela/presenter/oportunity/register_contractor_opportunity_controller.dart';
 import 'package:manda_aquela/presenter/widgets/custom_button/custom_button.dart';
 
 class RegisterOpportunity extends StatefulWidget {

@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'package:manda_aquela/core/endpoints.dart';
 import 'package:manda_aquela/data/models/music_style_model.dart';
+import 'package:manda_aquela/data/models/opportunity_request.dart';
 import 'package:manda_aquela/domain/entities/music_style.dart';
 import 'package:manda_aquela/domain/entities/oportunity.dart';
 import 'package:manda_aquela/domain/repositories/opportunity_repository.dart';
@@ -34,5 +35,17 @@ class OpportunityRepositoryImpl extends OpportunityRepository {
   Future<List<Oportunity>> fetchOpportunities() {
     // TODO: implement fetchOpportunities
     throw UnimplementedError();
+  }
+
+  @override
+  Future<void> registerOpportunity(
+      {required OpportunityRequest request}) async {
+    try {
+      print(request.toJson());
+      await service.post(
+          '${Endpoints.base}/oportunities/oportunity', request.toJson(), {});
+    } catch (e) {
+      rethrow;
+    }
   }
 }

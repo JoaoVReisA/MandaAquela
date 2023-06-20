@@ -27,6 +27,8 @@ class HomePageController extends GetxController {
 
   RxStatus pageState = RxStatus.empty();
 
+  String get userType => userModel.value?.type ?? 'musician';
+
   Future<void> _fetchMusicianList() async {
     if (musicianList.isNotEmpty) {
       return;

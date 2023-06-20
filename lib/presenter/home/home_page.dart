@@ -174,12 +174,16 @@ class _HomePageState extends State<HomePage> {
                 labelButtonLeft: 'Evento',
                 labelButtonRight: 'Oportunidade',
                 onTapButtonLeft: () {
-                  if (_controller.userModel.value?.type == 'contractor') {
+                  if (_controller.userType == 'contractor') {
                     Modular.to.pushNamed('/events/register');
                   }
                 },
                 onTapButtonRight: () {
-                  Modular.to.pushNamed('/home/register_opportunity');
+                  if (_controller.userType == 'contractor') {
+                    Modular.to.pushNamed('/home/register_opportunity');
+                  } else {
+                    Modular.to.pushNamed('/home/register_opportunity_musician');
+                  }
                 },
               ),
             );
