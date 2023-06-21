@@ -6,6 +6,7 @@ import 'package:manda_aquela/domain/entities/oportunity.dart';
 
 class OpportunityModel {
   OpportunityModel({
+    this.musicianInterestedIds = const [],
     required this.id,
     required this.description,
     required this.name,
@@ -24,6 +25,7 @@ class OpportunityModel {
   final String value;
   final List<MusicStyleModel> musicStyle;
   final String strDate;
+  final List<String> musicianInterestedIds;
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
@@ -44,6 +46,9 @@ class OpportunityModel {
       description: map['description'] as String,
       name: map['name'] as String,
       value: map['value'] as String,
+      musicianInterestedIds: map['musicianInterestedIds'] != null
+          ? List<String>.from(map['musicianInterestedIds'] as List<dynamic>)
+          : [],
       musicStyle: map['musicStyle'] != null
           ? List<MusicStyleModel>.from(
               (map['musicStyle'] as List<dynamic>).map<MusicStyleModel>(
@@ -68,6 +73,7 @@ class OpportunityModel {
       value: value,
       musicStyle: musicStyle.map((e) => e.toEntity()).toList(),
       city: city,
+      musicianInterestedIds: musicianInterestedIds,
     );
   }
 }

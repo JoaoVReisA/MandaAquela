@@ -4,7 +4,7 @@ import 'package:manda_aquela/presenter/common/assets.dart';
 
 class RatingComponent extends StatelessWidget {
   const RatingComponent({super.key, required this.rate});
-  final double rate;
+  final int rate;
 
   @override
   Widget build(BuildContext context) {
@@ -14,12 +14,11 @@ class RatingComponent extends StatelessWidget {
   }
 }
 
-_createRatingStars(double rate) {
-  final fullStars = rate.floor();
+_createRatingStars(int rate) {
   return Row(children: [
     for (var i = 0; i < 5; i++)
       SvgPicture.asset(Assets.musicNote.path,
-          colorFilter: i < fullStars
+          colorFilter: i < rate
               ? null
               : const ColorFilter.mode(Colors.grey, BlendMode.srcIn)),
   ]);

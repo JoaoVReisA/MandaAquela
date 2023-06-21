@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:manda_aquela/presenter/events/widget/bottom_sheets/bottom_sheet_base.dart';
-import 'package:manda_aquela/presenter/events/widget/musician_card.dart';
 
 class AcceptedMusiciansBottomSheet extends StatelessWidget {
   const AcceptedMusiciansBottomSheet({super.key});
@@ -26,7 +25,7 @@ class AcceptedMusiciansBottomSheet extends StatelessWidget {
       content: ListView.builder(
         itemCount: 2,
         shrinkWrap: true,
-        itemBuilder: (context, index) => const MusicianCard(),
+        itemBuilder: (context, index) => Container(),
       ),
     );
   }

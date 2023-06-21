@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:manda_aquela/color_schemes.g.dart';
 import 'package:manda_aquela/presenter/common/assets.dart';
 import 'package:manda_aquela/presenter/common/text_styles.dart';
-import 'package:manda_aquela/presenter/events/widget/interested_musician_card.dart';
 
 class DetailsPageBase extends StatelessWidget {
-  const DetailsPageBase({super.key});
+  const DetailsPageBase(
+      {super.key, required this.title, required this.content});
+
+  final String title;
+  final Widget content;
 
   @override
   Widget build(BuildContext context) {
@@ -28,26 +30,14 @@ class DetailsPageBase extends StatelessWidget {
                 ),
                 const Spacer(),
                 Text(
-                  'Sertanejo',
+                  title,
                   style: TextStyles.outfit24px700w,
                 ),
                 const Spacer(),
               ],
             ),
             const SizedBox(height: 16),
-            Text(
-              'Lista de músicos interessados',
-              style: TextStyles.poppins14px700w.copyWith(color: AppColors.gray),
-            ),
-            const SizedBox(height: 16),
-            ListView.builder(
-              itemCount: 2,
-              shrinkWrap: true,
-              itemBuilder: (context, index) => GestureDetector(
-                onTap: () {},
-                child: const InterestedMusicianCard(),
-              ),
-            )
+            content
           ],
         ),
       )),

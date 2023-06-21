@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:manda_aquela/presenter/events/widget/bottom_sheets/accepted_musicians_bottomsheet.dart';
-import 'package:manda_aquela/presenter/events/widget/event_card.dart';
 
 class AcceptedTabView extends StatelessWidget {
   const AcceptedTabView({super.key});
@@ -13,7 +12,7 @@ class AcceptedTabView extends StatelessWidget {
         children: [
           GestureDetector(
             onTap: () => AcceptedMusiciansBottomSheet.show(context),
-            child: const EventCard(),
+            child: Container(),
           ),
         ],
       ),

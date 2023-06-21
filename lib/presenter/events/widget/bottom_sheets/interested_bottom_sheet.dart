@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
+import 'package:manda_aquela/domain/entities/oportunity.dart';
 import 'package:manda_aquela/presenter/events/widget/bottom_sheets/bottom_sheet_base.dart';
-import 'package:manda_aquela/presenter/events/widget/details_page_base.dart';
 import 'package:manda_aquela/presenter/events/widget/interested_card.dart';
 
 class InterestedBottomSheet extends StatelessWidget {
-  const InterestedBottomSheet({super.key});
+  const InterestedBottomSheet({super.key, required this.oportunities});
 
-  static Future<void> show(BuildContext context) async {
+  final List<Oportunity> oportunities;
+
+  static Future<void> show(
+      BuildContext context, List<Oportunity> oportunities) async {
     await showModalBottomSheet(
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
@@ -17,7 +19,7 @@ class InterestedBottomSheet extends StatelessWidget {
       ),
       isScrollControlled: true,
       context: context,
-      builder: (context) => const InterestedBottomSheet(),
+      builder: (context) => InterestedBottomSheet(oportunities: oportunities),
     );
   }
 
@@ -26,12 +28,12 @@ class InterestedBottomSheet extends StatelessWidget {
     return BottomSheetBase(
       title: 'Quem se interessou',
       content: ListView.builder(
-        itemCount: 2,
+        itemCount: oportunities.length,
         shrinkWrap: true,
         itemBuilder: (context, index) => GestureDetector(
-            onTap: () => Modular.to.push(MaterialPageRoute<void>(
-                builder: (_) => const DetailsPageBase())),
-            child: const InterestedCard()),
+            child: InterestedCard(
+          oportunity: oportunities[index],
+        )),
       ),
     );
   }

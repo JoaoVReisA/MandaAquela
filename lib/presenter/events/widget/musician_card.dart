@@ -1,13 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:manda_aquela/color_schemes.g.dart';
+import 'package:manda_aquela/core/extensions/date_time_extensions.dart';
+import 'package:manda_aquela/domain/entities/musician.dart';
+import 'package:manda_aquela/domain/entities/oportunity.dart';
 import 'package:manda_aquela/presenter/common/assets.dart';
 import 'package:manda_aquela/presenter/common/text_styles.dart';
 import 'package:manda_aquela/presenter/events/widget/rating_component.dart';
 import 'package:manda_aquela/presenter/widgets/svg_and_text/svg_and_text.dart';
 
 class MusicianCard extends StatelessWidget {
-  const MusicianCard({super.key});
+  const MusicianCard(
+      {super.key, required this.musician, required this.oportunity});
+
+  final Musician musician;
+  final Oportunity oportunity;
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +52,7 @@ class MusicianCard extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Greg pontepretano',
+                            musician.name,
                             style: TextStyles.poppins10px700w
                                 .copyWith(color: AppColors.gray),
                           ),
@@ -55,7 +62,7 @@ class MusicianCard extends StatelessWidget {
                             iconSize: 16,
                             assetName: Assets.piano,
                             text: Text(
-                              'Sanfona, Canto, Animador...',
+                              "Piano",
                               style: TextStyles.poppins8px500w
                                   .copyWith(color: AppColors.gray),
                             ),
@@ -66,32 +73,21 @@ class MusicianCard extends StatelessWidget {
                             iconSize: 16,
                             assetName: Assets.calendar,
                             text: Text(
-                              '21/07/2022',
-                              style: TextStyles.poppins8px500w
-                                  .copyWith(color: AppColors.gray),
-                            ),
-                          ),
-                          const SizedBox(height: 4),
-                          SvgAndText(
-                            dividerWidth: 6,
-                            iconSize: 16,
-                            assetName: Assets.alarm,
-                            text: Text(
-                              '18:30 - 21:30',
+                              oportunity.date.toFormattedString,
                               style: TextStyles.poppins8px500w
                                   .copyWith(color: AppColors.gray),
                             ),
                           ),
                         ],
                       ),
-                      const Padding(
-                        padding: EdgeInsets.only(right: 6),
+                      Padding(
+                        padding: const EdgeInsets.only(right: 6),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             RatingComponent(
-                              rate: 4,
+                              rate: musician.rate,
                             )
                           ],
                         ),

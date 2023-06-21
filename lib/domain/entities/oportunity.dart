@@ -8,9 +8,10 @@ class Oportunity {
     required this.date,
     required this.description,
     required this.name,
+    required this.city,
     required this.value,
     required this.musicStyle,
-    required this.city,
+    this.musicianInterestedIds = const [],
   });
 
   final String id;
@@ -20,6 +21,7 @@ class Oportunity {
   final String city;
   final String value;
   final List<MusicStyle> musicStyle;
+  final List<String> musicianInterestedIds;
 
   OpportunityModel toModel() => OpportunityModel(
         city: city,

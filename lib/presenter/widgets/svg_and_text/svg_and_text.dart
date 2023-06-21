@@ -12,7 +12,7 @@ class SvgAndText extends StatelessWidget {
       this.iconColor});
 
   final Assets assetName;
-  final Text text;
+  final Widget text;
   final double dividerWidth;
   final double iconSize;
   final Color? iconColor;
@@ -21,6 +21,7 @@ class SvgAndText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         SvgPicture.asset(assetName.path,
