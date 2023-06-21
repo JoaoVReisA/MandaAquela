@@ -15,10 +15,14 @@ class InterestedMusicianCard extends StatelessWidget {
     super.key,
     required this.oportunity,
     required this.musician,
+    required this.onTapImage,
+    required this.onTapAccept,
   });
 
   final Oportunity oportunity;
   final Musician musician;
+  final VoidCallback onTapImage;
+  final VoidCallback onTapAccept;
 
   @override
   Widget build(BuildContext context) {
@@ -47,13 +51,16 @@ class InterestedMusicianCard extends StatelessWidget {
                     children: [
                       Padding(
                         padding: const EdgeInsets.only(left: 12.0),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(100),
-                          child: Image.network(
-                            fit: BoxFit.cover,
-                            musician.photoUrl!,
-                            width: 48,
-                            height: 48,
+                        child: GestureDetector(
+                          onTap: onTapImage,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(100),
+                            child: Image.network(
+                              fit: BoxFit.cover,
+                              musician.photoUrl!,
+                              width: 48,
+                              height: 48,
+                            ),
                           ),
                         ),
                       ),
@@ -83,16 +90,21 @@ class InterestedMusicianCard extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            const SizedBox(height: 4),
-                            SvgAndText(
-                              dividerWidth: 0,
-                              iconSize: 20,
-                              assetName: Assets.done,
-                              iconColor: AppColors.blue,
-                              text: Text(
-                                'Aceitar',
-                                style: TextStyles.poppins10px700w
-                                    .copyWith(color: AppColors.blue),
+                            GestureDetector(
+                              onTap: onTapAccept,
+                              child: Padding(
+                                padding: const EdgeInsets.all(4.0),
+                                child: SvgAndText(
+                                  dividerWidth: 0,
+                                  iconSize: 20,
+                                  assetName: Assets.done,
+                                  iconColor: AppColors.blue,
+                                  text: Text(
+                                    'Aceitar',
+                                    style: TextStyles.poppins10px700w
+                                        .copyWith(color: AppColors.blue),
+                                  ),
+                                ),
                               ),
                             ),
                           ],
