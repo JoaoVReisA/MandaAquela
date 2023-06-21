@@ -1,9 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:manda_aquela/color_schemes.g.dart';
+import 'package:manda_aquela/core/formats/currency_format.dart';
+import 'package:manda_aquela/core/input_formatters/currency_input_formatter.dart';
 import 'package:manda_aquela/domain/entities/event.dart';
 import 'package:manda_aquela/domain/entities/music_style.dart';
 import 'package:manda_aquela/presenter/common/assets.dart';
@@ -12,6 +15,7 @@ import 'package:manda_aquela/presenter/oportunity/register_contractor_opportunit
 import 'package:manda_aquela/presenter/widgets/custom_button/custom_button.dart';
 import 'package:manda_aquela/presenter/widgets/custom_date_picker.dart';
 import 'package:manda_aquela/presenter/widgets/date_picker_widget.dart';
+import 'package:manda_aquela/presenter/widgets/success_snackbar.dart';
 
 class RegisterOpportunity extends StatefulWidget {
   const RegisterOpportunity({super.key});
@@ -23,6 +27,8 @@ class RegisterOpportunity extends StatefulWidget {
 class _RegisterOpportunityState extends State<RegisterOpportunity> {
   final _controller = Modular.get<RegisterOpportunityController>();
   final _descriptionFocusNode = FocusNode();
+  final _valueFocusNode = FocusNode();
+
   @override
   void initState() {
     _controller.getMusicStyles();
@@ -107,6 +113,14 @@ class _RegisterOpportunityState extends State<RegisterOpportunity> {
                   ),
                   TextFormField(
                     style: TextStyles.outfit15px400w,
+                    initialValue: CurrencyFormats.withSymbol.format(0.0),
+                    inputFormatters: [
+                      FilteringTextInputFormatter.digitsOnly,
+                      CurrencyTextFormatter(),
+                    ],
+                    focusNode: _valueFocusNode,
+                    onTapOutside: (_) => _valueFocusNode.unfocus(),
+                    keyboardType: TextInputType.number,
                     decoration: const InputDecoration(
                       hintText: "Valor",
                       label: Text("Valor"),
@@ -200,6 +214,14 @@ class _RegisterOpportunityState extends State<RegisterOpportunity> {
                   ? () async {
                       await _controller.registerOpportunity();
                       Modular.to.pop();
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          backgroundColor: AppColors.success,
+                          content: SuccessSnackBar(
+                            message: 'Oportunidade cadastrado',
+                          ),
+                        ),
+                      );
                     }
                   : null,
               label: "Enviar",

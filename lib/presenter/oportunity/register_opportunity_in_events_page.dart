@@ -8,6 +8,7 @@ import 'package:manda_aquela/presenter/common/assets.dart';
 import 'package:manda_aquela/presenter/common/text_styles.dart';
 import 'package:manda_aquela/presenter/events/controller/register_event_controller.dart';
 import 'package:manda_aquela/presenter/widgets/custom_button/custom_button.dart';
+import 'package:manda_aquela/presenter/widgets/success_snackbar.dart';
 
 class RegisterOpportunityInEventsPage extends StatefulWidget {
   const RegisterOpportunityInEventsPage({super.key});
@@ -143,6 +144,14 @@ class _RegisterOpportunityInEventsPageState
                   ? () async {
                       _controller.buildOpportunity();
                       Modular.to.pop();
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          backgroundColor: AppColors.success,
+                          content: SuccessSnackBar(
+                            message: 'Oportunidade cadastrado',
+                          ),
+                        ),
+                      );
                     }
                   : null,
               label: "Enviar",
