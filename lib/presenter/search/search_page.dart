@@ -22,6 +22,7 @@ class _SearchPageState extends State<SearchPage> {
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+      await _controller.getUserModel();
       _controller.generateEventsAndMusiciansList();
     });
 
@@ -61,45 +62,51 @@ class _SearchPageState extends State<SearchPage> {
               const SizedBox(
                 height: 16,
               ),
-              Expanded(
-                child: ListView.builder(
-                    itemCount: _controller.filteredList.length,
-                    itemBuilder: (context, index) {
-                      final item = _controller.filteredList[index];
-                      if (item is Musician) {
-                        return MusicianCard(
-                          musicianName: item.name,
-                          musicianRate: item.rate,
-                          genres: '',
-                          imageUrl: item.photoUrl ?? '',
-                          musicianValue: item.fee,
-                          onTapContacts: () {},
-                          onTapGoToProfile: () {},
-                          skills: '_controller.getSkillsString(item.skills)',
-                        );
-                      }
-                      return EventsCard(
-                          event: item,
-                          onTapGoToEvent: () {},
-                          onTapOportunity: () {
-                            showModalBottomSheet(
-                              shape: const RoundedRectangleBorder(
-                                borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(24),
-                                  topRight: Radius.circular(24),
+              Visibility(
+                visible: !_controller.pageState.isLoading,
+                replacement: const Center(
+                  child: CircularProgressIndicator(),
+                ),
+                child: Expanded(
+                  child: ListView.builder(
+                      itemCount: _controller.filteredList.length,
+                      itemBuilder: (context, index) {
+                        final item = _controller.filteredList[index];
+                        if (item is Musician) {
+                          return MusicianCard(
+                            musicianName: item.name,
+                            musicianRate: item.rate,
+                            genres: '',
+                            imageUrl: item.photoUrl ?? '',
+                            musicianValue: item.fee,
+                            onTapContacts: () {},
+                            onTapGoToProfile: () {},
+                            skills: _controller.getSkillsString(item.skills),
+                          );
+                        }
+                        return EventsCard(
+                            event: item,
+                            onTapGoToEvent: () {},
+                            onTapOportunity: () {
+                              showModalBottomSheet(
+                                shape: const RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(24),
+                                    topRight: Radius.circular(24),
+                                  ),
                                 ),
-                              ),
-                              isScrollControlled: true,
-                              useRootNavigator: true,
-                              context: context,
-                              builder: (context) {
-                                return OportunityBottomSheet(
-                                  oportunities: item.oportunities,
-                                );
-                              },
-                            );
-                          });
-                    }),
+                                isScrollControlled: true,
+                                useRootNavigator: true,
+                                context: context,
+                                builder: (context) {
+                                  return OportunityBottomSheet(
+                                    oportunities: item.oportunities,
+                                  );
+                                },
+                              );
+                            });
+                      }),
+                ),
               ),
             ],
           ),

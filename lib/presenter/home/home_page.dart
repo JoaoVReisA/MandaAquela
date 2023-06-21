@@ -115,7 +115,11 @@ class _HomePageState extends State<HomePage> {
                                       },
                                     );
                                   },
-                                  onTapGoToProfile: () {},
+                                  onTapGoToProfile: () {
+                                    Modular.to.pushNamed('/home/profile',
+                                        arguments: _controller
+                                            .buildUserModelFromMusician(item));
+                                  },
                                   skills:
                                       _controller.getSkillsString(item.skills),
                                 );

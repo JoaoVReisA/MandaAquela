@@ -17,7 +17,7 @@ class SearchPageController extends GetxController {
   final FetchEventsListUsecase fetchEventsListUsecase;
   final GetCachedUserDataUsecase getCachedUserDataUsecase;
   final userModel = Rxn<UserModel>();
-
+  RxStatus pageState = RxStatus.empty();
   final searchInput = ''.obs;
 
   void onChangeSearchInput(String value) {
@@ -64,7 +64,9 @@ class SearchPageController extends GetxController {
     if (musicianList.isNotEmpty) {
       return;
     }
-    // pageState = RxStatus.loading();
+    // await getUserModel();
+    print(userModel.value!.id!);
+
     final list =
         await fetchMusicianListUsecase(musicianId: userModel.value!.id!);
     musicianList.addAll(list);
@@ -84,6 +86,8 @@ class SearchPageController extends GetxController {
   }
 
   void generateEventsAndMusiciansList() async {
+    pageState = RxStatus.loading();
+
     if (eventsAndMusicianList.isNotEmpty) {
       return;
     }
@@ -92,6 +96,9 @@ class SearchPageController extends GetxController {
     _eventsAndMusicianList.addAll(musicianList);
     _eventsAndMusicianList.addAll(eventsList);
     _eventsAndMusicianList.shuffle();
+    filteredList.addAll(_eventsAndMusicianList);
+
+    pageState = RxStatus.success();
   }
 
   String getSkillsString(List<Skill> skills) {

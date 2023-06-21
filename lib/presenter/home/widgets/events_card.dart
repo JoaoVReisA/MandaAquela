@@ -73,22 +73,6 @@ class EventsCard extends StatelessWidget {
               ],
             ),
             Row(
-              children: const [
-                Icon(
-                  Icons.home_work,
-                  color: Colors.white,
-                ),
-                SizedBox(
-                  width: 4,
-                ),
-                // Text(
-                //   event.establishment?.name ?? '',
-                //   style:
-                //       TextStyles.outfit15px400w.copyWith(color: Colors.white),
-                // ),
-              ],
-            ),
-            Row(
               children: [
                 const Icon(
                   Icons.location_on,

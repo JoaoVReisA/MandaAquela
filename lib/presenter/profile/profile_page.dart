@@ -3,6 +3,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:manda_aquela/color_schemes.g.dart';
+import 'package:manda_aquela/data/models/user_model.dart';
 import 'package:manda_aquela/presenter/common/assets.dart';
 import 'package:manda_aquela/presenter/common/text_styles.dart';
 import 'package:manda_aquela/presenter/profile/controller/profile_page_controller.dart';
@@ -15,7 +16,9 @@ import 'package:manda_aquela/presenter/widgets/common_dialog/signup_dialog.dart'
 import 'package:manda_aquela/presenter/widgets/rate/rate_notes.dart';
 
 class ProfilePage extends StatefulWidget {
-  const ProfilePage({super.key});
+  const ProfilePage({super.key, this.userModel});
+
+  final UserModel? userModel;
 
   @override
   State<ProfilePage> createState() => _ProfilePageState();
@@ -26,7 +29,11 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   void initState() {
-    _controller.getUserModel();
+    if (widget.userModel == null) {
+      _controller.getUserModel();
+    } else {
+      _controller.setUserModel(widget.userModel!);
+    }
     super.initState();
   }
 
@@ -67,29 +74,31 @@ class _ProfilePageState extends State<ProfilePage> {
                             color: Colors.white,
                           )),
                       const Spacer(),
-                      IconButton(
-                          onPressed: () {
-                            showDialog(
-                              context: context,
-                              builder: (context) => SignUpDialog(
-                                title: 'Deseja sair do app?',
-                                bodyText:
-                                    'Tem certeza que deseja sair do Manda Aquela?',
-                                labelButtonLeft: 'cancelar',
-                                labelButtonRight: 'sair',
-                                onTapButtonLeft: () {
-                                  Modular.to.pop();
-                                },
-                                onTapButtonRight: () {
-                                  _controller.logout();
-                                },
-                              ),
-                            );
-                          },
-                          icon: const Icon(
-                            Icons.logout,
-                            color: Colors.white,
-                          )),
+                      widget.userModel == null
+                          ? IconButton(
+                              onPressed: () {
+                                showDialog(
+                                  context: context,
+                                  builder: (context) => SignUpDialog(
+                                    title: 'Deseja sair do app?',
+                                    bodyText:
+                                        'Tem certeza que deseja sair do Manda Aquela?',
+                                    labelButtonLeft: 'cancelar',
+                                    labelButtonRight: 'sair',
+                                    onTapButtonLeft: () {
+                                      Modular.to.pop();
+                                    },
+                                    onTapButtonRight: () {
+                                      _controller.logout();
+                                    },
+                                  ),
+                                );
+                              },
+                              icon: const Icon(
+                                Icons.logout,
+                                color: Colors.white,
+                              ))
+                          : const SizedBox.shrink(),
                     ],
                   ),
                   buildHeader(),
@@ -232,20 +241,22 @@ class _ProfilePageState extends State<ProfilePage> {
       padding: const EdgeInsets.only(left: 24.0),
       child: Row(
         children: [
-          Container(
-            height: 200,
-            width: 100,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(24),
-              image: _controller.userModel?.photoUrl != null
-                  ? DecorationImage(
-                      image: NetworkImage(
-                        _controller.userModel!.photoUrl!,
-                      ),
-                    )
-                  : null,
-            ),
-          ),
+          _controller.userModel?.photoUrl != null
+              ? Container(
+                  height: 200,
+                  width: 100,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(24),
+                    image: _controller.userModel?.photoUrl != null
+                        ? DecorationImage(
+                            image: NetworkImage(
+                              _controller.userModel!.photoUrl!,
+                            ),
+                          )
+                        : null,
+                  ),
+                )
+              : SvgPicture.asset(Assets.musicianGuitar.path),
           const SizedBox(
             width: 24,
           ),
@@ -283,8 +294,10 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
               _controller.userModel?.skills != null
                   ? Text(
-                      _controller.getSkillsStrings,
-                      style: TextStyles.outfit15px400w
+                      _controller.getSkillsStrings(
+                        _controller.userModel?.skills,
+                      ),
+                      style: TextStyles.outfit12px400w
                           .copyWith(color: Colors.grey),
                     )
                   : const SizedBox.shrink(),

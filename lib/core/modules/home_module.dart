@@ -38,7 +38,11 @@ class HomeModule extends Module {
         Bind<MusicianRepository>((i) => MusicianRepositoryImpl(client: i()),
             export: true),
         Bind<RegisterOpportunityController>(
-          (i) => RegisterOpportunityController(),
+          (i) => RegisterOpportunityController(
+            getCachedUserDataUsecase: i(),
+            getMusicStylesUseCase: i(),
+            registerOpportunityUseCase: i(),
+          ),
           export: true,
         ),
         Bind<GetCachedUserDataUsecase>(
@@ -79,6 +83,9 @@ class HomeModule extends Module {
             child: (context, args) => const RegisterOpportunity()),
         ChildRoute('/register_opportunity_musician',
             child: (context, args) => const RegisterMusicianOpportunityPage()),
-        ChildRoute('/profile', child: (context, args) => const ProfilePage()),
+        ChildRoute('/profile',
+            child: (context, args) => ProfilePage(
+                  userModel: args.data,
+                )),
       ];
 }
