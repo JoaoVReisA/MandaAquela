@@ -68,14 +68,7 @@ class MusicianCard extends StatelessWidget {
                           ),
                         ),
                       )
-                    : Container(
-                        decoration: BoxDecoration(
-                          color: Colors.amber,
-                          borderRadius: BorderRadius.circular(16),
-                        ),
-                        width: 150,
-                        height: 150,
-                      ),
+                    : SvgPicture.asset(Assets.musicianGuitar.path),
                 const SizedBox(
                   width: 16,
                 ),

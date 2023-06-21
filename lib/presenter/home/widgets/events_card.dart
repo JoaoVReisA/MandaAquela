@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:manda_aquela/color_schemes.g.dart';
-import 'package:manda_aquela/core/extensions/date_time_extensions.dart';
 import 'package:manda_aquela/domain/entities/event.dart';
 import 'package:manda_aquela/presenter/common/assets.dart';
 import 'package:manda_aquela/presenter/common/text_styles.dart';
@@ -60,26 +59,26 @@ class EventsCard extends StatelessWidget {
                   width: 4,
                 ),
                 Text(
-                  event.date.toFormattedString,
+                  event.date,
                   style:
                       TextStyles.outfit15px400w.copyWith(color: Colors.white),
                 ),
               ],
             ),
             Row(
-              children: [
-                const Icon(
+              children: const [
+                Icon(
                   Icons.home_work,
                   color: Colors.white,
                 ),
-                const SizedBox(
+                SizedBox(
                   width: 4,
                 ),
-                Text(
-                  event.establishment?.name ?? '',
-                  style:
-                      TextStyles.outfit15px400w.copyWith(color: Colors.white),
-                ),
+                // Text(
+                //   event.establishment?.name ?? '',
+                //   style:
+                //       TextStyles.outfit15px400w.copyWith(color: Colors.white),
+                // ),
               ],
             ),
             Row(
@@ -92,7 +91,7 @@ class EventsCard extends StatelessWidget {
                   width: 4,
                 ),
                 Text(
-                  event.establishment?.address ?? '',
+                  event.locale,
                   style:
                       TextStyles.outfit15px400w.copyWith(color: Colors.white),
                 ),

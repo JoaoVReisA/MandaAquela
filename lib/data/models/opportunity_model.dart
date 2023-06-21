@@ -2,6 +2,7 @@
 import 'dart:convert';
 
 import 'package:manda_aquela/data/models/music_style_model.dart';
+import 'package:manda_aquela/domain/entities/oportunity.dart';
 
 class OpportunityModel {
   OpportunityModel({
@@ -53,4 +54,16 @@ class OpportunityModel {
 
   factory OpportunityModel.fromJson(String source) =>
       OpportunityModel.fromMap(json.decode(source) as Map<String, dynamic>);
+
+  Oportunity toEntity() {
+    return Oportunity(
+      id: id,
+      date: date,
+      description: description,
+      name: name,
+      value: value,
+      musicStyle: musicStyle.map((e) => e.toEntity()).toList(),
+      city: city,
+    );
+  }
 }
