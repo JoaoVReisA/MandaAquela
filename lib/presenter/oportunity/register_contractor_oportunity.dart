@@ -22,7 +22,7 @@ class RegisterOpportunity extends StatefulWidget {
 
 class _RegisterOpportunityState extends State<RegisterOpportunity> {
   final _controller = Modular.get<RegisterOpportunityController>();
-
+  final _descriptionFocusNode = FocusNode();
   @override
   void initState() {
     _controller.getMusicStyles();
@@ -176,10 +176,13 @@ class _RegisterOpportunityState extends State<RegisterOpportunity> {
                   SizedBox(
                     height: MediaQuery.of(context).size.height * 0.20,
                     child: TextFormField(
+                      focusNode: _descriptionFocusNode,
+                      onTapOutside: (event) => _descriptionFocusNode.unfocus(),
                       onChanged: _controller.setDescription,
                       maxLines: 7,
                       decoration: const InputDecoration(
-                        contentPadding: EdgeInsets.symmetric(vertical: 40),
+                        contentPadding:
+                            EdgeInsets.symmetric(vertical: 34, horizontal: 8),
                         label: Text('Informe uma breve descrição...'),
                       ),
                     ),

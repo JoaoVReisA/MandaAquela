@@ -18,7 +18,7 @@ class MusicianDescriptionPage extends StatefulWidget {
 
 class _MusicianDescriptionPageState extends State<MusicianDescriptionPage> {
   final _controller = Modular.get<MusicianDescriptionPageController>();
-
+  final _focusNode = FocusNode();
   @override
   Widget build(BuildContext context) {
     return Obx(
@@ -61,6 +61,8 @@ class _MusicianDescriptionPageState extends State<MusicianDescriptionPage> {
                     child: SizedBox(
                       height: MediaQuery.of(context).size.height * 0.30,
                       child: TextFormField(
+                        focusNode: _focusNode,
+                        onTapOutside: (event) => _focusNode.unfocus(),
                         onChanged: _controller.setDescription,
                         maxLines: 7,
                         decoration: const InputDecoration(
