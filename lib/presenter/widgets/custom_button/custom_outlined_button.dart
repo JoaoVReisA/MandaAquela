@@ -21,7 +21,7 @@ class CustomOutlinedButton extends StatelessWidget {
       ),
       child: Text(
         label,
-        style: TextStyles.outfit18px700w.copyWith(color: Colors.white),
+        style: TextStyles.outfit15px400w.copyWith(color: Colors.white),
       ),
       // height: 30,
     );

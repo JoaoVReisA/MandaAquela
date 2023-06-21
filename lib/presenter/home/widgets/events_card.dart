@@ -8,9 +8,16 @@ import 'package:manda_aquela/presenter/widgets/custom_button/custom_button.dart'
 import 'package:manda_aquela/presenter/widgets/custom_button/custom_outlined_button.dart';
 
 class EventsCard extends StatelessWidget {
-  const EventsCard({super.key, required this.event});
+  const EventsCard(
+      {super.key,
+      required this.event,
+      required this.onTapGoToEvent,
+      required this.onTapOportunity});
 
   final Events event;
+  final VoidCallback onTapGoToEvent;
+  final VoidCallback onTapOportunity;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -102,8 +109,8 @@ class EventsCard extends StatelessWidget {
               children: [
                 Expanded(
                   child: CustomButton(
-                    onPressed: () {},
-                    label: 'ir para evento',
+                    onPressed: onTapGoToEvent,
+                    label: 'Evento',
                     height: 30,
                     textColor: AppColors.primary,
                     backgroundColor: Colors.white,
@@ -113,8 +120,11 @@ class EventsCard extends StatelessWidget {
                   width: 8,
                 ),
                 Expanded(
-                    child: CustomOutlinedButton(
-                        label: 'Oportunidade', onTap: () {}))
+                  child: CustomOutlinedButton(
+                    label: 'Oportunidade',
+                    onTap: onTapOportunity,
+                  ),
+                )
               ],
             )
           ],

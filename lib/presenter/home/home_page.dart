@@ -10,6 +10,7 @@ import 'package:manda_aquela/presenter/home/home_page_controller.dart';
 import 'package:manda_aquela/presenter/home/widgets/events_card.dart';
 import 'package:manda_aquela/presenter/home/widgets/musician_card.dart';
 import 'package:manda_aquela/presenter/widgets/bottom_sheets/contacts_bottom_sheet.dart';
+import 'package:manda_aquela/presenter/widgets/bottom_sheets/opotunity_bottom_sheet.dart';
 import 'package:manda_aquela/presenter/widgets/common_dialog/signup_dialog.dart';
 
 class HomePage extends StatefulWidget {
@@ -119,7 +120,28 @@ class _HomePageState extends State<HomePage> {
                                       _controller.getSkillsString(item.skills),
                                 );
                               }
-                              return EventsCard(event: item);
+                              return EventsCard(
+                                event: item,
+                                onTapGoToEvent: () {},
+                                onTapOportunity: () {
+                                  showModalBottomSheet(
+                                    shape: const RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(24),
+                                        topRight: Radius.circular(24),
+                                      ),
+                                    ),
+                                    isScrollControlled: true,
+                                    useRootNavigator: true,
+                                    context: context,
+                                    builder: (context) {
+                                      return OportunityBottomSheet(
+                                        oportunities: item.oportunities,
+                                      );
+                                    },
+                                  );
+                                },
+                              );
                             }),
                       )
                     : const Center(child: CircularProgressIndicator()),

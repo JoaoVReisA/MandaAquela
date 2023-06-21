@@ -145,7 +145,7 @@ class MusicianCard extends StatelessWidget {
                 Expanded(
                   child: CustomButton(
                     onPressed: () {},
-                    label: 'perfil',
+                    label: 'Perfil',
                     height: 30,
                     textColor: AppColors.primary,
                     backgroundColor: Colors.white,

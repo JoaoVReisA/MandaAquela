@@ -44,11 +44,13 @@ class OpportunityModel {
       description: map['description'] as String,
       name: map['name'] as String,
       value: map['value'] as String,
-      musicStyle: List<MusicStyleModel>.from(
-        (map['musicStyle'] as List<dynamic>).map<MusicStyleModel>(
-          (x) => MusicStyleModel.fromMap(x as Map<String, dynamic>),
-        ),
-      ),
+      musicStyle: map['musicStyle'] != null
+          ? List<MusicStyleModel>.from(
+              (map['musicStyle'] as List<dynamic>).map<MusicStyleModel>(
+                (x) => MusicStyleModel.fromMap(x as Map<String, dynamic>),
+              ),
+            )
+          : [],
     );
   }
 
