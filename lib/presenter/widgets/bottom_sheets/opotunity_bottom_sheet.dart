@@ -62,8 +62,10 @@ class OportunityBottomSheet extends StatelessWidget {
                       padding: const EdgeInsets.only(bottom: 16.0),
                       child: OportunityCard(
                         oportunity: oportunities[index],
-                        onPressed: () =>
-                            onPressedInterest?.call(oportunities[index].id),
+                        onPressed: onPressedInterest != null
+                            ? () =>
+                                onPressedInterest?.call(oportunities[index].id)
+                            : null,
                       ),
                     );
                   },
