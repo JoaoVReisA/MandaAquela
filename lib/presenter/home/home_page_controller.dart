@@ -34,7 +34,8 @@ class HomePageController extends GetxController {
       return;
     }
     pageState = RxStatus.loading();
-    final list = await fetchMusicianListUsecase();
+    final list =
+        await fetchMusicianListUsecase(musicianId: userModel.value!.id!);
     musicianList.addAll(list);
     pageState = RxStatus.success();
   }
@@ -67,16 +68,15 @@ class HomePageController extends GetxController {
     eventsAndMusicianList.shuffle();
   }
 
-  String getSkillsString(List<Skill> skills) {
-    String skillsString = '';
-
-    for (Skill skill in skills) {
-      skillsString += '${skill.skillName}-';
+  String getSkillsString(List<Skill> skillsP) {
+    String skills = "";
+    for (int i = 0; i < skillsP.length; i++) {
+      skills += "${skillsP[i].skillName}-";
+      if (i == 2) {
+        break;
+      }
     }
-    final strList = skillsString.split('');
-    strList.removeLast();
-    skillsString = strList.join();
-    return skillsString;
+    return skills;
   }
 
   Future<void> getUserModel() async {

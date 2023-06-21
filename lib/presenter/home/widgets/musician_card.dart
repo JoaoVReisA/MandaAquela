@@ -20,7 +20,7 @@ class MusicianCard extends StatelessWidget {
       required this.imageUrl});
 
   final String musicianName;
-  final double musicianValue;
+  final String musicianValue;
   final int musicianRate;
   final String skills;
   final String genres;
@@ -68,14 +68,7 @@ class MusicianCard extends StatelessWidget {
                           ),
                         ),
                       )
-                    : Container(
-                        decoration: BoxDecoration(
-                          color: Colors.amber,
-                          borderRadius: BorderRadius.circular(16),
-                        ),
-                        width: 150,
-                        height: 150,
-                      ),
+                    : SvgPicture.asset(Assets.musicianGuitar.path),
                 const SizedBox(
                   width: 16,
                 ),
@@ -83,11 +76,16 @@ class MusicianCard extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      musicianName,
-                      style: TextStyles.outfit18px700w
-                          .copyWith(color: Colors.white),
-                      overflow: TextOverflow.ellipsis,
+                    SizedBox(
+                      width: 110,
+                      child: Text(
+                        musicianName,
+                        style: TextStyles.outfit18px700w
+                            .copyWith(color: Colors.white),
+                        overflow: TextOverflow.fade,
+                        softWrap: false,
+                        maxLines: 1,
+                      ),
                     ),
                     const SizedBox(
                       height: 16,
@@ -147,7 +145,7 @@ class MusicianCard extends StatelessWidget {
                 Expanded(
                   child: CustomButton(
                     onPressed: () {},
-                    label: 'perfil',
+                    label: 'Perfil',
                     height: 30,
                     textColor: AppColors.primary,
                     backgroundColor: Colors.white,

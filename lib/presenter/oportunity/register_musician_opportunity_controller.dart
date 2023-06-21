@@ -83,6 +83,7 @@ class RegisterMusicianOpportunityController extends GetxController {
       userType: 'musician',
       uuid: await getUserId(),
       opportunityModel: OpportunityModel(
+        strDate: '',
         name: _stateModel.name.value,
         city: _stateModel.city.value,
         value: _stateModel.value.value.toString(),

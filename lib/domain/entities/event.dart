@@ -1,44 +1,27 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'dart:convert';
 
-import 'package:manda_aquela/data/models/establishment_model.dart';
+import 'package:manda_aquela/domain/entities/event_category.dart';
+import 'package:manda_aquela/domain/entities/oportunity.dart';
 
 class Events {
-  Events({
-    required this.name,
-    this.establishment,
-    required this.address,
-    required this.date,
-  });
-
+  final String id;
   final String name;
-  final EstablishmentModel? establishment;
-  final String address;
-  final DateTime date;
-
-  Map<String, dynamic> toMap() {
-    return <String, dynamic>{
-      'name': name,
-      'establishment': establishment?.toMap(),
-      'address': address,
-      'date': date.millisecondsSinceEpoch,
-    };
-  }
-
-  factory Events.fromMap(Map<String, dynamic> map) {
-    return Events(
-      name: map['name'] as String,
-      establishment: map['establishment'] != null
-          ? EstablishmentModel.fromMap(
-              map['establishment'] as Map<String, dynamic>)
-          : null,
-      address: map['address'] as String,
-      date: DateTime.fromMillisecondsSinceEpoch(map['date'] as int),
-    );
-  }
-
-  String toJson() => json.encode(toMap());
-
-  factory Events.fromJson(String source) =>
-      Events.fromMap(json.decode(source) as Map<String, dynamic>);
+  final String description;
+  final String locale;
+  final int capacity;
+  final String contractorId;
+  final List<Oportunity> oportunities;
+  final EventCategory category;
+  final String date;
+  Events({
+    required this.id,
+    required this.name,
+    required this.description,
+    required this.locale,
+    required this.date,
+    required this.capacity,
+    required this.contractorId,
+    required this.oportunities,
+    required this.category,
+  });
 }

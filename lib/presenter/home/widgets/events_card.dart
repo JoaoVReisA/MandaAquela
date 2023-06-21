@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:manda_aquela/color_schemes.g.dart';
-import 'package:manda_aquela/core/extensions/date_time_extensions.dart';
 import 'package:manda_aquela/domain/entities/event.dart';
 import 'package:manda_aquela/presenter/common/assets.dart';
 import 'package:manda_aquela/presenter/common/text_styles.dart';
@@ -9,9 +8,16 @@ import 'package:manda_aquela/presenter/widgets/custom_button/custom_button.dart'
 import 'package:manda_aquela/presenter/widgets/custom_button/custom_outlined_button.dart';
 
 class EventsCard extends StatelessWidget {
-  const EventsCard({super.key, required this.event});
+  const EventsCard(
+      {super.key,
+      required this.event,
+      required this.onTapGoToEvent,
+      required this.onTapOportunity});
 
   final Events event;
+  final VoidCallback onTapGoToEvent;
+  final VoidCallback onTapOportunity;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -38,10 +44,15 @@ class EventsCard extends StatelessWidget {
               const SizedBox(
                 width: 16,
               ),
-              Text(
-                event.name,
-                style: TextStyles.outfit18px700w.copyWith(color: Colors.white),
-                overflow: TextOverflow.ellipsis,
+              SizedBox(
+                width: 110,
+                child: Text(
+                  event.name,
+                  style:
+                      TextStyles.outfit18px700w.copyWith(color: Colors.white),
+                  overflow: TextOverflow.fade,
+                  softWrap: false,
+                ),
               ),
             ]),
             const Spacer(),
@@ -55,26 +66,26 @@ class EventsCard extends StatelessWidget {
                   width: 4,
                 ),
                 Text(
-                  event.date.toFormattedString,
+                  event.date,
                   style:
                       TextStyles.outfit15px400w.copyWith(color: Colors.white),
                 ),
               ],
             ),
             Row(
-              children: [
-                const Icon(
+              children: const [
+                Icon(
                   Icons.home_work,
                   color: Colors.white,
                 ),
-                const SizedBox(
+                SizedBox(
                   width: 4,
                 ),
-                Text(
-                  event.establishment?.name ?? '',
-                  style:
-                      TextStyles.outfit15px400w.copyWith(color: Colors.white),
-                ),
+                // Text(
+                //   event.establishment?.name ?? '',
+                //   style:
+                //       TextStyles.outfit15px400w.copyWith(color: Colors.white),
+                // ),
               ],
             ),
             Row(
@@ -87,7 +98,7 @@ class EventsCard extends StatelessWidget {
                   width: 4,
                 ),
                 Text(
-                  event.establishment?.address ?? '',
+                  event.locale,
                   style:
                       TextStyles.outfit15px400w.copyWith(color: Colors.white),
                 ),
@@ -98,8 +109,8 @@ class EventsCard extends StatelessWidget {
               children: [
                 Expanded(
                   child: CustomButton(
-                    onPressed: () {},
-                    label: 'ir para evento',
+                    onPressed: onTapGoToEvent,
+                    label: 'Evento',
                     height: 30,
                     textColor: AppColors.primary,
                     backgroundColor: Colors.white,
@@ -109,8 +120,11 @@ class EventsCard extends StatelessWidget {
                   width: 8,
                 ),
                 Expanded(
-                    child: CustomOutlinedButton(
-                        label: 'Oportunidade', onTap: () {}))
+                  child: CustomOutlinedButton(
+                    label: 'Oportunidade',
+                    onTap: onTapOportunity,
+                  ),
+                )
               ],
             )
           ],

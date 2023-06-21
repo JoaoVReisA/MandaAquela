@@ -2,7 +2,7 @@ import 'package:manda_aquela/domain/entities/musician.dart';
 import 'package:manda_aquela/domain/repositories/musician_repository/musician_repository.dart';
 
 abstract class FetchMusicianListUsecase {
-  Future<List<Musician>> call();
+  Future<List<Musician>> call({required String musicianId});
 }
 
 class RemoteFetchMusicianListUsecase extends FetchMusicianListUsecase {
@@ -11,7 +11,7 @@ class RemoteFetchMusicianListUsecase extends FetchMusicianListUsecase {
   final MusicianRepository repository;
 
   @override
-  Future<List<Musician>> call() {
-    return repository.fetchMusicianList();
+  Future<List<Musician>> call({required String musicianId}) {
+    return repository.fetchMusicianList(musicianId: musicianId);
   }
 }
