@@ -123,6 +123,13 @@ class _SearchPageState extends State<SearchPage> {
                                 builder: (context) {
                                   return OportunityBottomSheet(
                                     oportunities: item.oportunities,
+                                    onPressedInterest:
+                                        _controller.userType == 'musician'
+                                            ? (oportunityId) {
+                                                _controller.registerInterest(
+                                                    oportunityId: oportunityId);
+                                              }
+                                            : null,
                                   );
                                 },
                               );

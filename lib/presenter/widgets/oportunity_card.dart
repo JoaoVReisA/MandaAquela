@@ -3,13 +3,13 @@ import 'package:manda_aquela/color_schemes.g.dart';
 import 'package:manda_aquela/core/extensions/date_time_extensions.dart';
 import 'package:manda_aquela/domain/entities/oportunity.dart';
 import 'package:manda_aquela/presenter/common/text_styles.dart';
-import 'package:manda_aquela/presenter/widgets/custom_button/custom_outlined_button.dart';
 
 class OportunityCard extends StatelessWidget {
-  const OportunityCard({super.key, required this.oportunity});
+  const OportunityCard(
+      {super.key, required this.oportunity, required this.onPressed});
 
   final Oportunity oportunity;
-
+  final VoidCallback? onPressed;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -61,15 +61,21 @@ class OportunityCard extends StatelessWidget {
           const SizedBox(
             height: 8,
           ),
-          Row(
-            children: [
-              CustomOutlinedButton(
-                label: 'Tenho interesse',
-                onTap: () {},
-              ),
-              const Spacer()
-            ],
-          )
+          onPressed != null
+              ? Row(
+                  children: [
+                    TextButton(
+                      onPressed: onPressed,
+                      child: Text(
+                        'Tenho Interesse',
+                        style: TextStyles.outfit15px400w
+                            .copyWith(color: AppColors.primary),
+                      ),
+                    ),
+                    const Spacer()
+                  ],
+                )
+              : const SizedBox.shrink()
         ],
       ),
     );

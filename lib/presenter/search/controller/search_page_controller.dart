@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:manda_aquela/data/models/interest_model.dart';
 import 'package:manda_aquela/data/models/user_model.dart';
 import 'package:manda_aquela/domain/entities/event.dart';
 import 'package:manda_aquela/domain/entities/musician.dart';
@@ -6,19 +7,25 @@ import 'package:manda_aquela/domain/entities/skill.dart';
 import 'package:manda_aquela/domain/usecase/events/fetch_events_list_usecase.dart';
 import 'package:manda_aquela/domain/usecase/get_cached_user_data_usecase.dart';
 import 'package:manda_aquela/domain/usecase/musician/fetch_musician_list_usecase.dart';
+import 'package:manda_aquela/domain/usecase/opportunity/register_musician_interest_on_opportunity_usecase.dart';
 
 class SearchPageController extends GetxController {
   SearchPageController(
       {required this.fetchMusicianListUsecase,
       required this.fetchEventsListUsecase,
-      required this.getCachedUserDataUsecase});
+      required this.getCachedUserDataUsecase,
+      required this.registerMusicianInterestOnOpportunityUseCase});
 
   final FetchMusicianListUsecase fetchMusicianListUsecase;
   final FetchEventsListUsecase fetchEventsListUsecase;
   final GetCachedUserDataUsecase getCachedUserDataUsecase;
+  final RegisterMusicianInterestOnOpportunityUseCase
+      registerMusicianInterestOnOpportunityUseCase;
   final userModel = Rxn<UserModel>();
   RxStatus pageState = RxStatus.loading();
   final searchInput = ''.obs;
+
+  String get userType => userModel.value?.type ?? 'musician';
 
   void onChangeSearchInput(String value) {
     searchInput.value = value;
@@ -132,5 +139,13 @@ class SearchPageController extends GetxController {
     final response = await getCachedUserDataUsecase.call();
     userModel.value = response;
     print("HOME PAGE $userModel");
+  }
+
+  void registerInterest({required String oportunityId}) async {
+    await registerMusicianInterestOnOpportunityUseCase(
+        interest: InterestModel(
+      musicianId: userModel.value?.id ?? '',
+      oportunityId: oportunityId,
+    ));
   }
 }

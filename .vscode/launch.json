@@ -15,6 +15,16 @@
             "type": "dart",     
             "flutterMode": "profile"       
         },
+        {
+            "name": "manda_aquela_release",
+            "request": "launch",
+            "type": "dart",     
+            "args": [ 
+                "--release"
+            ]
+            
+                   
+        },
     
     ]
 }

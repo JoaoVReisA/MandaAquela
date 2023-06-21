@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:manda_aquela/data/models/interest_model.dart';
 import 'package:manda_aquela/data/models/user_model.dart';
 import 'package:manda_aquela/domain/entities/event.dart';
 import 'package:manda_aquela/domain/entities/musician.dart';
@@ -6,17 +7,21 @@ import 'package:manda_aquela/domain/entities/skill.dart';
 import 'package:manda_aquela/domain/usecase/events/fetch_events_list_usecase.dart';
 import 'package:manda_aquela/domain/usecase/get_cached_user_data_usecase.dart';
 import 'package:manda_aquela/domain/usecase/musician/fetch_musician_list_usecase.dart';
+import 'package:manda_aquela/domain/usecase/opportunity/register_musician_interest_on_opportunity_usecase.dart';
 
 class HomePageController extends GetxController {
   HomePageController({
     required this.fetchMusicianListUsecase,
     required this.fetchEventsListUsecase,
     required this.getCachedUserDataUsecase,
+    required this.registerMusicianInterestOnOpportunityUseCase,
   });
 
   final FetchMusicianListUsecase fetchMusicianListUsecase;
   final FetchEventsListUsecase fetchEventsListUsecase;
   final GetCachedUserDataUsecase getCachedUserDataUsecase;
+  final RegisterMusicianInterestOnOpportunityUseCase
+      registerMusicianInterestOnOpportunityUseCase;
 
   final musicianList = <Musician>[].obs;
   final eventsList = <Events>[].obs;
@@ -99,5 +104,13 @@ class HomePageController extends GetxController {
       fee: musician.fee,
       socialMedia: musician.socialMedia,
     );
+  }
+
+  void registerInterest({required String oportunityId}) async {
+    await registerMusicianInterestOnOpportunityUseCase(
+        interest: InterestModel(
+      musicianId: userModel.value?.id ?? '',
+      oportunityId: oportunityId,
+    ));
   }
 }

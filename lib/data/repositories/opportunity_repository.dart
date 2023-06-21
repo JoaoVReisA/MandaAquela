@@ -2,6 +2,7 @@
 import 'dart:convert';
 
 import 'package:manda_aquela/core/endpoints.dart';
+import 'package:manda_aquela/data/models/interest_model.dart';
 import 'package:manda_aquela/data/models/music_style_model.dart';
 import 'package:manda_aquela/data/models/opportunity_request.dart';
 import 'package:manda_aquela/domain/entities/music_style.dart';
@@ -44,6 +45,18 @@ class OpportunityRepositoryImpl extends OpportunityRepository {
       print(request.toJson());
       await service.post(
           '${Endpoints.base}/oportunities/oportunity', request.toJson(), {});
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<void> registerMusicianInterestOnOpportunity(
+      {required InterestModel request}) async {
+    try {
+      print(request.toJson());
+      await service.post(
+          '${Endpoints.base}/interests/set-interest', request.toJson(), {});
     } catch (e) {
       rethrow;
     }

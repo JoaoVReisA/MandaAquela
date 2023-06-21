@@ -5,9 +5,11 @@ import 'package:manda_aquela/presenter/common/text_styles.dart';
 import 'package:manda_aquela/presenter/widgets/oportunity_card.dart';
 
 class OportunityBottomSheet extends StatelessWidget {
-  const OportunityBottomSheet({super.key, required this.oportunities});
+  const OportunityBottomSheet(
+      {super.key, required this.oportunities, this.onPressedInterest});
 
   final List<Oportunity> oportunities;
+  final Function(String)? onPressedInterest;
 
   @override
   Widget build(BuildContext context) {
@@ -60,6 +62,8 @@ class OportunityBottomSheet extends StatelessWidget {
                       padding: const EdgeInsets.only(bottom: 16.0),
                       child: OportunityCard(
                         oportunity: oportunities[index],
+                        onPressed: () =>
+                            onPressedInterest?.call(oportunities[index].id),
                       ),
                     );
                   },

@@ -6,6 +6,7 @@ import 'package:manda_aquela/domain/repositories/opportunity_repository.dart';
 import 'package:manda_aquela/domain/usecase/get_cached_user_data_usecase.dart';
 import 'package:manda_aquela/domain/usecase/musician/fetch_musician_list_usecase.dart';
 import 'package:manda_aquela/domain/usecase/musician/fetch_skill_list_usecase.dart';
+import 'package:manda_aquela/domain/usecase/opportunity/register_musician_interest_on_opportunity_usecase.dart';
 import 'package:manda_aquela/domain/usecase/opportunity/register_opportunity_usecase.dart';
 import 'package:manda_aquela/presenter/home/home_page_controller.dart';
 import 'package:manda_aquela/presenter/oportunity/register_contractor_oportunity.dart';
@@ -22,10 +23,10 @@ class HomeModule extends Module {
   List<Bind> get binds => [
         Bind<HomePageController>(
           (i) => HomePageController(
-            getCachedUserDataUsecase: i(),
-            fetchMusicianListUsecase: i(),
-            fetchEventsListUsecase: i(),
-          ),
+              getCachedUserDataUsecase: i(),
+              fetchMusicianListUsecase: i(),
+              fetchEventsListUsecase: i(),
+              registerMusicianInterestOnOpportunityUseCase: i()),
           export: true,
         ),
         Bind<FetchMusicianListUsecase>(
@@ -75,6 +76,11 @@ class HomeModule extends Module {
                   service: i(),
                 ),
             export: true),
+        Bind<RegisterMusicianInterestOnOpportunityUseCase>(
+          (i) => RemoteRegisterMusicianInterestOnOpportunityUseCase(
+            repository: i(),
+          ),
+        ),
       ];
 
   @override

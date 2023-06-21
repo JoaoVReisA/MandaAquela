@@ -146,6 +146,14 @@ class _HomePageState extends State<HomePage> {
                                     builder: (context) {
                                       return OportunityBottomSheet(
                                         oportunities: item.oportunities,
+                                        onPressedInterest: _controller
+                                                    .userType ==
+                                                'musician'
+                                            ? (oportunityId) {
+                                                _controller.registerInterest(
+                                                    oportunityId: oportunityId);
+                                              }
+                                            : null,
                                       );
                                     },
                                   );
