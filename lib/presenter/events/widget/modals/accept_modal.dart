@@ -18,9 +18,9 @@ class AcceptOportunityModal extends StatelessWidget {
           color: Colors.white,
           borderRadius: BorderRadius.circular(24),
         ),
-        child: const Column(
+        child: Column(
           mainAxisSize: MainAxisSize.min,
-          children: [],
+          children: const [],
         ),
       ),
     );

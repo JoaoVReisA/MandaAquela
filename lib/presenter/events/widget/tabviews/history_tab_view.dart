@@ -6,10 +6,10 @@ class HistoryTabView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.all(10.0),
+    return Padding(
+      padding: const EdgeInsets.all(10.0),
       child: Column(
-        children: [
+        children: const [
           HistoryCard(),
         ],
       ),

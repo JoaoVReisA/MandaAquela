@@ -42,6 +42,7 @@ class HomeModule extends Module {
             getCachedUserDataUsecase: i(),
             getMusicStylesUseCase: i(),
             registerOpportunityUseCase: i(),
+            fetchUserEvents: i(),
           ),
           export: true,
         ),

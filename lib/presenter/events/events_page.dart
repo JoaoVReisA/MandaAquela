@@ -14,12 +14,12 @@ class EventsPage extends StatefulWidget {
 class _EventsPageState extends State<EventsPage> {
   @override
   Widget build(BuildContext context) {
-    return const DefaultTabController(
+    return DefaultTabController(
       length: 3,
       child: SafeArea(
         child: Scaffold(
           body: Column(
-            children: [
+            children: const [
               EventsTabBar(),
               Expanded(
                 child: TabBarView(

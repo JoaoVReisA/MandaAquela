@@ -4,6 +4,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:manda_aquela/color_schemes.g.dart';
+import 'package:manda_aquela/domain/entities/event.dart';
 import 'package:manda_aquela/domain/entities/music_style.dart';
 import 'package:manda_aquela/presenter/common/assets.dart';
 import 'package:manda_aquela/presenter/common/text_styles.dart';
@@ -25,6 +26,7 @@ class _RegisterOpportunityState extends State<RegisterOpportunity> {
   @override
   void initState() {
     _controller.getMusicStyles();
+    _controller.fetchUserEventsList();
     super.initState();
   }
 
@@ -114,13 +116,30 @@ class _RegisterOpportunityState extends State<RegisterOpportunity> {
                   const SizedBox(
                     height: 12,
                   ),
-                  TextFormField(
-                    style: TextStyles.outfit15px400w,
-                    decoration: const InputDecoration(
-                      hintText: "Evento",
-                      label: Text("Evento"),
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 8),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      border: Border.all(color: Colors.grey),
                     ),
-                    onChanged: _controller.setEvent,
+                    child: DropdownButton<Events>(
+                      borderRadius: BorderRadius.circular(8),
+                      isExpanded: true,
+                      value: _controller.selectedEvent,
+                      elevation: 16,
+                      style: const TextStyle(color: AppColors.primary),
+                      onChanged: _controller.setEvent,
+                      underline: Container(
+                        color: Colors.transparent,
+                      ),
+                      items: _controller.eventsList
+                          .map<DropdownMenuItem<Events>>((Events value) {
+                        return DropdownMenuItem<Events>(
+                          value: value,
+                          child: Text(value.name),
+                        );
+                      }).toList(),
+                    ),
                   ),
                   const SizedBox(
                     height: 16,
