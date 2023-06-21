@@ -7,6 +7,7 @@ import 'package:manda_aquela/presenter/common/text_styles.dart';
 import 'package:manda_aquela/presenter/home/widgets/events_card.dart';
 import 'package:manda_aquela/presenter/home/widgets/musician_card.dart';
 import 'package:manda_aquela/presenter/search/controller/search_page_controller.dart';
+import 'package:manda_aquela/presenter/widgets/bottom_sheets/contacts_bottom_sheet.dart';
 import 'package:manda_aquela/presenter/widgets/bottom_sheets/opotunity_bottom_sheet.dart';
 
 class SearchPage extends StatefulWidget {
@@ -79,8 +80,29 @@ class _SearchPageState extends State<SearchPage> {
                             genres: '',
                             imageUrl: item.photoUrl ?? '',
                             musicianValue: item.fee,
-                            onTapContacts: () {},
-                            onTapGoToProfile: () {},
+                            onTapContacts: () {
+                              showModalBottomSheet(
+                                shape: const RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(24),
+                                    topRight: Radius.circular(24),
+                                  ),
+                                ),
+                                isScrollControlled: true,
+                                useRootNavigator: true,
+                                context: context,
+                                builder: (context) {
+                                  return ContactsBottomSheet(
+                                    socialMedias: item.socialMedia,
+                                  );
+                                },
+                              );
+                            },
+                            onTapGoToProfile: () {
+                              Modular.to.pushNamed('/home/profile',
+                                  arguments: _controller
+                                      .buildUserModelFromMusician(item));
+                            },
                             skills: _controller.getSkillsString(item.skills),
                           );
                         }

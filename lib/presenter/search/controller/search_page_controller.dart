@@ -17,7 +17,7 @@ class SearchPageController extends GetxController {
   final FetchEventsListUsecase fetchEventsListUsecase;
   final GetCachedUserDataUsecase getCachedUserDataUsecase;
   final userModel = Rxn<UserModel>();
-  RxStatus pageState = RxStatus.empty();
+  RxStatus pageState = RxStatus.loading();
   final searchInput = ''.obs;
 
   void onChangeSearchInput(String value) {
@@ -73,6 +73,22 @@ class SearchPageController extends GetxController {
     // pageState = RxStatus.success();
   }
 
+  UserModel buildUserModelFromMusician(Musician musician) {
+    return UserModel(
+      id: musician.id,
+      name: musician.name,
+      email: 'musician.email',
+      photoUrl: musician.photoUrl,
+      type: 'musician',
+      address: musician.address.toModel(),
+      description: musician.description,
+      skills: musician.skills.map((e) => e.toModel()).toList(),
+      rate: musician.rate,
+      fee: musician.fee,
+      socialMedia: musician.socialMedia,
+    );
+  }
+
   Future<void> fetchEventsList() async {
     if (eventsList.isNotEmpty) {
       return;
@@ -101,16 +117,15 @@ class SearchPageController extends GetxController {
     pageState = RxStatus.success();
   }
 
-  String getSkillsString(List<Skill> skills) {
-    String skillsString = '';
-
-    for (Skill skill in skills) {
-      skillsString += '${skill.skillName}-';
+  String getSkillsString(List<Skill> skillsP) {
+    String skills = "";
+    for (int i = 0; i < skillsP.length; i++) {
+      skills += "${skillsP[i].skillName}-";
+      if (i == 2) {
+        break;
+      }
     }
-    final strList = skillsString.split('');
-    strList.removeLast();
-    skillsString = strList.join();
-    return skillsString;
+    return skills;
   }
 
   Future<void> getUserModel() async {
