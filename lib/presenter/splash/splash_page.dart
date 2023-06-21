@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:manda_aquela/presenter/common/assets.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -21,15 +22,15 @@ class _SplashPageState extends State<SplashPage> {
           seconds: 3,
         ),
         () async {
-          Modular.to.navigate('/start/');
-          // String uid = '';
-          // await SharedPreferences.getInstance()
-          //     .then((value) => uid = value.getString('userData') ?? '');
-          // if (uid.isNotEmpty) {
-          //   Modular.to.navigate('/start/home');
-          // } else {
-          //   Modular.to.navigate('/auth/');
-          // }
+          // Modular.to.navigate('/start/');
+          String uid = '';
+          await SharedPreferences.getInstance()
+              .then((value) => uid = value.getString('userData') ?? '');
+          if (uid.isNotEmpty) {
+            Modular.to.navigate('/start/home');
+          } else {
+            Modular.to.navigate('/auth/');
+          }
         },
       );
     });
