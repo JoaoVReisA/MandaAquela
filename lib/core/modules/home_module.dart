@@ -77,10 +77,10 @@ class HomeModule extends Module {
                 ),
             export: true),
         Bind<RegisterMusicianInterestOnOpportunityUseCase>(
-          (i) => RemoteRegisterMusicianInterestOnOpportunityUseCase(
-            repository: i(),
-          ),
-        ),
+            (i) => RemoteRegisterMusicianInterestOnOpportunityUseCase(
+                  repository: i(),
+                ),
+            export: true),
       ];
 
   @override

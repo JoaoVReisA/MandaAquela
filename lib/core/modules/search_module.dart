@@ -7,10 +7,10 @@ class SearchModule extends Module {
   List<Bind> get binds => [
         Bind<SearchPageController>(
           (i) => SearchPageController(
-            fetchEventsListUsecase: i(),
-            fetchMusicianListUsecase: i(),
-            getCachedUserDataUsecase: i(),
-          ),
+              fetchEventsListUsecase: i(),
+              fetchMusicianListUsecase: i(),
+              getCachedUserDataUsecase: i(),
+              registerMusicianInterestOnOpportunityUseCase: i()),
         ),
       ];
 
