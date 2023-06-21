@@ -126,7 +126,12 @@ class _HomePageState extends State<HomePage> {
                               }
                               return EventsCard(
                                 event: item,
-                                onTapGoToEvent: () {},
+                                onTapGoToEvent: () {
+                                  Modular.to.pushNamed(
+                                    '/events/details',
+                                    arguments: item,
+                                  );
+                                },
                                 onTapOportunity: () {
                                   showModalBottomSheet(
                                     shape: const RoundedRectangleBorder(

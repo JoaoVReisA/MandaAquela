@@ -1,6 +1,7 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:manda_aquela/data/repositories/events_repository.dart';
 import 'package:manda_aquela/data/repositories/opportunity_repository.dart';
+import 'package:manda_aquela/domain/entities/event.dart';
 import 'package:manda_aquela/domain/repositories/events_repository/events_repository.dart';
 import 'package:manda_aquela/domain/repositories/opportunity_repository.dart';
 import 'package:manda_aquela/domain/usecase/events/fetch_events_categories_usecase.dart';
@@ -12,6 +13,7 @@ import 'package:manda_aquela/domain/usecase/opportunity/get_music_styles_usecase
 import 'package:manda_aquela/presenter/events/controller/events_controller.dart';
 import 'package:manda_aquela/presenter/events/controller/musician_page_controller.dart';
 import 'package:manda_aquela/presenter/events/controller/register_event_controller.dart';
+import 'package:manda_aquela/presenter/events/events_detail_page.dart';
 import 'package:manda_aquela/presenter/events/events_page.dart';
 import 'package:manda_aquela/presenter/events/register_event.dart';
 import 'package:manda_aquela/presenter/oportunity/register_opportunity_in_events_page.dart';
@@ -83,5 +85,9 @@ class EventsModule extends Module {
             child: (context, args) => const RegisterEvent()),
         ChildRoute('/register_opportunity',
             child: (context, args) => const RegisterOpportunityInEventsPage()),
+        ChildRoute('/details',
+            child: (context, args) => EventsDetailPage(
+                  event: args.data as Events,
+                )),
       ];
 }
