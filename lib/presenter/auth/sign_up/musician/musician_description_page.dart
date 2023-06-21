@@ -35,44 +35,46 @@ class _MusicianDescriptionPageState extends State<MusicianDescriptionPage> {
           backgroundColor: Colors.transparent,
           elevation: 0,
         ),
-        body: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.all(16),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Center(child: SvgPicture.asset(Assets.musicianGuitar.path)),
-                const SizedBox(
-                  height: 32,
-                ),
-                Text(
-                  'Agora nos conte um pouco mais sobre você',
-                  textAlign: TextAlign.start,
-                  style:
-                      TextStyles.outfit15px400w.copyWith(color: Colors.black),
-                ),
-                const SizedBox(
-                  height: 24,
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  child: SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.30,
-                    child: TextFormField(
-                      onChanged: _controller.setDescription,
-                      maxLines: 7,
-                      decoration: const InputDecoration(
-                        contentPadding: EdgeInsets.symmetric(vertical: 40),
-                        label: Text('Informe uma breve descrição...'),
+        body: SingleChildScrollView(
+          child: SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Center(child: SvgPicture.asset(Assets.musicianGuitar.path)),
+                  const SizedBox(
+                    height: 32,
+                  ),
+                  Text(
+                    'Agora nos conte um pouco mais sobre você',
+                    textAlign: TextAlign.start,
+                    style:
+                        TextStyles.outfit15px400w.copyWith(color: Colors.black),
+                  ),
+                  const SizedBox(
+                    height: 24,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.30,
+                      child: TextFormField(
+                        onChanged: _controller.setDescription,
+                        maxLines: 7,
+                        decoration: const InputDecoration(
+                          contentPadding: EdgeInsets.symmetric(vertical: 40),
+                          label: Text('Informe uma breve descrição...'),
+                        ),
                       ),
                     ),
                   ),
-                ),
-                const SizedBox(
-                  height: 8,
-                ),
-              ],
+                  const SizedBox(
+                    height: 8,
+                  ),
+                ],
+              ),
             ),
           ),
         ),

@@ -1,3 +1,3 @@
 class Endpoints {
-  static const base = 'http://localhost:3333';
+  static const base = 'http://10.0.2.2:3333';
 }

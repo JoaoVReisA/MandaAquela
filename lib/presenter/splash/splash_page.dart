@@ -22,6 +22,7 @@ class _SplashPageState extends State<SplashPage> {
           seconds: 3,
         ),
         () async {
+          // Modular.to.navigate('/start/');
           String uid = '';
           await SharedPreferences.getInstance()
               .then((value) => uid = value.getString('userData') ?? '');

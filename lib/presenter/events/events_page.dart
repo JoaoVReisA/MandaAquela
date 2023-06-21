@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:manda_aquela/presenter/events/widget/events_tab_bar.dart';
+import 'package:manda_aquela/presenter/events/widget/tabviews/accepted_tab_view.dart';
+import 'package:manda_aquela/presenter/events/widget/tabviews/events_tab_view.dart';
+import 'package:manda_aquela/presenter/events/widget/tabviews/history_tab_view.dart';
 
 class EventsPage extends StatefulWidget {
   const EventsPage({super.key});
@@ -10,9 +14,25 @@ class EventsPage extends StatefulWidget {
 class _EventsPageState extends State<EventsPage> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
-        child: Text('Events'),
+    return const DefaultTabController(
+      length: 3,
+      child: SafeArea(
+        child: Scaffold(
+          body: Column(
+            children: [
+              EventsTabBar(),
+              Expanded(
+                child: TabBarView(
+                  children: [
+                    EventsTabView(),
+                    AcceptedTabView(),
+                    HistoryTabView()
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

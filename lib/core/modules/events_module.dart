@@ -5,8 +5,12 @@ import 'package:manda_aquela/domain/repositories/events_repository/events_reposi
 import 'package:manda_aquela/domain/repositories/opportunity_repository.dart';
 import 'package:manda_aquela/domain/usecase/events/fetch_events_categories_usecase.dart';
 import 'package:manda_aquela/domain/usecase/events/fetch_events_list_usecase.dart';
+import 'package:manda_aquela/domain/usecase/events/fetch_oportunity_musicians_usecase.dart';
+import 'package:manda_aquela/domain/usecase/events/fetch_user_events.dart';
 import 'package:manda_aquela/domain/usecase/events/register_event_usecase.dart';
 import 'package:manda_aquela/domain/usecase/opportunity/get_music_styles_usecase.dart';
+import 'package:manda_aquela/presenter/events/controller/events_controller.dart';
+import 'package:manda_aquela/presenter/events/controller/musician_page_controller.dart';
 import 'package:manda_aquela/presenter/events/controller/register_event_controller.dart';
 import 'package:manda_aquela/presenter/events/events_page.dart';
 import 'package:manda_aquela/presenter/events/register_event.dart';
@@ -23,8 +27,15 @@ class EventsModule extends Module {
             getMusicStylesUseCase: i(),
           ),
         ),
+        Bind.singleton<EventsController>((i) => EventsController(
+            getCachedUserDataUsecase: i(), fetchUserEvents: i())),
+        Bind.singleton<MusiciansPageController>(
+            (i) => MusiciansPageController(fetchOportunityMusicians: i())),
         Bind.singleton<FetchEventsListUsecase>(
             (i) => RemoteFetchEventsListUsecase(repository: i()),
+            export: true),
+        Bind.singleton<FetchOportunityMusiciansUsecase>(
+            (i) => RemoteFetchOportunityMusicians(i()),
             export: true),
         Bind.singleton<EventsRepository>(
             (i) => EventsRepositoryImpl(client: i()),
@@ -36,6 +47,12 @@ class EventsModule extends Module {
           (i) => RemoteFetchEventsListUsecase(
             repository: i(),
           ),
+        ),
+        Bind<RemoteFetchUserEvents>(
+          (i) => RemoteFetchUserEvents(
+            repository: i(),
+          ),
+          export: true,
         ),
         Bind<FetchEventsCategoriesUseCase>(
           (i) => RemoteFetchEventsCategoriesUseCase(
