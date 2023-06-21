@@ -25,6 +25,7 @@ class Oportunity {
         city: city,
         id: id,
         date: date,
+        strDate: date.toString(),
         description: description,
         name: name,
         value: value,
