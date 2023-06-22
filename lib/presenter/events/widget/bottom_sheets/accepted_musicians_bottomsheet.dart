@@ -43,6 +43,7 @@ class _AcceptedMusiciansBottomSheetState
     extends State<AcceptedMusiciansBottomSheet> {
   final _controller = MusiciansPageController(
     fetchOportunityMusicians: Modular.get(),
+    rateEventUsecase: Modular.get(),
     acceptMusicianUsecase: Modular.get(),
   );
 

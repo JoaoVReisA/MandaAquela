@@ -2,10 +2,12 @@
 import 'dart:convert';
 
 import 'package:manda_aquela/data/models/music_style_model.dart';
+import 'package:manda_aquela/domain/entities/feedback.dart';
 import 'package:manda_aquela/domain/entities/oportunity.dart';
 
 class OpportunityModel {
   OpportunityModel({
+    this.feedback,
     this.musicianId,
     this.musicianInterestedIds = const [],
     required this.id,
@@ -28,6 +30,7 @@ class OpportunityModel {
   final String strDate;
   final List<String> musicianInterestedIds;
   final String? musicianId;
+  final FeedbackEntity? feedback;
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
@@ -41,6 +44,7 @@ class OpportunityModel {
   }
 
   factory OpportunityModel.fromMap(Map<String, dynamic> map) {
+    print(map);
     return OpportunityModel(
       city: map['city'] as String? ?? '',
       id: map['id'] as String,
@@ -52,6 +56,9 @@ class OpportunityModel {
       musicianInterestedIds: map['musicianInterestedIds'] != null
           ? List<String>.from(map['musicianInterestedIds'] as List<dynamic>)
           : [],
+      feedback: map['feedback'] != null
+          ? FeedbackEntity.fromMap(map['feedback'] as Map<String, dynamic>)
+          : null,
       musicStyle: map['musicStyle'] != null
           ? List<MusicStyleModel>.from(
               (map['musicStyle'] as List<dynamic>).map<MusicStyleModel>(
@@ -69,15 +76,15 @@ class OpportunityModel {
 
   Oportunity toEntity() {
     return Oportunity(
-      id: id,
-      date: date ?? DateTime.now(),
-      description: description,
-      name: name,
-      value: value,
-      musicStyle: musicStyle.map((e) => e.toEntity()).toList(),
-      city: city,
-      musicianInterestedIds: musicianInterestedIds,
-      musicianId: musicianId,
-    );
+        id: id,
+        date: date ?? DateTime.now(),
+        description: description,
+        name: name,
+        value: value,
+        musicStyle: musicStyle.map((e) => e.toEntity()).toList(),
+        city: city,
+        musicianInterestedIds: musicianInterestedIds,
+        musicianId: musicianId,
+        feedback: feedback);
   }
 }

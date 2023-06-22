@@ -2,17 +2,21 @@ import 'package:get/get.dart';
 import 'package:manda_aquela/data/models/user_model.dart';
 import 'package:manda_aquela/domain/entities/musician.dart';
 import 'package:manda_aquela/domain/entities/oportunity.dart';
+import 'package:manda_aquela/domain/entities/rate_request.dart';
 import 'package:manda_aquela/domain/usecase/events/accept_musician_usecase.dart';
 import 'package:manda_aquela/domain/usecase/events/fetch_oportunity_musicians_usecase.dart';
+import 'package:manda_aquela/domain/usecase/events/rate_event_usecase.dart';
 
 class MusiciansPageController extends GetxController {
   MusiciansPageController({
+    required this.rateEventUsecase,
     required this.fetchOportunityMusicians,
     required this.acceptMusicianUsecase,
   });
 
   final FetchOportunityMusiciansUsecase fetchOportunityMusicians;
   final RemoteAcceptMusician acceptMusicianUsecase;
+  final RemoteRateEvent rateEventUsecase;
 
   final musicianList = <Musician>[].obs;
 
@@ -56,6 +60,12 @@ class MusiciansPageController extends GetxController {
       musician: musician,
       oportunity: oportunity,
     );
+    sendingState.value = RxStatus.success();
+  }
+
+  Future<void> rateMusician(RateRequest request) async {
+    sendingState.value = RxStatus.loading();
+    final result = await rateEventUsecase(request);
     sendingState.value = RxStatus.success();
   }
 

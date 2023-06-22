@@ -22,8 +22,10 @@ class MusiciansPage extends StatefulWidget {
 
 class _MusiciansPageState extends State<MusiciansPage> {
   final _controller = MusiciansPageController(
-      fetchOportunityMusicians: Modular.get(),
-      acceptMusicianUsecase: Modular.get());
+    rateEventUsecase: Modular.get(),
+    fetchOportunityMusicians: Modular.get(),
+    acceptMusicianUsecase: Modular.get(),
+  );
 
   @override
   void initState() {

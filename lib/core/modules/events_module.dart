@@ -9,6 +9,7 @@ import 'package:manda_aquela/domain/usecase/events/fetch_events_categories_useca
 import 'package:manda_aquela/domain/usecase/events/fetch_events_list_usecase.dart';
 import 'package:manda_aquela/domain/usecase/events/fetch_oportunity_musicians_usecase.dart';
 import 'package:manda_aquela/domain/usecase/events/fetch_user_events.dart';
+import 'package:manda_aquela/domain/usecase/events/rate_event_usecase.dart';
 import 'package:manda_aquela/domain/usecase/events/register_event_usecase.dart';
 import 'package:manda_aquela/domain/usecase/opportunity/get_music_styles_usecase.dart';
 import 'package:manda_aquela/presenter/events/controller/events_controller.dart';
@@ -33,6 +34,8 @@ class EventsModule extends Module {
             getCachedUserDataUsecase: i(), fetchUserEvents: i())),
         Bind.singleton<FetchEventsListUsecase>(
             (i) => RemoteFetchEventsListUsecase(repository: i()),
+            export: true),
+        Bind.singleton<RateEventUsecase>((i) => RemoteRateEvent(i()),
             export: true),
         Bind.singleton<AcceptMusician>(
             (i) => RemoteAcceptMusician(repository: i()),

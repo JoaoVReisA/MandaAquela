@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:manda_aquela/domain/entities/event.dart';
+import 'package:manda_aquela/presenter/events/oportunitys_page.dart';
 import 'package:manda_aquela/presenter/events/widget/history_card.dart';
 
 class HistoryTabView extends StatelessWidget {
@@ -19,6 +21,11 @@ class HistoryTabView extends StatelessWidget {
                 itemCount: eventsList.length,
                 itemBuilder: (context, index) {
                   return HistoryCard(
+                    onTap: () => Modular.to.push(MaterialPageRoute<void>(
+                      builder: (_) => OportunityPage(
+                        event: eventsList[index],
+                      ),
+                    )),
                     event: eventsList[index],
                   );
                 })

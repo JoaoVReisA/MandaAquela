@@ -9,6 +9,7 @@ import 'package:manda_aquela/domain/entities/event.dart';
 import 'package:manda_aquela/domain/entities/event_category.dart';
 import 'package:manda_aquela/domain/entities/musician.dart';
 import 'package:manda_aquela/domain/entities/oportunity.dart';
+import 'package:manda_aquela/domain/entities/rate_request.dart';
 import 'package:manda_aquela/domain/repositories/events_repository/events_repository.dart';
 import 'package:manda_aquela/infrastructure/network/dio_http_service.dart';
 
@@ -108,6 +109,23 @@ class EventsRepositoryImpl extends EventsRepository {
     try {
       final response = await client.patch(url, body, {});
     } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<void> rateEvent(RateRequest request) async {
+    final body = request.toJson();
+    const url = '${Endpoints.base}/feedbacks/send-feedback';
+
+    print(body);
+    print(url);
+
+    try {
+      final response = await client.post(url, body, {});
+      print(response.body);
+    } catch (e) {
+      print(e);
       rethrow;
     }
   }
