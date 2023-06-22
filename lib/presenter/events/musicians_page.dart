@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:get/get.dart';
+import 'package:manda_aquela/color_schemes.g.dart';
 import 'package:manda_aquela/domain/entities/oportunity.dart';
 import 'package:manda_aquela/presenter/common/text_styles.dart';
 import 'package:manda_aquela/presenter/events/controller/musician_page_controller.dart';
 import 'package:manda_aquela/presenter/events/widget/details_page_base.dart';
 import 'package:manda_aquela/presenter/events/widget/interested_musician_card.dart';
 import 'package:manda_aquela/presenter/events/widget/modals/accept_modal.dart';
+import 'package:manda_aquela/presenter/widgets/success_snackbar.dart';
 
 class MusiciansPage extends StatefulWidget {
   const MusiciansPage({
@@ -67,6 +69,19 @@ class _MusiciansPageState extends State<MusiciansPage> {
                     _controller.musicianList[index],
                     widget.oportunity,
                   );
+
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      backgroundColor: AppColors.success,
+                      content: SuccessSnackBar(
+                        message: 'Evento cadastrado',
+                      ),
+                    ),
+                  );
+
+                  Modular.to.pop();
+                  Modular.to
+                      .pushNamedAndRemoveUntil('/start/home/', (p0) => false);
                 });
               },
               musician: _controller.musicianList[index],
