@@ -35,7 +35,7 @@ class EstablishmentBottomSheet extends StatelessWidget {
               padding: const EdgeInsets.only(left: 16),
               child: Text(
                 textAlign: TextAlign.start,
-                "Contato",
+                "Estabelecimentos",
                 style: TextStyles.outfit24px700w
                     .copyWith(color: AppColors.primary),
               ),

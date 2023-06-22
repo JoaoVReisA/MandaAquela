@@ -63,6 +63,8 @@ class LoginPageController extends GetxController {
       pageState.value = RxStatus.success();
       return tokenResponse;
     } on CustomException catch (e) {
+      pageState.value = RxStatus.error();
+
       onLoginErrorFunction(e.message);
     }
     return null;
