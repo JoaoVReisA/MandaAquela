@@ -32,6 +32,22 @@ class MusiciansPageController extends GetxController {
     pageState = RxStatus.success();
   }
 
+  UserModel buildUserModelFromMusician(Musician musician) {
+    return UserModel(
+      id: musician.id,
+      name: musician.name,
+      email: 'musician.email',
+      photoUrl: musician.photoUrl,
+      type: 'musician',
+      address: musician.address.toModel(),
+      description: musician.description,
+      skills: musician.skills.map((e) => e.toModel()).toList(),
+      rate: musician.rate,
+      fee: musician.fee,
+      socialMedia: musician.socialMedia,
+    );
+  }
+
   void initMusiciansPage(List<String> ids) async {
     await _fetchOportunityMusicians(ids);
   }

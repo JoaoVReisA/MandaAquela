@@ -38,6 +38,12 @@ class _MusiciansPageState extends State<MusiciansPage> {
             shrinkWrap: true,
             itemCount: _controller.musicianList.length,
             itemBuilder: (context, index) => InterestedMusicianCard(
+              onTapImage: () {
+                Modular.to.pushNamed('/home/profile',
+                    arguments: _controller.buildUserModelFromMusician(
+                        _controller.musicianList[index]));
+              },
+              onTapAccept: () {},
               musician: _controller.musicianList[index],
               oportunity: widget.oportunity,
             ),
