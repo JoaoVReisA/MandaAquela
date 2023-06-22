@@ -24,6 +24,8 @@ class LoginPageController extends GetxController {
   final TokenAuthLoginUseCase tokenAuthLoginUseCase;
   final _stateModel = _LoginPageStateModel();
 
+  final pageState = RxStatus.empty().obs;
+
   late void Function(String message) onLoginErrorFunction;
 
   void setEmail(String value) {
@@ -39,6 +41,7 @@ class LoginPageController extends GetxController {
 
   Future<UserModel?> doUserLogin() async {
     try {
+      pageState.value = RxStatus.loading();
       final response = await emailAuthLoginUsecase.call(
           email: _stateModel.email.value, password: _stateModel.password.value);
 
@@ -57,6 +60,7 @@ class LoginPageController extends GetxController {
       final tokenResponse =
           await tokenAuthLoginUseCase.call(token: response!.user!.uid);
 
+      pageState.value = RxStatus.success();
       return tokenResponse;
     } on CustomException catch (e) {
       onLoginErrorFunction(e.message);
