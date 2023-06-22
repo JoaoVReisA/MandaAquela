@@ -8,6 +8,8 @@ import 'package:manda_aquela/data/models/musician_model.dart';
 import 'package:manda_aquela/domain/entities/event.dart';
 import 'package:manda_aquela/domain/entities/event_category.dart';
 import 'package:manda_aquela/domain/entities/musician.dart';
+import 'package:manda_aquela/domain/entities/oportunity.dart';
+import 'package:manda_aquela/domain/entities/rate_request.dart';
 import 'package:manda_aquela/domain/repositories/events_repository/events_repository.dart';
 import 'package:manda_aquela/infrastructure/network/dio_http_service.dart';
 
@@ -60,6 +62,7 @@ class EventsRepositoryImpl extends EventsRepository {
   @override
   Future<List<Events>> fetchUserEvents(String uid) async {
     try {
+      print('ee');
       final response = await client.get('${Endpoints.base}/events/$uid', {});
       print(response.body);
       final data = jsonDecode(response.body)["data"]["events"];
@@ -85,7 +88,6 @@ class EventsRepositoryImpl extends EventsRepository {
           .post('${Endpoints.base}/musicians/list-musicians', body, {});
 
       final data = jsonDecode(response.body)["data"]["musicians"];
-      print(data);
       final musicianList = <Musician>[];
 
       for (dynamic item in data) {
@@ -94,6 +96,36 @@ class EventsRepositoryImpl extends EventsRepository {
 
       return musicianList;
     } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<void> acceptMusician(Musician musician, Oportunity oportunity) async {
+    final body = {"musicianId": musician.id};
+    final url =
+        '${Endpoints.base}/oportunities/oportunity/accept-musician/${oportunity.id}';
+
+    try {
+      final response = await client.patch(url, body, {});
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<void> rateEvent(RateRequest request) async {
+    final body = request.toJson();
+    const url = '${Endpoints.base}/feedbacks/send-feedback';
+
+    print(body);
+    print(url);
+
+    try {
+      final response = await client.post(url, body, {});
+      print(response.body);
+    } catch (e) {
+      print(e);
       rethrow;
     }
   }

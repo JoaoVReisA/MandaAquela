@@ -4,14 +4,15 @@ import 'package:manda_aquela/data/repositories/opportunity_repository.dart';
 import 'package:manda_aquela/domain/entities/event.dart';
 import 'package:manda_aquela/domain/repositories/events_repository/events_repository.dart';
 import 'package:manda_aquela/domain/repositories/opportunity_repository.dart';
+import 'package:manda_aquela/domain/usecase/events/accept_musician_usecase.dart';
 import 'package:manda_aquela/domain/usecase/events/fetch_events_categories_usecase.dart';
 import 'package:manda_aquela/domain/usecase/events/fetch_events_list_usecase.dart';
 import 'package:manda_aquela/domain/usecase/events/fetch_oportunity_musicians_usecase.dart';
 import 'package:manda_aquela/domain/usecase/events/fetch_user_events.dart';
+import 'package:manda_aquela/domain/usecase/events/rate_event_usecase.dart';
 import 'package:manda_aquela/domain/usecase/events/register_event_usecase.dart';
 import 'package:manda_aquela/domain/usecase/opportunity/get_music_styles_usecase.dart';
 import 'package:manda_aquela/presenter/events/controller/events_controller.dart';
-import 'package:manda_aquela/presenter/events/controller/musician_page_controller.dart';
 import 'package:manda_aquela/presenter/events/controller/register_event_controller.dart';
 import 'package:manda_aquela/presenter/events/events_detail_page.dart';
 import 'package:manda_aquela/presenter/events/events_page.dart';
@@ -31,10 +32,13 @@ class EventsModule extends Module {
         ),
         Bind.singleton<EventsController>((i) => EventsController(
             getCachedUserDataUsecase: i(), fetchUserEvents: i())),
-        Bind.singleton<MusiciansPageController>(
-            (i) => MusiciansPageController(fetchOportunityMusicians: i())),
         Bind.singleton<FetchEventsListUsecase>(
             (i) => RemoteFetchEventsListUsecase(repository: i()),
+            export: true),
+        Bind.singleton<RateEventUsecase>((i) => RemoteRateEvent(i()),
+            export: true),
+        Bind.singleton<AcceptMusician>(
+            (i) => RemoteAcceptMusician(repository: i()),
             export: true),
         Bind.singleton<FetchOportunityMusiciansUsecase>(
             (i) => RemoteFetchOportunityMusicians(i()),

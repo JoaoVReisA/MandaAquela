@@ -3,18 +3,18 @@ import 'package:manda_aquela/color_schemes.g.dart';
 import 'package:manda_aquela/domain/entities/event.dart';
 import 'package:manda_aquela/presenter/common/assets.dart';
 import 'package:manda_aquela/presenter/common/text_styles.dart';
-import 'package:manda_aquela/presenter/events/widget/bottom_sheets/interested_bottom_sheet.dart';
 import 'package:manda_aquela/presenter/widgets/svg_and_text/svg_and_text.dart';
 
 class EventCard extends StatelessWidget {
-  const EventCard({super.key, required this.event});
+  const EventCard({super.key, required this.event, required this.onTap});
 
   final Events event;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => InterestedBottomSheet.show(context, event.oportunities),
+      onTap: onTap,
       child: Container(
         margin: const EdgeInsets.only(bottom: 12),
         decoration: BoxDecoration(

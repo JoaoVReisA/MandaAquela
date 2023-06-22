@@ -13,7 +13,10 @@ class Events {
   final List<Oportunity> oportunities;
   final EventCategory category;
   final String date;
+  final bool isClosed;
+
   Events({
+    this.isClosed = false,
     required this.id,
     required this.name,
     required this.description,

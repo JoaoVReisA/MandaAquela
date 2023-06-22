@@ -7,6 +7,7 @@ import 'package:manda_aquela/domain/entities/event.dart';
 
 class EventsModel {
   EventsModel({
+    this.isClosed = false,
     required this.id,
     required this.name,
     required this.description,
@@ -27,6 +28,7 @@ class EventsModel {
   final List<OpportunityModel> oportunities;
   final EventCategoryModel category;
   final String date;
+  final bool isClosed;
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
@@ -49,6 +51,7 @@ class EventsModel {
       locale: map['locale'] as String,
       capacity: map['capacity'] as int,
       contractorId: map['contractorId'] as String,
+      isClosed: map['isClosed'] as bool? ?? false,
       oportunities: List<OpportunityModel>.from(
         (map['oportunities'] as List<dynamic>).map<OpportunityModel>(
           (x) => OpportunityModel.fromMap(x as Map<String, dynamic>),
@@ -67,14 +70,16 @@ class EventsModel {
 
   Events toEntity() {
     return Events(
-        id: id,
-        name: name,
-        description: description,
-        locale: locale,
-        capacity: capacity,
-        contractorId: contractorId,
-        oportunities: oportunities.map((x) => x.toEntity()).toList(),
-        category: category.toEntity(),
-        date: date);
+      id: id,
+      name: name,
+      description: description,
+      locale: locale,
+      capacity: capacity,
+      contractorId: contractorId,
+      oportunities: oportunities.map((x) => x.toEntity()).toList(),
+      category: category.toEntity(),
+      date: date,
+      isClosed: isClosed,
+    );
   }
 }

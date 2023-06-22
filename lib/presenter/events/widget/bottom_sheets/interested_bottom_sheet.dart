@@ -30,10 +30,9 @@ class InterestedBottomSheet extends StatelessWidget {
       content: ListView.builder(
         itemCount: oportunities.length,
         shrinkWrap: true,
-        itemBuilder: (context, index) => GestureDetector(
-            child: InterestedCard(
+        itemBuilder: (context, index) => InterestedCard(
           oportunity: oportunities[index],
-        )),
+        ),
       ),
     );
   }

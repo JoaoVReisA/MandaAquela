@@ -1,9 +1,11 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:manda_aquela/data/models/opportunity_model.dart';
+import 'package:manda_aquela/domain/entities/feedback.dart';
 import 'package:manda_aquela/domain/entities/music_style.dart';
 
 class Oportunity {
   Oportunity({
+    this.musicianId,
     required this.id,
     required this.date,
     required this.description,
@@ -12,6 +14,7 @@ class Oportunity {
     required this.value,
     required this.musicStyle,
     this.musicianInterestedIds = const [],
+    this.feedback,
   });
 
   final String id;
@@ -22,6 +25,8 @@ class Oportunity {
   final String value;
   final List<MusicStyle> musicStyle;
   final List<String> musicianInterestedIds;
+  final String? musicianId;
+  final FeedbackEntity? feedback;
 
   OpportunityModel toModel() => OpportunityModel(
         city: city,
@@ -32,5 +37,6 @@ class Oportunity {
         name: name,
         value: value,
         musicStyle: musicStyle.map((e) => e.toModel()).toList(),
+        musicianId: musicianId,
       );
 }

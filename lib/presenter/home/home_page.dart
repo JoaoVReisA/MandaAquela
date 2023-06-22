@@ -83,7 +83,7 @@ class _HomePageState extends State<HomePage> {
                 height: 8,
               ),
               Obx(
-                () => !_controller.pageState.isLoading
+                () => !_controller.pageState.value.isLoading
                     ? SizedBox(
                         height: 400,
                         child: PageView.builder(

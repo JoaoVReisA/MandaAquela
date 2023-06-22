@@ -1,44 +1,44 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
-import 'package:get/get.dart';
-import 'package:manda_aquela/presenter/events/controller/events_controller.dart';
+import 'package:manda_aquela/domain/entities/oportunity.dart';
+import 'package:manda_aquela/presenter/events/widget/bottom_sheets/interested_bottom_sheet.dart';
 import 'package:manda_aquela/presenter/events/widget/event_card.dart';
 
+import '../../../../domain/entities/event.dart';
+
 class EventsTabView extends StatefulWidget {
-  const EventsTabView({super.key});
+  const EventsTabView({super.key, required this.eventsList});
 
   @override
   State<EventsTabView> createState() => _EventsTabViewState();
+
+  final List<Events> eventsList;
 }
 
 class _EventsTabViewState extends State<EventsTabView> {
-  final _controller = Modular.get<EventsController>();
-
-  @override
-  void initState() {
-    _controller.initEventsPage();
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {});
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
-    return Obx(
-      () => Padding(
+    return Center(
+      child: Padding(
         padding: const EdgeInsets.all(10.0),
         child: Column(
           children: [
             ListView.builder(
                 shrinkWrap: true,
-                itemCount: _controller.eventsList.length,
+                itemCount: widget.eventsList.length,
                 itemBuilder: (context, index) {
                   return EventCard(
-                    event: _controller.eventsList[index],
+                    onTap: () => InterestedBottomSheet.show(context,
+                        _filter(widget.eventsList[index].oportunities)),
+                    event: widget.eventsList[index],
                   );
                 })
           ],
         ),
       ),
     );
+  }
+
+  _filter(List<Oportunity> oportunities) {
+    return oportunities.where((e) => e.musicianId == null).toList();
   }
 }

@@ -1,20 +1,29 @@
 import 'package:get/get.dart';
 import 'package:manda_aquela/data/models/user_model.dart';
 import 'package:manda_aquela/domain/entities/musician.dart';
+import 'package:manda_aquela/domain/entities/oportunity.dart';
+import 'package:manda_aquela/domain/entities/rate_request.dart';
+import 'package:manda_aquela/domain/usecase/events/accept_musician_usecase.dart';
 import 'package:manda_aquela/domain/usecase/events/fetch_oportunity_musicians_usecase.dart';
+import 'package:manda_aquela/domain/usecase/events/rate_event_usecase.dart';
 
 class MusiciansPageController extends GetxController {
   MusiciansPageController({
+    required this.rateEventUsecase,
     required this.fetchOportunityMusicians,
+    required this.acceptMusicianUsecase,
   });
 
   final FetchOportunityMusiciansUsecase fetchOportunityMusicians;
+  final RemoteAcceptMusician acceptMusicianUsecase;
+  final RemoteRateEvent rateEventUsecase;
 
   final musicianList = <Musician>[].obs;
 
   final userModel = Rxn<UserModel>();
 
-  RxStatus pageState = RxStatus.empty();
+  final pageState = RxStatus.empty().obs;
+  final sendingState = RxStatus.empty().obs;
 
   Future<void> _fetchOportunityMusicians(List<String> ids) async {
     if (musicianList.isNotEmpty) {
@@ -24,12 +33,40 @@ class MusiciansPageController extends GetxController {
     if (ids.isEmpty) {
       return;
     }
-    pageState = RxStatus.loading();
+    pageState.value = RxStatus.loading();
 
     final list = await fetchOportunityMusicians(ids);
     musicianList.addAll(list);
 
-    pageState = RxStatus.success();
+    pageState.value = RxStatus.success();
+  }
+
+  _getIdsFromOprotunityList(List<Oportunity> oportunityList) {
+    List<String> ids = [];
+    for (var element in oportunityList) {
+      ids.add(element.musicianId ?? '');
+    }
+    return ids;
+  }
+
+  fetchMusiciansFromOportunityList(List<Oportunity> oportunityList) async {
+    final ids = _getIdsFromOprotunityList(oportunityList);
+    await _fetchOportunityMusicians(ids);
+  }
+
+  Future<void> acceptMusician(Musician musician, Oportunity oportunity) async {
+    sendingState.value = RxStatus.loading();
+    final result = await acceptMusicianUsecase(
+      musician: musician,
+      oportunity: oportunity,
+    );
+    sendingState.value = RxStatus.success();
+  }
+
+  Future<void> rateMusician(RateRequest request) async {
+    sendingState.value = RxStatus.loading();
+    final result = await rateEventUsecase(request);
+    sendingState.value = RxStatus.success();
   }
 
   UserModel buildUserModelFromMusician(Musician musician) {
