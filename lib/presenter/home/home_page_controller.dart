@@ -30,7 +30,7 @@ class HomePageController extends GetxController {
 
   final userModel = Rxn<UserModel>();
 
-  RxStatus pageState = RxStatus.empty();
+  final pageState = RxStatus.empty().obs;
 
   String get userType => userModel.value?.type ?? 'musician';
 
@@ -38,23 +38,23 @@ class HomePageController extends GetxController {
     if (musicianList.isNotEmpty) {
       return;
     }
-    pageState = RxStatus.loading();
+    pageState.value = RxStatus.loading();
     final list =
         await fetchMusicianListUsecase(musicianId: userModel.value!.id!);
     musicianList.addAll(list);
-    pageState = RxStatus.success();
+    pageState.value = RxStatus.success();
   }
 
   Future<void> _fetchEventsList() async {
     if (eventsList.isNotEmpty) {
       return;
     }
-    pageState = RxStatus.loading();
+    pageState.value = RxStatus.loading();
 
     final list = await fetchEventsListUsecase();
     eventsList.addAll(list);
 
-    pageState = RxStatus.success();
+    pageState.value = RxStatus.success();
   }
 
   void initHomePage() async {

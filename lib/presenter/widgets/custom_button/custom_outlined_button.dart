@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:manda_aquela/color_schemes.g.dart';
 import 'package:manda_aquela/presenter/common/text_styles.dart';
 
 class CustomOutlinedButton extends StatelessWidget {
@@ -16,7 +17,7 @@ class CustomOutlinedButton extends StatelessWidget {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
         side: const BorderSide(
           width: 2.0,
-          color: Colors.white,
+          color: AppColors.primary,
         ),
       ),
       child: Text(

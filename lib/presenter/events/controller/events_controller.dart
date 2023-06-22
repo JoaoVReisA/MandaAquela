@@ -14,22 +14,37 @@ class EventsController extends GetxController {
   final GetCachedUserDataUsecase getCachedUserDataUsecase;
 
   final eventsList = <Events>[].obs;
+  final acceptedEventsList = <Events>[].obs;
+  final historyEventsList = <Events>[].obs;
 
   final userModel = Rxn<UserModel>();
 
-  RxStatus pageState = RxStatus.empty();
+  final pageState = RxStatus.empty().obs;
 
   Future<void> fetchUserEventsList() async {
     if (eventsList.isNotEmpty) {
       return;
     }
-    pageState = RxStatus.loading();
+    pageState.value = RxStatus.loading();
 
     final userId = await getUserId();
-    final list = await fetchUserEvents(userId);
-    eventsList.addAll(list);
+    List<Events> list = await fetchUserEvents(userId);
+    for (var event in list) {
+      for (var opportunity in event.oportunities) {
+        if (opportunity.musicianId != null) {
+          acceptedEventsList.add(event);
+          break;
+        }
+      }
 
-    pageState = RxStatus.success();
+      if (event.isClosed == true) {
+        historyEventsList.add(event);
+      } else {
+        eventsList.add(event);
+      }
+    }
+
+    pageState.value = RxStatus.success();
   }
 
   Future<String> getUserId() async {

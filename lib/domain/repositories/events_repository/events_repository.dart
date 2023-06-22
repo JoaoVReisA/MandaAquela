@@ -2,6 +2,7 @@ import 'package:manda_aquela/data/models/event_request.dart';
 import 'package:manda_aquela/domain/entities/event.dart';
 import 'package:manda_aquela/domain/entities/event_category.dart';
 import 'package:manda_aquela/domain/entities/musician.dart';
+import 'package:manda_aquela/domain/entities/oportunity.dart';
 
 abstract class EventsRepository {
   Future<List<Events>> fetchEventsList();
@@ -14,4 +15,6 @@ abstract class EventsRepository {
 
   Future<List<Musician>> getOportunityMusicians(
       List<String> musicianInterestedIds);
+
+  Future<void> acceptMusician(Musician musician, Oportunity oportunity);
 }

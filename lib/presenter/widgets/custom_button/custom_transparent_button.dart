@@ -27,7 +27,7 @@ class CustomTransparentButton extends StatelessWidget {
         onPressed: onPressed,
         child: Text(
           label,
-          style: TextStyles.outfit18px700w.copyWith(color: Colors.black),
+          style: TextStyles.outfit18px700w.copyWith(color: AppColors.primary),
         ),
       ),
     );

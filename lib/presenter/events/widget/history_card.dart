@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:manda_aquela/color_schemes.g.dart';
+import 'package:manda_aquela/domain/entities/event.dart';
 import 'package:manda_aquela/presenter/common/assets.dart';
 import 'package:manda_aquela/presenter/common/text_styles.dart';
 import 'package:manda_aquela/presenter/widgets/svg_and_text/svg_and_text.dart';
 
 class HistoryCard extends StatelessWidget {
-  const HistoryCard({super.key});
+  const HistoryCard({
+    super.key,
+    required this.event,
+  });
+
+  final Events event;
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +45,7 @@ class HistoryCard extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Festa junina',
+                            event.name,
                             style: TextStyles.poppins14px700w
                                 .copyWith(color: AppColors.gray),
                           ),
@@ -49,18 +55,7 @@ class HistoryCard extends StatelessWidget {
                             iconSize: 16,
                             assetName: Assets.calendar,
                             text: Text(
-                              '21/07/2022',
-                              style: TextStyles.poppins8px500w
-                                  .copyWith(color: AppColors.gray),
-                            ),
-                          ),
-                          const SizedBox(height: 8),
-                          SvgAndText(
-                            dividerWidth: 6,
-                            iconSize: 16,
-                            assetName: Assets.alarm,
-                            text: Text(
-                              '18:30 - 21:30',
+                              _getLocaleDate(event.date),
                               style: TextStyles.poppins8px500w
                                   .copyWith(color: AppColors.gray),
                             ),
@@ -73,26 +68,10 @@ class HistoryCard extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            SvgAndText(
-                              dividerWidth: 8,
-                              iconSize: 20,
-                              assetName: Assets.money,
-                              text: Text(
-                                'R\$ 900,00',
-                                style: TextStyles.poppins10px500w
-                                    .copyWith(color: AppColors.green),
-                              ),
-                            ),
-                            const SizedBox(height: 5),
-                            SvgAndText(
-                              dividerWidth: 8,
-                              iconSize: 20,
-                              assetName: Assets.storefront,
-                              text: Text(
-                                'Bar do Bira',
-                                style: TextStyles.poppins14px700w
-                                    .copyWith(color: AppColors.gray),
-                              ),
+                            Text(
+                              event.locale,
+                              style: TextStyles.poppins14px700w
+                                  .copyWith(color: AppColors.gray),
                             ),
                           ],
                         ),
@@ -123,5 +102,10 @@ class HistoryCard extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  _getLocaleDate(String date) {
+    final dateSplitted = date.split('-');
+    return dateSplitted.reversed.join('/');
   }
 }

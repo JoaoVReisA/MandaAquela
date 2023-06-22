@@ -4,6 +4,7 @@ import 'package:manda_aquela/domain/entities/music_style.dart';
 
 class Oportunity {
   Oportunity({
+    this.musicianId,
     required this.id,
     required this.date,
     required this.description,
@@ -22,6 +23,7 @@ class Oportunity {
   final String value;
   final List<MusicStyle> musicStyle;
   final List<String> musicianInterestedIds;
+  final String? musicianId;
 
   OpportunityModel toModel() => OpportunityModel(
         city: city,
@@ -32,5 +34,6 @@ class Oportunity {
         name: name,
         value: value,
         musicStyle: musicStyle.map((e) => e.toModel()).toList(),
+        musicianId: musicianId,
       );
 }

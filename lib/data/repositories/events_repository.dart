@@ -8,6 +8,7 @@ import 'package:manda_aquela/data/models/musician_model.dart';
 import 'package:manda_aquela/domain/entities/event.dart';
 import 'package:manda_aquela/domain/entities/event_category.dart';
 import 'package:manda_aquela/domain/entities/musician.dart';
+import 'package:manda_aquela/domain/entities/oportunity.dart';
 import 'package:manda_aquela/domain/repositories/events_repository/events_repository.dart';
 import 'package:manda_aquela/infrastructure/network/dio_http_service.dart';
 
@@ -85,7 +86,6 @@ class EventsRepositoryImpl extends EventsRepository {
           .post('${Endpoints.base}/musicians/list-musicians', body, {});
 
       final data = jsonDecode(response.body)["data"]["musicians"];
-      print(data);
       final musicianList = <Musician>[];
 
       for (dynamic item in data) {
@@ -93,6 +93,22 @@ class EventsRepositoryImpl extends EventsRepository {
       }
 
       return musicianList;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<void> acceptMusician(Musician musician, Oportunity oportunity) async {
+    final body = {"musicianId": musician.id};
+    final url =
+        '${Endpoints.base}/oportunities/oportunity/accept-musician/${oportunity.id}';
+
+    try {
+      print([body, url]);
+      final response = await client.post(url, body, {});
+
+      print(response);
     } catch (e) {
       rethrow;
     }
