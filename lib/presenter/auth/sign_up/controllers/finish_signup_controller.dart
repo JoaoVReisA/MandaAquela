@@ -26,6 +26,8 @@ class FinishSignUpController extends GetxController {
   final TokenAuthLoginUseCase tokenAuthLoginUseCase;
   final ContractorSignUpUsecase contractorSignUpUsecase;
 
+  final pageState = RxStatus.empty().obs;
+
   // Page controllers
   final _addImagePageController = Modular.get<AddImagePageController>();
   final _addressPageController = Modular.get<AddressPageController>();
@@ -77,6 +79,7 @@ class FinishSignUpController extends GetxController {
   }
 
   Future<void> sendUserData() async {
+    pageState.value = RxStatus.loading();
     final user = await getUserData();
     try {
       if (user is MusicianRequest) {
@@ -84,12 +87,14 @@ class FinishSignUpController extends GetxController {
             await musicianSignUpUsecase.call(musicianRequest: user);
 
         await tokenAuthLoginUseCase.call(token: user.uuid);
+        pageState.value = RxStatus.success();
       } else {
         final response = await contractorSignUpUsecase.call(
           contractor: user as ContractorRequest,
         );
 
         await tokenAuthLoginUseCase.call(token: user.uuid);
+        pageState.value = RxStatus.success();
       }
     } catch (e) {
       //add error modal
