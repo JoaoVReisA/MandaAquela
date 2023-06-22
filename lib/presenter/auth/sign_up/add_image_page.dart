@@ -74,9 +74,11 @@ class _AddImagePageState extends State<AddImagePage> {
             child: Visibility(
               visible: !_finishSignUpController.pageState.value.isLoading,
               replacement: const SizedBox(
-                width: 50,
-                child: CircularProgressIndicator(
-                  color: AppColors.primary,
+                height: 50,
+                child: Center(
+                  child: CircularProgressIndicator(
+                    color: AppColors.primary,
+                  ),
                 ),
               ),
               child: CustomButton(
