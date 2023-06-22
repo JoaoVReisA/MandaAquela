@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:manda_aquela/core/endpoints.dart';
 import 'package:manda_aquela/data/models/event_category_model.dart';
+import 'package:manda_aquela/data/models/event_musician_model.dart';
 import 'package:manda_aquela/data/models/event_request.dart';
 import 'package:manda_aquela/data/models/events_model.dart';
 import 'package:manda_aquela/data/models/musician_model.dart';
@@ -129,9 +130,10 @@ class EventsRepositoryImpl extends EventsRepository {
     try {
       final response = await client.get(url, {});
       final data = jsonDecode(response.body)["data"]["events"];
+      print(data);
       final eventsList = <Events>[];
       for (dynamic item in data) {
-        eventsList.add(EventsModel.fromMap(item).toEntity());
+        eventsList.add(EventMusician.fromJson(item).toEntity());
       }
       return eventsList;
     } catch (e) {

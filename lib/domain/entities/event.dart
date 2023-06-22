@@ -9,9 +9,9 @@ class Events {
   final String description;
   final String locale;
   final int capacity;
-  final String contractorId;
+  final String? contractorId;
   final List<Oportunity> oportunities;
-  final EventCategory category;
+  final EventCategory? category;
   final String date;
   final bool isClosed;
 
@@ -23,8 +23,8 @@ class Events {
     required this.locale,
     required this.date,
     required this.capacity,
-    required this.contractorId,
+    this.contractorId,
     required this.oportunities,
-    required this.category,
+    this.category,
   });
 }
