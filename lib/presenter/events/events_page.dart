@@ -31,30 +31,37 @@ class _EventsPageState extends State<EventsPage> {
         return const Center(child: CircularProgressIndicator());
       }
 
-      return DefaultTabController(
-        length: 3,
-        child: SafeArea(
-          child: Scaffold(
-            body: Column(
-              children: [
-                const EventsTabBar(),
-                Expanded(
-                  child: TabBarView(
-                    children: [
-                      EventsTabView(
-                        eventsList: _controller.eventsList,
-                      ),
-                      AcceptedTabView(
-                          eventsList: _controller.acceptedEventsList),
-                      HistoryTabView(eventsList: _controller.historyEventsList),
-                    ],
+      if (_controller.userModel.value != null) {
+        return DefaultTabController(
+          length: 3,
+          child: SafeArea(
+            child: Scaffold(
+              body: Column(
+                children: [
+                  const EventsTabBar(),
+                  Expanded(
+                    child: TabBarView(
+                      children: [
+                        EventsTabView(
+                          user: _controller.userModel.value!,
+                          eventsList: _controller.eventsList,
+                        ),
+                        AcceptedTabView(
+                            user: _controller.userModel.value!,
+                            eventsList: _controller.acceptedEventsList),
+                        HistoryTabView(
+                            eventsList: _controller.historyEventsList),
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
-        ),
-      );
+        );
+      }
+
+      return Container();
     });
   }
 }
