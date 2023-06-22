@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
 import 'package:get/get.dart';
+import 'package:manda_aquela/core/formats/currency_format.dart';
 import 'package:manda_aquela/data/models/event_request.dart';
 import 'package:manda_aquela/domain/entities/event_category.dart';
 import 'package:manda_aquela/domain/entities/music_style.dart';
@@ -108,7 +109,8 @@ class RegisterEventController extends GetxController {
   }
 
   void setOpportunityValue(String value) {
-    _opportunityStateModel.value.value = double.parse(value);
+    _opportunityStateModel.value.value =
+        CurrencyFormats.withSymbol.parse(value).toDouble();
   }
 
   void setOpportunityMusicStyle(MusicStyle? value) {

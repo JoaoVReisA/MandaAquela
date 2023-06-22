@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:manda_aquela/core/formats/currency_format.dart';
 import 'package:manda_aquela/data/models/opportunity_model.dart';
 import 'package:manda_aquela/data/models/opportunity_request.dart';
 import 'package:manda_aquela/domain/entities/music_style.dart';
@@ -51,7 +52,8 @@ class RegisterMusicianOpportunityController extends GetxController {
   }
 
   void setOpportunityValue(String value) {
-    _stateModel.value.value = double.parse(value);
+    _stateModel.value.value =
+        CurrencyFormats.withSymbol.parse(value).toDouble();
   }
 
   void setOpportunityMusicStyle(MusicStyle? value) {
