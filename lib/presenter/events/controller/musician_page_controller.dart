@@ -37,6 +37,19 @@ class MusiciansPageController extends GetxController {
     pageState.value = RxStatus.success();
   }
 
+  _getIdsFromOprotunityList(List<Oportunity> oportunityList) {
+    List<String> ids = [];
+    for (var element in oportunityList) {
+      ids.add(element.musicianId ?? '');
+    }
+    return ids;
+  }
+
+  fetchMusiciansFromOportunityList(List<Oportunity> oportunityList) async {
+    final ids = _getIdsFromOprotunityList(oportunityList);
+    await _fetchOportunityMusicians(ids);
+  }
+
   Future<void> acceptMusician(Musician musician, Oportunity oportunity) async {
     sendingState.value = RxStatus.loading();
     final result = await acceptMusicianUsecase(

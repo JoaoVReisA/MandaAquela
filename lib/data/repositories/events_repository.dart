@@ -61,6 +61,7 @@ class EventsRepositoryImpl extends EventsRepository {
   @override
   Future<List<Events>> fetchUserEvents(String uid) async {
     try {
+      print('ee');
       final response = await client.get('${Endpoints.base}/events/$uid', {});
       print(response.body);
       final data = jsonDecode(response.body)["data"]["events"];
@@ -105,10 +106,7 @@ class EventsRepositoryImpl extends EventsRepository {
         '${Endpoints.base}/oportunities/oportunity/accept-musician/${oportunity.id}';
 
     try {
-      print([body, url]);
-      final response = await client.post(url, body, {});
-
-      print(response);
+      final response = await client.patch(url, body, {});
     } catch (e) {
       rethrow;
     }

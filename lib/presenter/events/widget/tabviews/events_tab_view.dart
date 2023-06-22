@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:manda_aquela/domain/entities/oportunity.dart';
 import 'package:manda_aquela/presenter/events/widget/bottom_sheets/interested_bottom_sheet.dart';
 import 'package:manda_aquela/presenter/events/widget/event_card.dart';
 
@@ -26,8 +27,8 @@ class _EventsTabViewState extends State<EventsTabView> {
                 itemCount: widget.eventsList.length,
                 itemBuilder: (context, index) {
                   return EventCard(
-                    onTap: () => InterestedBottomSheet.show(
-                        context, widget.eventsList[index].oportunities),
+                    onTap: () => InterestedBottomSheet.show(context,
+                        _filter(widget.eventsList[index].oportunities)),
                     event: widget.eventsList[index],
                   );
                 })
@@ -35,5 +36,9 @@ class _EventsTabViewState extends State<EventsTabView> {
         ),
       ),
     );
+  }
+
+  _filter(List<Oportunity> oportunities) {
+    return oportunities.where((e) => e.musicianId == null).toList();
   }
 }

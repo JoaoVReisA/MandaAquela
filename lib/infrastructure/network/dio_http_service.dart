@@ -18,6 +18,8 @@ abstract class HttpService {
 
   Future<CustomHttpResponse> delete(
       String url, dynamic body, Map<String, dynamic> queryParams);
+  Future<CustomHttpResponse> patch(
+      String url, dynamic body, Map<String, dynamic> queryParams);
 }
 
 class DioHttpService implements HttpService {
@@ -109,5 +111,23 @@ class DioHttpService implements HttpService {
       String path, String refreshToken) async {
     final response = await post(path, refreshToken, {});
     return response;
+  }
+
+  @override
+  Future<CustomHttpResponse> patch(
+      String url, body, Map<String, dynamic> queryParams) async {
+    try {
+      final response = await _client.patch(
+        url,
+        data: body,
+        queryParameters: queryParams,
+      );
+
+      return CustomHttpResponse(
+          body: response.data, statusCode: response.statusCode);
+    } on DioError catch (e) {
+      print(e);
+      throw await _errorHandler.handleError(e);
+    }
   }
 }
