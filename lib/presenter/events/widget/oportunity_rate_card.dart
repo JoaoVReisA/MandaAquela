@@ -9,6 +9,7 @@ import 'package:manda_aquela/domain/entities/rate_request.dart';
 import 'package:manda_aquela/presenter/common/text_styles.dart';
 import 'package:manda_aquela/presenter/events/widget/modals/rate_modal.dart';
 import 'package:manda_aquela/presenter/events/widget/rating_component.dart';
+import 'package:manda_aquela/presenter/widgets/success_snackbar.dart';
 
 class OportunityRateCard extends StatelessWidget {
   const OportunityRateCard({
@@ -80,6 +81,15 @@ class OportunityRateCard extends StatelessWidget {
                             musicianId: musician!.id,
                             stars: rate,
                           ));
+
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              backgroundColor: AppColors.success,
+                              content: SuccessSnackBar(
+                                message: 'Evento cadastrado',
+                              ),
+                            ),
+                          );
 
                           Modular.to.pop();
                           Modular.to.pushNamedAndRemoveUntil(

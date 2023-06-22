@@ -6,12 +6,13 @@ import 'package:manda_aquela/presenter/events/widget/event_card.dart';
 import '../../../../domain/entities/event.dart';
 
 class EventsTabView extends StatefulWidget {
-  const EventsTabView({super.key, required this.eventsList});
+  const EventsTabView({super.key, required this.eventsList, this.oportunities});
 
   @override
   State<EventsTabView> createState() => _EventsTabViewState();
 
   final List<Events> eventsList;
+  final List<Oportunity>? oportunities;
 }
 
 class _EventsTabViewState extends State<EventsTabView> {

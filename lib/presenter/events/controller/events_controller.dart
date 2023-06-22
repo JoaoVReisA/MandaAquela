@@ -30,17 +30,19 @@ class EventsController extends GetxController {
     final userId = await getUserId();
     List<Events> list = await fetchUserEvents(userId);
     for (var event in list) {
+      if (event.isClosed == true) {
+        historyEventsList.add(event);
+      } else {
+        eventsList.add(event);
+      }
+    }
+
+    for (var event in eventsList) {
       for (var opportunity in event.oportunities) {
         if (opportunity.musicianId != null) {
           acceptedEventsList.add(event);
           break;
         }
-      }
-
-      if (event.isClosed == true) {
-        historyEventsList.add(event);
-      } else {
-        eventsList.add(event);
       }
     }
 

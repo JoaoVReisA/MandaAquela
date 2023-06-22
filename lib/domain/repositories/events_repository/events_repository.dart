@@ -13,6 +13,7 @@ abstract class EventsRepository {
   Future<List<EventCategory>> fetchEventsCategories();
 
   Future<List<Events>> fetchUserEvents(String uid);
+  Future<List<Events>> fetchMusicianEvents(String uid);
 
   Future<List<Musician>> getOportunityMusicians(
       List<String> musicianInterestedIds);
