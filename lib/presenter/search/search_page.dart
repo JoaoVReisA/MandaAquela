@@ -9,6 +9,7 @@ import 'package:manda_aquela/presenter/home/widgets/musician_card.dart';
 import 'package:manda_aquela/presenter/search/controller/search_page_controller.dart';
 import 'package:manda_aquela/presenter/widgets/bottom_sheets/contacts_bottom_sheet.dart';
 import 'package:manda_aquela/presenter/widgets/bottom_sheets/opotunity_bottom_sheet.dart';
+import 'package:manda_aquela/presenter/widgets/success_snackbar.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({super.key});
@@ -133,6 +134,18 @@ class _SearchPageState extends State<SearchPage> {
                                             ? (oportunityId) {
                                                 _controller.registerInterest(
                                                     oportunityId: oportunityId);
+                                                Modular.to.pop();
+                                                ScaffoldMessenger.of(context)
+                                                    .showSnackBar(
+                                                  const SnackBar(
+                                                    backgroundColor:
+                                                        AppColors.success,
+                                                    content: SuccessSnackBar(
+                                                      message:
+                                                          'Interesse cadastrado',
+                                                    ),
+                                                  ),
+                                                );
                                               }
                                             : null,
                                   );

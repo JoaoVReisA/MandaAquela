@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:manda_aquela/color_schemes.g.dart';
 import 'package:manda_aquela/presenter/auth/sign_up/controllers/add_image_page_controller.dart';
 import 'package:manda_aquela/presenter/auth/sign_up/controllers/finish_signup_controller.dart';
 import 'package:manda_aquela/presenter/common/assets.dart';
@@ -70,14 +71,26 @@ class _AddImagePageState extends State<AddImagePage> {
         bottomNavigationBar: SafeArea(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
-            child: CustomButton(
-              onPressed: _controller.isButtonReady
-                  ? () async {
-                      await _finishSignUpController.sendUserData();
-                      Modular.to.pushNamed('/start/home/');
-                    }
-                  : null,
-              label: "Enviar",
+            child: Visibility(
+              visible: !_finishSignUpController.pageState.value.isLoading,
+              replacement: const SizedBox(
+                height: 50,
+                child: Center(
+                  child: CircularProgressIndicator(
+                    color: AppColors.primary,
+                  ),
+                ),
+              ),
+              child: CustomButton(
+                onPressed: _controller.isButtonReady
+                    ? () async {
+                        await _finishSignUpController.sendUserData();
+
+                        Modular.to.pushNamed('/start/home/');
+                      }
+                    : null,
+                label: "Enviar",
+              ),
             ),
           ),
         ),

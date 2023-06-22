@@ -12,6 +12,7 @@ import 'package:manda_aquela/presenter/widgets/bottom_sheets/opotunity_bottom_sh
 import 'package:manda_aquela/presenter/widgets/custom_button/custom_button.dart';
 import 'package:manda_aquela/presenter/widgets/custom_date_picker.dart';
 import 'package:manda_aquela/presenter/widgets/date_picker_widget.dart';
+import 'package:manda_aquela/presenter/widgets/success_snackbar.dart';
 
 class RegisterEvent extends StatefulWidget {
   const RegisterEvent({super.key});
@@ -225,6 +226,14 @@ class _SignUpEventState extends State<RegisterEvent> {
                   ? () async {
                       await _controller.registerEvent();
 
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          backgroundColor: AppColors.success,
+                          content: SuccessSnackBar(
+                            message: 'Evento cadastrado',
+                          ),
+                        ),
+                      );
                       Modular.to.pop();
                     }
                   : null,

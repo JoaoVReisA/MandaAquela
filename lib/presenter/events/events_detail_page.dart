@@ -126,7 +126,7 @@ class _EventsDetailPageState extends State<EventsDetailPage> {
                     builder: (context) {
                       return OportunityBottomSheet(
                         oportunities: widget.event.oportunities,
-                        onPressedInterest: (_) {},
+                        onPressedInterest: null,
                       );
                     },
                   );

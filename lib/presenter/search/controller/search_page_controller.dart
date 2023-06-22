@@ -39,11 +39,11 @@ class SearchPageController extends GetxController {
                 .contains(searchInput.value.toLowerCase())) {
               return true;
             }
-            // if (getSkillsString(element.skills)
-            //     .toLowerCase()
-            //     .contains(searchInput.value.toLowerCase())) {
-            //   return true;
-            // }
+            if (getSkillsString(element.skills)
+                .toLowerCase()
+                .contains(searchInput.value.toLowerCase())) {
+              return true;
+            }
           }
           if (element is Events) {
             if (element.name

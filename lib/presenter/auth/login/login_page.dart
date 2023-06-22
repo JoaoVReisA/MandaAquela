@@ -86,21 +86,31 @@ class _LoginPageState extends State<LoginPage> {
                   const SizedBox(
                     height: 16,
                   ),
-                  CustomButton(
-                    onPressed: _controller.isLoginButtonReady
-                        ? () async {
-                            final response = await _controller.doUserLogin();
-                            if (response != null) {
-                              if (response.isSignedUp ?? false) {
-                                Modular.to.navigate('/start/home');
-                              } else {
-                                Modular.to.navigate(
-                                    '/auth/is_musician_or_contractor');
+                  Visibility(
+                    visible: !_controller.pageState.value.isLoading,
+                    replacement: const SizedBox(
+                      width: 50,
+                      height: 50,
+                      child: Center(
+                        child: CircularProgressIndicator(),
+                      ),
+                    ),
+                    child: CustomButton(
+                      onPressed: _controller.isLoginButtonReady
+                          ? () async {
+                              final response = await _controller.doUserLogin();
+                              if (response != null) {
+                                if (response.isSignedUp ?? false) {
+                                  Modular.to.navigate('/start/home');
+                                } else {
+                                  Modular.to.navigate(
+                                      '/auth/is_musician_or_contractor');
+                                }
                               }
                             }
-                          }
-                        : null,
-                    label: "Login",
+                          : null,
+                      label: "Login",
+                    ),
                   ),
                   const SizedBox(
                     height: 32,

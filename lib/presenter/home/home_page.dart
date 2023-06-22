@@ -12,6 +12,7 @@ import 'package:manda_aquela/presenter/home/widgets/musician_card.dart';
 import 'package:manda_aquela/presenter/widgets/bottom_sheets/contacts_bottom_sheet.dart';
 import 'package:manda_aquela/presenter/widgets/bottom_sheets/opotunity_bottom_sheet.dart';
 import 'package:manda_aquela/presenter/widgets/common_dialog/signup_dialog.dart';
+import 'package:manda_aquela/presenter/widgets/success_snackbar.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -149,9 +150,21 @@ class _HomePageState extends State<HomePage> {
                                         onPressedInterest: _controller
                                                     .userType ==
                                                 'musician'
-                                            ? (oportunityId) {
+                                            ? (oportunityId) async {
                                                 _controller.registerInterest(
                                                     oportunityId: oportunityId);
+                                                Modular.to.pop();
+                                                ScaffoldMessenger.of(context)
+                                                    .showSnackBar(
+                                                  const SnackBar(
+                                                    backgroundColor:
+                                                        AppColors.success,
+                                                    content: SuccessSnackBar(
+                                                      message:
+                                                          'Interesse cadastrado',
+                                                    ),
+                                                  ),
+                                                );
                                               }
                                             : null,
                                       );
