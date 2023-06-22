@@ -62,9 +62,7 @@ class EventsRepositoryImpl extends EventsRepository {
   @override
   Future<List<Events>> fetchUserEvents(String uid) async {
     try {
-      print('ee');
       final response = await client.get('${Endpoints.base}/events/$uid', {});
-      print(response.body);
       final data = jsonDecode(response.body)["data"]["events"];
       final eventsList = <Events>[];
       for (dynamic item in data) {
@@ -118,14 +116,25 @@ class EventsRepositoryImpl extends EventsRepository {
     final body = request.toJson();
     const url = '${Endpoints.base}/feedbacks/send-feedback';
 
-    print(body);
-    print(url);
-
     try {
       final response = await client.post(url, body, {});
-      print(response.body);
     } catch (e) {
-      print(e);
+      rethrow;
+    }
+  }
+
+  @override
+  Future<List<Events>> fetchMusicianEvents(String uid) async {
+    final url = '${Endpoints.base}/oportunities/musician/$uid';
+    try {
+      final response = await client.get(url, {});
+      final data = jsonDecode(response.body)["data"]["events"];
+      final eventsList = <Events>[];
+      for (dynamic item in data) {
+        eventsList.add(EventsModel.fromMap(item).toEntity());
+      }
+      return eventsList;
+    } catch (e) {
       rethrow;
     }
   }

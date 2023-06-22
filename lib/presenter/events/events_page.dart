@@ -41,7 +41,9 @@ class _EventsPageState extends State<EventsPage> {
                 Expanded(
                   child: TabBarView(
                     children: [
-                      EventsTabView(eventsList: _controller.eventsList),
+                      EventsTabView(
+                        eventsList: _controller.eventsList,
+                      ),
                       AcceptedTabView(
                           eventsList: _controller.acceptedEventsList),
                       HistoryTabView(eventsList: _controller.historyEventsList),
